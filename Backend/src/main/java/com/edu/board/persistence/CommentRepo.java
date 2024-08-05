@@ -1,12 +1,12 @@
-package com.edu.persistence;
-
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.edu.domain.Board;
-import com.edu.domain.Comment;
-
-public interface CommentRepo extends JpaRepository<Comment, Long> {
-    List<Comment> findByBoard(Board board);
-}
+//package com.edu.board.persistence;
+//
+//import java.util.List;
+//
+//import org.springframework.data.jpa.repository.JpaRepository;
+//
+//import com.edu.board.entity.Board;
+//import com.edu.board.entity.Comment;
+//
+//public interface CommentRepo extends JpaRepository<Comment, Long> {
+//    List<Comment> findByBoard(Board board);
+//}
