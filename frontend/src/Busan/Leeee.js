@@ -1,12 +1,14 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { NavermapsProvider } from 'react-naver-maps';
 export default function Leeee() {
 
     let url = `https://apis.data.go.kr/6260000/AttractionService/getAttractionKr`
     url = url + `?serviceKey=${process.env.REACT_APP_API_KEY}`;
     url = url + `&pageNo=1&numOfRows=10&resultType=json`
 
-const [dataBoard, setDataBoard] = useState([]);
+
+const [dataBoard, setDataBoard] = useState([]);//명소정보
 
 const loadBoard = async() =>{//보드 불러움
     await fetch(url)//url 연결
@@ -44,19 +46,21 @@ const loadData = ()=>{
         </table>
     )};
     const sel = ()=>{
-        const select = dataBoard.filter((item)=>item.GUGUN_NM !== "영도구");
+        const select = dataBoard.filter((item)=>item.GUGUN_NM === "영도구");
         setDataBoard(select);
     }
         
     
 
     return (
+        
       <div>
         <h2>부산 명소</h2>
         <button onClick={() => loadBoard()}>Board</button>
         <button onClick={() => sel()}>select</button>
         <div>{loadData()}</div>
       </div>
+      
     )
 }
 
