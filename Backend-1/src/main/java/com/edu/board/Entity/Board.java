@@ -1,7 +1,7 @@
-package com.edu.board;
+package com.edu.board.Entity;
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.edu.user.entitiy.User;
 
@@ -33,5 +33,5 @@ public class Board {
 	@ManyToOne(fetch = FetchType.LAZY)	@JoinColumn(name="member_id")
 	private User writer;
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date createDate;
+	private LocalDateTime createDate;
 }

@@ -5,10 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Getter
+@Getter @Setter @Builder
 public class Restaurant {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "rt_id")
 	private Long id;
@@ -33,4 +35,16 @@ public class Restaurant {
 	
 	@Column(columnDefinition = "TEXT")
 	private String content;
+	
+    @Builder
+    public Restaurant(String address, String menu, String img1, String img2, String usage_day, String point, String name, String content) {
+        this.address = address;
+        this.menu = menu;
+        this.img1 = img1;
+        this.img2 = img2;
+        this.usage_day = usage_day;
+        this.point = point;
+        this.name = name;
+        this.content = content;
+    }
 }
