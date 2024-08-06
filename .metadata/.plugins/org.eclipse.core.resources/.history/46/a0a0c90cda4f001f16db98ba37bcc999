@@ -1,0 +1,8 @@
+package com.edu.board.DTO;
+
+import lombok.Getter;
+
+@Getter
+public class BoardRequestDTO {
+
+}

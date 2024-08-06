@@ -1,0 +1,5 @@
+package com.edu.user.entitiy;
+
+public enum ERole {
+
+}

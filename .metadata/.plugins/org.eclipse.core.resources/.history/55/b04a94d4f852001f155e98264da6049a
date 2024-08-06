@@ -1,0 +1,55 @@
+package com.edu.common;
+
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.UUID;
+
+@Service
+public class EmailVerificationService {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private VerificationTokenRepository tokenRepository;
+
+    public String generateVerificationToken(User user) {
+        String token = UUID.randomUUID().toString();
+        VerificationToken verificationToken = new VerificationToken(token, user);
+        tokenRepository.save(verificationToken);
+        return token;
+    }
+
+    public boolean verifyEmail(String token) {
+        VerificationToken verificationToken = tokenRepository.findByToken(token);
+        if (verificationToken == null) {
+            return false;
+        }
+
+        User user = verificationToken.getUser();
+        user.setEmailVerified(true);
+        userRepository.save(user);
+        tokenRepository.delete(verificationToken);
+        return true;
+    }
+}
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+public class VerificationToken {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String token;
+
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false, name = "user_id")
+    private User user;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expiryDate;
+
+    // Getters and Setters
+}

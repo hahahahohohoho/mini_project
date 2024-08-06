@@ -1,0 +1,9 @@
+package com.edu.user.entity;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.edu.road.Road;
+
+public interface RoadRepo extends JpaRepository<Road, Long>{
+
+}

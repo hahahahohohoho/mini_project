@@ -1,0 +1,30 @@
+package com.edu.user.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.edu.user.dto.LoginRequest;
+import com.edu.user.dto.SignUpRequest;
+import com.edu.user.dto.UserResponse;
+import com.edu.user.service.UserService;
+
+@RestController
+public class AuthController {
+	@Autowired
+	private UserService userService;
+
+    @PostMapping("/signup")
+    public ResponseEntity<UserResponse> registerUser(@RequestBody SignUpRequest signUpRequest) {
+        UserResponse response = userService.registerUser(signUpRequest);
+        return ResponseEntity.ok(response);
+    }
+	
+	@PostMapping("/login")
+	public ResponseEntity<UserResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+		UserResponse response = userService.loginUser(loginRequest);
+		return ResponseEntity.ok(response);
+	}
+}

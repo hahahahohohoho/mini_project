@@ -1,0 +1,9 @@
+package com.edu.common;
+
+public class Snippet {
+	public static void main(String[] args) {
+		<version>0.9.1</version>
+		
+	}
+}
+

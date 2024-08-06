@@ -1,0 +1,10 @@
+package com.edu.persistence;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.edu.domain.Like;
+
+public interface LikeRepo extends JpaRepository<Like, Long>{
+	Long countByPostId(Long postId);
+}
