@@ -5,3 +5,21 @@
 1722841414368	Rename compilation unit 'Email.java'
 1722842557041	Delete element
 1722842565169	Delete element
+1722914684836	Move compilation unit
+1722914700728	Move compilation unit
+1722914720479	Move compilation unit
+1722914740643	Move compilation unit
+1722914742889	Move compilation unit
+1722920508943	Rename field 'authService'
+1722921574553	Rename field 'authService'
+1722929542119	Rename local variable 'member'
+1722929943175	Rename field 'memrepo'
+1722929959985	Rename local variable 'member'
+1722930418878	Move compilation unit
+1722930508419	Rename compilation unit 'UserDetailsServiceImpl.java'
+1722930542166	Rename type 'UserService'
+1722930932050	Rename local variable 'member'
+1722931134506	Delete elements
+1722931238109	Delete element
+1722931269777	Delete element
+1722931296460	Delete element

@@ -1,7 +1,6 @@
-package com.edu.common;
+package com.edu.common.entitiy;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import com.edu.user.entitiy.User;
 
@@ -34,9 +33,8 @@ public class VerificationToken {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime expiryDate;
     
-    public VerificationToken(String token, User user) {
-    	this.token = token;
-    	this.user = user;
+    // 기본 생성자
+    public VerificationToken() {
     }
 
 	public VerificationToken(String token, User user, LocalDateTime localDateTime) {

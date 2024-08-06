@@ -1,7 +1,6 @@
 package com.edu.road;
 
 
-import org.locationtech.jts.geom.LineString;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +23,7 @@ public class Road {
 	@Column(nullable = false)
 	private Integer grade;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "TEXT")
 	private String geometry;
 	
 	private float length;

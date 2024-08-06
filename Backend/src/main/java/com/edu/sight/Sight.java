@@ -1,7 +1,5 @@
 package com.edu.sight;
 
-import org.locationtech.jts.geom.Point;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,8 +27,9 @@ public class Sight {
 	
 	private String homepage;
 	
+	@Column(columnDefinition = "TEXT")
 	private String content;
 	
-	@Column(nullable = false)
-	private Point point;
+	@Column(nullable = false, columnDefinition = "TEXT")
+	private String point;
 }

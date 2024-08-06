@@ -1,4 +1,4 @@
-package com.edu.common;
+package com.edu.common.util;
 
 import java.util.Date;
 

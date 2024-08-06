@@ -1,4 +1,4 @@
-package com.edu.common;
+package com.edu.common.service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,6 +8,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.edu.common.entitiy.VerificationToken;
+import com.edu.common.entitiy.VerificationTokenRepository;
 import com.edu.user.entitiy.User;
 import com.edu.user.repo.UserRepository;
 
@@ -50,9 +52,9 @@ public class EmailVerificationService {
         }
 
         User user = verificationToken.getUser();
-        user.setEmailVerified(true);
-        userRepository.save(user);
-        tokenRepository.delete(verificationToken);
+        user.setEmailVerified(true); // 이메일 검증 상태 업데이트
+        userRepository.save(user); // 변경 사항 저장
+        tokenRepository.delete(verificationToken); // 사용된 토큰 삭제
 
         return true;
     }

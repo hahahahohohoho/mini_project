@@ -1,4 +1,4 @@
-package com.edu.common;
+package com.edu.common.entitiy;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
