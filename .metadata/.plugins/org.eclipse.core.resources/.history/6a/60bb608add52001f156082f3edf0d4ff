@@ -1,0 +1,5 @@
+package com.edu.sight;
+
+public interface sightRepo {
+
+}

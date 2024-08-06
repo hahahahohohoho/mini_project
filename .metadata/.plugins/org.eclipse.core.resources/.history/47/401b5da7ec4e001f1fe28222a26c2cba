@@ -1,0 +1,40 @@
+package com.edu.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.edu.domain.Comment;
+import com.edu.service.CommentService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
+
+@RestController
+@RequestMapping
+public class CommentController {
+	@Autowired
+	private CommentService cs;
+	
+	@GetMapping("/post/{postid}")
+	public List<Comment> getCommentByPostId(@PathVariable Long postId) {
+		return cs.getCommentsByPostId(postId);
+	}
+	
+	@PostMapping
+	public Comment createComment(@RequestBody Comment comment) {
+		return cs.createComment(comment);
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteComment(@PathVariable Long id) {
+		cs.deleteComment(id);
+	}
+}

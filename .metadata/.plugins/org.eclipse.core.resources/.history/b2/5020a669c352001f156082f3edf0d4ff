@@ -1,0 +1,5 @@
+package com.edu.user.service;
+
+public class MemberService {
+
+}

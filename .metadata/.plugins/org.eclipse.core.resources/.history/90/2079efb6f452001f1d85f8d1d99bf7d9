@@ -1,0 +1,5 @@
+package com.edu.config;
+
+public class SecurityConfig {
+
+}

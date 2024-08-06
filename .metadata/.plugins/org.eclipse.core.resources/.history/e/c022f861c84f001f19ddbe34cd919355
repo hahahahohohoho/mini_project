@@ -1,0 +1,24 @@
+package com.edu.board.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.edu.board.entity.Board;
+import com.edu.board.entity.BoardLike;
+import com.edu.board.persistence.BoardLikeRepo;
+
+
+@Service
+public class LikeService {
+	@Autowired
+	private BoardLikeRepo blr;
+	
+	public Long getLikesByPostId(Board board) {
+		return blr.countByBoard(board);
+	}
+	
+	public BoardLike addLike(BoardLike like) {
+		like.setLikeCount(like.getLikeCount()+1);
+		return blr.save(like);
+	}
+}
