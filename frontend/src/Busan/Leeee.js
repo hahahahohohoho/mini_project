@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react';
-import { NavermapsProvider } from 'react-naver-maps';
+// import { NavermapsProvider } from 'react-naver-maps';
 export default function Leeee() {
 
     let url = `https://apis.data.go.kr/6260000/AttractionService/getAttractionKr`
