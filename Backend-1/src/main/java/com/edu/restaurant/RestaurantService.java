@@ -12,8 +12,10 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepo restaurantRepository;
 
-    public List<Restaurant> getAllRestaurants() {
-        return restaurantRepository.findAll();
+    public List<RestaurantDTO> getAllRestaurants() {
+        return restaurantRepository.findAll().stream()
+                .map(RestaurantDTO::new)
+                .collect(Collectors.toList());
     }
 
     public Restaurant getRestaurantById(Long id) {
