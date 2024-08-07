@@ -20,4 +20,10 @@ public class JwtResponse {
         this.username = username;
         this.email = email;
     }
+    public JwtResponse(JwtResponse jwtResponse) {
+    	this.token = jwtResponse.getToken();
+        this.id = jwtResponse.getId();
+        this.username = jwtResponse.getUsername();
+        this.email = jwtResponse.getEmail();
+    }
 }

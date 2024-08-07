@@ -29,18 +29,18 @@ public class RestaurantService {
     }
 
     public List<RestaurantDTO> searchByMenu(String menu) {
-        return restaurantRepository.findByMenu(menu).stream()
+        return restaurantRepository.findByMenuContaining(menu).stream()
                 .map(RestaurantDTO::new)
                 .collect(Collectors.toList());
     }
 
     public List<RestaurantDTO> searchByName(String name) {
-        return restaurantRepository.findByName(name).stream()
+        return restaurantRepository.findByNameContaining(name).stream()
                 .map(RestaurantDTO::new)
                 .collect(Collectors.toList());
     }
     public List<RestaurantDTO> searchByAddress(String address) {
-    	return restaurantRepository.findByAddress(address).stream()
+    	return restaurantRepository.findByAddressContaining(address).stream()
     			.map(RestaurantDTO::new)
     			.collect(Collectors.toList());
     }

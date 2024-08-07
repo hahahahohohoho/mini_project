@@ -36,6 +36,8 @@ public class Restaurant {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	
+    public Restaurant() {
+    }	
     @Builder
     public Restaurant(String address, String menu, String img1, String img2, String usage_day, String point, String name, String content) {
         this.address = address;

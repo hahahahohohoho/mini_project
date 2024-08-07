@@ -1,6 +1,7 @@
 package com.edu.restaurant;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -58,17 +58,20 @@ public class RestaurantController {
     }
 
     @GetMapping("/search/menu")
-    public List<RestaurantDTO> searchByMenu(@RequestParam String menu) {
+    public List<RestaurantDTO> searchByMenu(@RequestBody Map<String, String> payload) {
+    	String menu = payload.get("menu");
         return restaurantService.searchByMenu(menu);
     }
 
     @GetMapping("/search/name")
-    public List<RestaurantDTO> searchByName(@RequestParam String name) {
+    public List<RestaurantDTO> searchByName(@RequestBody Map<String, String> payload) {
+    	String name = payload.get("name");
         return restaurantService.searchByName(name);
     }
     
     @GetMapping("/search/address")
-    public List<RestaurantDTO> searchByAddress(@RequestParam String address) {
+    public List<RestaurantDTO> searchByAddress(@RequestBody Map<String, String> payload) {
+        String address = payload.get("address");
         return restaurantService.searchByAddress(address);
     }
 }

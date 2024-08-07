@@ -3,7 +3,7 @@ package com.edu.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edu.common.config.JwtBlacklist;
+import com.edu.common.util.JwtBlacklist;
 
 @Service
 public class LogoutService {

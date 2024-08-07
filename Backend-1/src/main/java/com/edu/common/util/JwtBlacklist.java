@@ -1,4 +1,4 @@
-package com.edu.common.config;
+package com.edu.common.util;
 
 import java.util.HashSet;
 import java.util.Set;
