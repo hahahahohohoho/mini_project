@@ -25,3 +25,30 @@
 1722931296460	Delete element
 1722932112002	Move compilation units
 1722934448223	Rename field 'usageday'
+1722990916065	Delete element
+1722991917746	Rename local variable 'username'
+1722992953860	Rename method 'findByAddressContaining'
+1722992994121	Rename method 'findByAddressLike'
+1722993317518	Move compilation unit
+1722994250797	Copy compilation units
+1722994269684	Rename type 'RestaurantController'
+1722994281225	Rename type 'RestaurantService'
+1722994299512	Rename type 'Restaurant'
+1722994313386	Rename type 'RestaurantRepo'
+1722994317937	Rename type 'sightRepo'
+1722994487958	Rename type 'RestaurantDTO'
+1722994582517	Rename field 'restaurantRepository'
+1722994599100	Rename local variable 'name'
+1722994636946	Rename field 'restaurantService'
+1722994700873	Rename type 'Sight'
+1722994714342	Rename local variable 'restaurant'
+1722994754824	Rename local variable 'restaurantDetails'
+1722994780497	Rename local variable 'sight'
+1722994795645	Rename method 'deleteRestaurant'
+1722994802094	Rename method 'saveRestaurant'
+1722994808801	Rename method 'getRestaurantById'
+1722994821560	Rename method 'getAllRestaurants'
+1722994899513	Rename type 'SightDTO'
+1722994919582	Rename type 'SightRepo'
+1722995880807	Rename type 'Backend2Application'
+1722995885156	Rename type 'Backend2ApplicationTests'

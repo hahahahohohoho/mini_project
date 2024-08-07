@@ -1,6 +1,7 @@
 package com.edu.board.Entity;
 
-import org.hibernate.annotations.ColumnDefault;
+import java.time.LocalDateTime;
+
 
 import com.edu.user.entitiy.User;
 
@@ -25,15 +26,9 @@ public class Comment {
 	private User writer;
 	@ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name="board_id")
 	private Board board;
-    @ColumnDefault("FALSE")
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "default false")
     private Boolean isDeleted;
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private LocalDateTime createDate;
     
-    
-	public Comment(String content) {
-		this.content = content;
-	}
-    public void changeIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 }

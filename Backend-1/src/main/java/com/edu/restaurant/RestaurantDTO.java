@@ -16,7 +16,6 @@ public class RestaurantDTO {
 	
 	
 	public RestaurantDTO(String address, String point, String menu, String name, String usage_day, String img2) {
-		super();
 		this.address = address;
 		this.point = point;
 		this.menu = menu;

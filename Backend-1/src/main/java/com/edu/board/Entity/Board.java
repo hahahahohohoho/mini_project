@@ -13,8 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Getter;
 
 @Entity
@@ -26,12 +24,12 @@ public class Board {
 	private String title;
 	@Column(nullable = false, columnDefinition = "TEXT")
 	private String content;
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "default false")
 	private Integer viewcount;
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "default false")
 	private Integer likecount;
 	@ManyToOne(fetch = FetchType.LAZY)	@JoinColumn(name="member_id")
 	private User writer;
-	@Temporal(value = TemporalType.TIMESTAMP)
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createDate;
 }
