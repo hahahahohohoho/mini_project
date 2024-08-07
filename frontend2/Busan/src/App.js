@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import NaverMap from './Map/NaverMap';
+// import NaverMap from './Map/NaverMap';
+import MapMain from './conponents/MapMain';
 
 function App() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -13,9 +14,10 @@ function App() {
   return (
     <div className="App">
       <h1>Naver Map Example</h1>
-      <input type="text" id="searchKeyword" placeholder="Search for an address" />
+      <MapMain/>
+      {/* <input type="text" id="searchKeyword" placeholder="Search for an address" />
       <button onClick={handleSearch}>Search</button>
-      <NaverMap searchKeyword={searchKeyword} />
+      <NaverMap searchKeyword={searchKeyword} /> */}
     </div>
   );
 }
