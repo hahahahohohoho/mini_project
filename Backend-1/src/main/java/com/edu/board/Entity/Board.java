@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.edu.user.entitiy.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -24,7 +23,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Getter @Setter @ToString(exclude = {"reply", "writer"})
+@Getter @Setter @ToString(exclude = {"replys", "writer"})
 @AllArgsConstructor @NoArgsConstructor
 public class Board {
 	@Id @Column(name = "board_id") @GeneratedValue(strategy = GenerationType.IDENTITY)

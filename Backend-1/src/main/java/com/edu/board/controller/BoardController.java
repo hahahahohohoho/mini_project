@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.board.DTO.BoardDTO;
 import com.edu.board.service.BoardService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -29,6 +32,10 @@ public class BoardController {
 	@GetMapping("/{id}")
 	public BoardDTO getBoard(@PathVariable Long id) {
 		return boardService.getBoard(id);
+	}
+	@PostMapping
+	public void postBoard(@RequestBody BoardDTO boardDTO) {
+		boardService.postBoard(boardDTO);
 	}
 	
 }

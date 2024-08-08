@@ -28,6 +28,5 @@ public class ReplyDTO {
 		this.board_id = board_id;
 		this.username = username;
 		this.content = content;
-		this.createDate = LocalDateTime.now();
 	}
 }
