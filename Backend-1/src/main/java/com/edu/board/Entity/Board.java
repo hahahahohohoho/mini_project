@@ -57,7 +57,9 @@ public class Board {
 	@Transient
 	private Integer recommend_count;
 	
-
+    public Integer getRecommendCount() {
+        return recommends != null ? recommends.size() : 0;
+    }
 	public void setWriter(User user) {
 		this.writer = user;
 		user.getBoardList().add(this);
