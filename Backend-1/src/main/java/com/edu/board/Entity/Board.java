@@ -1,9 +1,11 @@
 package com.edu.board.Entity;
 
-
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.edu.user.entitiy.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,23 +15,44 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Getter
+@Getter @Setter @ToString(exclude = {"reply", "writer"})
+@AllArgsConstructor @NoArgsConstructor
 public class Board {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "board_id")
+	@Id @Column(name = "board_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)
+	
+	@Column(nullable = false, length = 100)
 	private String title;
-	@Column(nullable = false, columnDefinition = "TEXT")
+	
+	@Column(columnDefinition = "TEXT")
 	private String content;
-	@Column(nullable = false, columnDefinition = "default false")
-	private Integer viewcount;
-	@Column(nullable = false, columnDefinition = "default false")
-	private Integer likecount;
-	@ManyToOne(fetch = FetchType.LAZY)	@JoinColumn(name="member_id")
+	
+	@ManyToOne // many = "Board", one = "user"
+	@JoinColumn(name="user_id")
 	private User writer;
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	
+	@Column(columnDefinition = "default 0")
+	private Integer viewcount;
+	
+	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime createDate;
+	// LAZY는 선택적 출력 EAGER는 반드시 출력
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //연관관계의 주인이 아니르는 의미, 외래키 아니니 열 생성 필요 X
+	@JsonIgnoreProperties({"board"})
+	private List<Reply> reply;
+	
+	
+
+//	public void setWriter(User user) {
+//		this.writer = user;
+//		user.getBoardList().add(this);
+//	}
 }

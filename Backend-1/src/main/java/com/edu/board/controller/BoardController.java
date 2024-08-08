@@ -4,30 +4,31 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edu.board.Entity.Board;
-import com.edu.board.Service.BoardService;
-import com.edu.board.dto.BoardResponseDTO;
+import com.edu.board.Entity.BoardDTO;
+import com.edu.board.service.BoardService;
 
-import lombok.RequiredArgsConstructor;
+
+
 
 
 @RestController
 @RequestMapping("/board")
-@RequiredArgsConstructor
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@GetMapping()
-	public List<Board> findAllBoard() {
-		return boardService.getAllBoards();
+	@GetMapping("/boardList")
+	public List<BoardDTO> getBoardList() {
+		return boardService.getBoardList();
 	}
-	@GetMapping("/search")
-	public List<BoardResponseDTO> findByTitle(String title) {
-		return boardService.findByTitle(title);
+	
+	@GetMapping("/{id}")
+	public BoardDTO getBoard(@PathVariable Long id) {
+		return boardService.getBoard(id);
 	}
 	
 }

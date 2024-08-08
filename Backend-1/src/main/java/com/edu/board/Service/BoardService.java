@@ -1,27 +1,35 @@
-package com.edu.board.Service;
+package com.edu.board.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edu.board.Entity.Board;
+import com.edu.board.Entity.BoardDTO;
 import com.edu.board.Entity.BoardRepository;
-import com.edu.board.dto.BoardResponseDTO;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 	
-	public List<Board> getAllBoards(){
-		return boardRepository.findAll();
-	}
-	
-	public List<BoardResponseDTO> findByTitle(String title){
-		return boardRepository.findByTitleContaining(title).stream()
-				.map(BoardResponseDTO::new)
+	public List<BoardDTO> getBoardList(){
+		return boardRepository.findAll().stream()
+                .map(BoardDTO::new)
                 .collect(Collectors.toList());
-	}
+	};
+	
+	public BoardDTO getBoard(Long id) {
+        Optional<Board> boardOptional = boardRepository.findById(id);
+        if (boardOptional.isPresent()) {
+            return new BoardDTO(boardOptional.get());
+        } else {
+            throw new EntityNotFoundException("Board not found with id " + id);
+        }
+    }
 }
