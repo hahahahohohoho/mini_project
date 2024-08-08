@@ -46,4 +46,16 @@ public class BoardService {
 			board.setCreateDate(LocalDateTime.now());
 		boardRepository.save(board);
 	}
+	
+	public void deleteBoard(Long id) {
+		boardRepository.deleteById(id);
+	}
+
+	public void putBoard(Long id, BoardDTO boardDTO) {
+		Board board = boardRepository.findByIdOrThrow(id);
+			board.setContent(boardDTO.getContent());
+			board.setTitle(boardDTO.getTitle());
+			board.setCreateDate(LocalDateTime.now());
+		boardRepository.save(board);
+	}
 }

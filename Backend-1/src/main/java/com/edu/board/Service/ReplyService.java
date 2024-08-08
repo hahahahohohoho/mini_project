@@ -29,4 +29,15 @@ public class ReplyService {
 			reply.setCreateDate(LocalDateTime.now());
 		replyRepository.save(reply);
 	}
+
+	public void deleteReply(Long replyId) {
+		replyRepository.deleteById(replyId);
+	}
+
+	public void putReply(Long id, ReplyDTO dTO) {
+		Reply reply = replyRepository.findByIdOrThrow(id);
+			reply.setContent(dTO.getContent());
+			reply.setCreateDate(LocalDateTime.now());
+		replyRepository.save(reply);
+	}
 }
