@@ -1,7 +1,11 @@
 package com.edu.user.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +58,13 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         JwtResponse jwtResponse = userService.authenticateUser(loginRequest.getEmail(), loginRequest.getPassword());
         return ResponseEntity.ok(jwtResponse);
+    }
+    
+    @GetMapping("/protected")
+    @PreAuthorize("hasRole('USER')")
+    public Map<String, String> getProtectedMessage() {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "This is a protected message only for authenticated users.");
+        return response;
     }
 }
