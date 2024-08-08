@@ -54,3 +54,6 @@
 1722995885156	Rename type 'Backend2ApplicationTests'
 1723077397797	Delete elements
 1723081442669	Delete element
+1723085177970	Rename field 'reply'
+1723085426096	Move compilation units
+1723085557709	Rename type 'CommentService'

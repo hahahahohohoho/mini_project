@@ -1,10 +1,10 @@
-package com.edu.board.Entity;
+package com.edu.board.DTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.edu.restaurant.RestaurantDTO;
+import com.edu.board.Entity.Board;
 
 import lombok.Getter;
 
@@ -26,7 +26,7 @@ public class BoardDTO {
 		this.viewcount = board.getViewcount();
 		this.createTime = board.getCreateDate();
 		
-		List<ReplyDTO> replyDTOs = board.getReply().stream()
+		List<ReplyDTO> replyDTOs = board.getReplys().stream()
                 .map(ReplyDTO::new)
                 .collect(Collectors.toList());
 

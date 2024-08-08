@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edu.board.DTO.BoardDTO;
 import com.edu.board.Entity.Board;
-import com.edu.board.Entity.BoardDTO;
-import com.edu.board.Entity.BoardRepository;
+import com.edu.board.repo.BoardRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 

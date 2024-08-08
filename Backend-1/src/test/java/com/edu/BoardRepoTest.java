@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.edu.board.Entity.Board;
-import com.edu.board.Entity.BoardRepository;
 import com.edu.board.Entity.Reply;
-import com.edu.board.Entity.ReplyRepository;
+import com.edu.board.repo.BoardRepository;
+import com.edu.board.repo.ReplyRepository;
 import com.edu.user.entitiy.User;
 import com.edu.user.repo.UserRepository;
 

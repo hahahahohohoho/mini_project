@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edu.board.Entity.BoardDTO;
+import com.edu.board.DTO.BoardDTO;
 import com.edu.board.service.BoardService;
 
 
