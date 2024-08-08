@@ -65,3 +65,4 @@ public class Board {
 		user.getBoardList().add(this);
 	}
 }
+

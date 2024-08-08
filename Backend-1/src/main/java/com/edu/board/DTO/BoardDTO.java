@@ -10,6 +10,7 @@ import lombok.Getter;
 
 @Getter
 public class BoardDTO {
+	private Long id;
 	private String username;
 	private String title;
 	private String content;
@@ -18,6 +19,7 @@ public class BoardDTO {
 	private List<ReplyDTO> replys;
 
 	public BoardDTO(Board board) {
+		this.id = board.getId();
 		this.username = board.getWriter().getUsername();
 		this.title = board.getTitle();
 		this.content = board.getContent();

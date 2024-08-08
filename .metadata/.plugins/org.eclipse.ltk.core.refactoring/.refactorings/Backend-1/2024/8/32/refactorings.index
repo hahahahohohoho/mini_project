@@ -63,3 +63,4 @@
 1723092441270	Rename local variable 'userId'
 1723096473505	Rename method 'findByUserNicknameContaining'
 1723096577541	Rename method 'findByWriter_NicknameContaining'
+1723097347459	Delete element

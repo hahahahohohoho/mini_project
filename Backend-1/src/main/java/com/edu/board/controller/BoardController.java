@@ -29,7 +29,7 @@ import com.edu.board.service.BoardService;
 
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/api/board")
 public class BoardController {
 	@Autowired
 	private BoardService boardService;

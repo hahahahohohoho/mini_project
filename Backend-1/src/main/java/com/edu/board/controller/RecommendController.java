@@ -13,7 +13,7 @@ import com.edu.board.service.RecommendService;
 
 
 @RestController
-@RequestMapping("/board/{board_id}/recommend")
+@RequestMapping("/api/board/{board_id}/recommend")
 public class RecommendController {
 	@Autowired
 	private RecommendService recommendService;

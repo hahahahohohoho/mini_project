@@ -44,6 +44,6 @@ public class User {
 
     private boolean emailVerified = false;
     
-    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
     private List<Board> boardList = new ArrayList<>();
 }

@@ -39,24 +39,6 @@ public class AuthController {
 		return ResponseEntity.ok(response);
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<UserResponse> loginUser(@RequestBody LoginRequest loginRequest) {
-		UserResponse response = userService.loginUser(loginRequest);
-		return ResponseEntity.ok(response);
-	}
-	
-//	@PostMapping("/logout")
-//    public ResponseEntity<String> logout(@RequestHeader("Authorization") String tokenHeader) {
-//        String token = tokenHeader.substring(7);
-//        logoutService.logout(token);
-//        SecurityContextHolder.clearContext();
-//        return ResponseEntity.ok("Successfully logged out.");
-//    }
-    @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser() {
-        // 클라이언트 측에서 JWT 토큰을 삭제하도록 안내
-        return ResponseEntity.ok("Successfully logged out");
-    }
 
 	@GetMapping("/verify")
     public ResponseEntity<String> verifyEmail(@RequestParam("token") String token) {

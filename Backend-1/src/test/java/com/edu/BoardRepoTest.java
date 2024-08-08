@@ -1,7 +1,10 @@
 package com.edu;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +16,8 @@ import com.edu.board.repo.ReplyRepository;
 import com.edu.user.entitiy.User;
 import com.edu.user.repo.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @SpringBootTest
 public class BoardRepoTest {
 	@Autowired
@@ -23,9 +28,10 @@ public class BoardRepoTest {
 	private ReplyRepository replyRepository;
 	
 	@Test
+	@Transactional
 	public void testInsert() {
 		List<User> users = userRepository.findAll();
-		
+
 		for(int i =1 ; i<=13 ; i++) {
 			Board board = new Board();
 			board.setTitle("test"+i + users.get(i%2).getUsername());
@@ -45,6 +51,7 @@ public class BoardRepoTest {
 	}
 	
 	@Test
+	@Transactional
 	public void testGetBoard() {
 		Board board = boardRepository.findById(41L).get();
 		

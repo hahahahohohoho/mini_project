@@ -45,12 +45,15 @@ public class UserService {
 
         return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail());
     }
-    //jwt위해 추가
     
     
 	public UserResponse registerUser(SignUpRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername()) || userRepository.existsByEmail(signUpRequest.getEmail())) {
-            throw new IllegalArgumentException("Username or email already exists.");
+		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            throw new IllegalArgumentException("Username already exists.");
+        }
+
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new IllegalArgumentException("Email already exists.");
         }
 
         User user = new User();
@@ -62,16 +65,7 @@ public class UserService {
 
         return new UserResponse(user.getId(), user.getUsername(), user.getEmail());
     }
-
-    public UserResponse loginUser(LoginRequest loginRequest) {
-        User user = userRepository.findByEmail(loginRequest.getEmail());
-        if (user == null || !passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid username or password.");
-        }
-
-        return new UserResponse(user.getId(), user.getUsername(), user.getEmail());
-    }
-    
+	
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
