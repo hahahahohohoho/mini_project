@@ -3586,3 +3586,13 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.hibernate
 2024-08-08 11:35:48,966 [Worker-78: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\SS\mini_project\Backend-1\src\test\resources
 2024-08-08 11:37:09,813 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@1a8c78b2{STOPPING}[12.0.9,sto=0]
 2024-08-08 11:37:09,815 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@6208ad3c{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2024-08-08 11:38:45,867 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2024-08-08 11:39:21,695 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-08 11:39:21,705 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-08 11:39:21,709 [Worker-1: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\SS\mini_project\Backend-1\src\test\resources
+2024-08-08 11:39:34,565 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-08 11:39:34,571 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-08 11:39:34,573 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\SS\mini_project\Backend-1\src\test\resources
+2024-08-08 11:41:48,050 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-08-08 11:41:48,055 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-08-08 11:41:48,057 [Worker-7: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\SS\mini_project\Backend-1\src\test\resources

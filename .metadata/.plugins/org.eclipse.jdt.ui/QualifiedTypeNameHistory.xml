@@ -58,6 +58,6 @@
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnoreProperties"/>
     <fullyQualifiedTypeName name="com.edu.board.Entity.Reply"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.edu.board.Entity.ReplyDTO"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

@@ -1,10 +1,11 @@
 package com.edu.user.entitiy;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
 import com.edu.board.Entity.Board;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,6 +44,6 @@ public class User {
 
     private boolean emailVerified = false;
     
-//    @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
-//    private List<Board> boardList = new ArrayList<>();
+    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
+    private List<Board> boardList = new ArrayList<>();
 }
