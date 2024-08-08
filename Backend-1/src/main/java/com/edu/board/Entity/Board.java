@@ -6,6 +6,7 @@ import java.util.List;
 import com.edu.user.entitiy.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -48,10 +49,13 @@ public class Board {
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //연관관계의 주인이 아니르는 의미, 외래키 아니니 열 생성 필요 X
 	@JsonIgnoreProperties({"board"})
 	private List<Reply> replys;
-	@OneToMany(mappedBy = "board")
+	
+	@OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
 	private List<Recommend> recommends;
 	@Transient
 	private boolean recommend_state;
+	@Transient
+	private Integer recommend_count;
 	
 
 	public void setWriter(User user) {

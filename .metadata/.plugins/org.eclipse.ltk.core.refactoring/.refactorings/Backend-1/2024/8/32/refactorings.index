@@ -57,3 +57,7 @@
 1723085177970	Rename field 'reply'
 1723085426096	Move compilation units
 1723085557709	Rename type 'CommentService'
+1723089299767	Rename method 'getBoard'
+1723092425566	Rename local variable 'boardId'
+1723092435175	Rename local variable 'boardId'
+1723092441270	Rename local variable 'userId'

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 
+
 @RestController
 @RequestMapping("/board")
 public class BoardController {
@@ -34,7 +35,7 @@ public class BoardController {
 	
 	@GetMapping("/{id}")
 	public BoardDTO getBoard(@PathVariable Long id) {
-		return boardService.getBoard(id);
+		return boardService.getBoardDetails(id);
 	}
 	@PostMapping
 	public void postBoard(@RequestBody BoardDTO boardDTO) {
@@ -49,4 +50,7 @@ public class BoardController {
 		//TODO: process PUT request
 		boardService.putBoard(id, boardDTO);
 	}
+	
+
+	
 }
