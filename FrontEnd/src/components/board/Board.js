@@ -7,12 +7,10 @@ const DataDisplay = () => {
 
     useEffect(() => {
         const loadBoard = async () => {
-            // console.log(process.env.REACT_APP_API_MODE);
-            console.log(process.env.REACT_APP_BACKEND_URL)
+            console.log(process.env.REACT_APP_API_MODE);
             try {
                 const response = await axios.get('/board');
                 const data = response.data;
-                console.log(data)
                 setDataBoard(data);
             }catch (error) {
                 console.error('Error fetching board data:', error);

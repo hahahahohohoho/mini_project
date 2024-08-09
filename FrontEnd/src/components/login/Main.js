@@ -10,11 +10,11 @@ const Main = () => {
     localStorage.removeItem('token');
     // 로그인 상태 변경
     navigate('/login');
-  };
-
-  const goAdmin = () => {
-    navigate('/admin')
-  }
+    };
+    
+    const goAdmin = () => {
+      navigate('/admin')
+    }
 
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-green-100">

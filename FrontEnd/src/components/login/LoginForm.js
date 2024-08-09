@@ -1,13 +1,14 @@
-// src/components/LoginForm.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from '../axios';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginForm = ({ setAuth }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || '/board';
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,10 +18,11 @@ const LoginForm = ({ setAuth }) => {
         password,
       });
       if (response.status === 200) {
-        const { token } = response.data;
+        const { token, username } = response.data;
         localStorage.setItem('token', token);
-        setAuth(true);  // 로그인 성공 시 auth 상태를 true로 설정
-        navigate('/admin');  // 로그인 후 /protected 페이지로 이동
+        localStorage.setItem('username', username);
+        setAuth(true);
+        navigate(from); // 로그인 후 원래 페이지로 리다이렉트
       } else {
         setError('Login failed');
       }
@@ -68,6 +70,11 @@ const LoginForm = ({ setAuth }) => {
             >
               Sign In
             </button>
+          </div>
+          <div className="mt-4 text-center">
+            <Link to="/register" className="text-blue-500 hover:text-blue-700">
+              Don't have an account? Sign Up
+            </Link>
           </div>
         </form>
       </div>

@@ -1,18 +1,19 @@
-// src/components/ProtectedPage.js
+// src/components/AdminPage.js
 import React, { useEffect, useState } from 'react';
-import axios from '../axios';
-
-const ProtectedPage = () => {
+import axios from 'axios';
+const AdminPage = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [userData, setUserData] = useState()
 
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const response = await axios.get('/auth/protected');
+        const response = await axios.get('/admin/user');
         setMessage(response.data.message);
+        setUserData(response.data)
       } catch (error) {
-        setError('Failed to fetch the protected message');
+        setError('Failed to fetch the admin message');
       }
     };
 
@@ -22,7 +23,7 @@ const ProtectedPage = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white shadow-md rounded">
-        <h1 className="text-2xl font-bold mb-4">Protected Page</h1>
+        <h1 className="text-2xl font-bold mb-4">Admin Page</h1>
         {message && <p className="text-green-500">{message}</p>}
         {error && <p className="text-red-500">{error}</p>}
       </div>
@@ -30,4 +31,4 @@ const ProtectedPage = () => {
   );
 };
 
-export default ProtectedPage;
+export default AdminPage;

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
@@ -26,6 +25,7 @@ const DetailPage = () => {
             const newCommentObj = {
                 username: username,
                 content: newComment,
+                createDate: new Date().toISOString(),
             };
 
             setComments([...comments, newCommentObj]);
