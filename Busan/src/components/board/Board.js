@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../axios';
-const DataDisplay = () => {
+const Board = () => {
     const [dataBoard, setDataBoard] = useState([]);
     const navigate = useNavigate();
 
@@ -29,15 +29,17 @@ const DataDisplay = () => {
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                     <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">View Count</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Create Time</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">순번</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">사용자</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">제목</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">조회수</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">작성 날짜</th>
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {dataBoard.map(board => (
                         <tr key={`${board.username}-${board.title}`} onClick={() => handleRowClick(board)} className="cursor-pointer">
+                            <td className="px-6 py-4 whitespace-nowrap">{board.id}</td>
                             <td className="px-6 py-4 whitespace-nowrap">{board.username}</td>
                             <td className="px-6 py-4 whitespace-nowrap">{board.title}</td>
                             <td className="px-6 py-4 whitespace-nowrap">{board.viewcount}</td>
@@ -57,7 +59,7 @@ const DataDisplay = () => {
                     onClick={() => window.location.reload()} 
                     className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
-                    Refresh Board
+                    개시판
                 </button>
             </div>
             <div className="overflow-x-auto">
@@ -67,4 +69,4 @@ const DataDisplay = () => {
     );
 };
 
-export default DataDisplay;
+export default Board;

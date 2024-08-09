@@ -20,16 +20,34 @@ const DetailPage = () => {
         setNewComment(e.target.value);
     };
 
-    const handleCommentSubmit = () => {
+    const handleCommentSubmit = async () => {
         if (newComment.trim() && username) {
             const newCommentObj = {
                 username: username,
                 content: newComment,
                 createDate: new Date().toISOString(),
+                postId: boardItem.id, // 게시글 ID가 필요하면 추가
             };
-
-            setComments([...comments, newCommentObj]);
-            setNewComment('');
+    
+            try {
+                // 댓글을 백엔드로 전송
+                const response = await axios.post('/auth/signin', newCommentObj, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}` // 인증 토큰이 필요할 경우
+                    }
+                });
+    
+                if (response.status === 201) {
+                    // 성공적으로 저장되면 댓글 리스트 업데이트
+                    setComments([...comments, response.data]);
+                    setNewComment('');
+                } else {
+                    alert("댓글 저장에 실패했습니다.");
+                }
+            } catch (error) {
+                console.error("댓글 저장 중 오류 발생:", error);
+                alert("댓글 저장 중 오류가 발생했습니다.");
+            }
         } else if (!username) {
             alert("로그인이 필요합니다.");
         }
