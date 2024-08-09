@@ -20,8 +20,22 @@ const Board = () => {
         loadBoard();
     }, []);
 
-    const handleRowClick = (boardItem) => {
-        navigate(`/detail/${boardItem.username}/${boardItem.title}`, { state: { boardItem } });
+    const handleRowClick = async (boardItem) => {
+        try {
+            // 서버에서 게시물 세부 정보를 가져옴
+            const response = await axios.get(`/board/${boardItem.id}`);
+            const boardDetail = response.data;
+
+            // 게시물 세부 정보를 DetailPage로 전달
+            navigate(`/detail/${boardItem.username}/${boardItem.title}`, { state: { boardItem: boardDetail } });
+        } catch (error) {
+            console.error('Error fetching board details:', error);
+            alert('게시물 세부 정보를 가져오는 데 실패했습니다.');
+        }
+    };
+
+    const handleCreatePostClick = () => {
+        navigate('/create'); // 게시글 작성 페이지로 이동
     };
 
     const loadData = () => {
@@ -54,12 +68,18 @@ const Board = () => {
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4 text-center">Board</h1>
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-between mb-4">
                 <button 
                     onClick={() => window.location.reload()} 
                     className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
-                    개시판
+                    Refresh Board
+                </button>
+                <button
+                    onClick={handleCreatePostClick}
+                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+                >
+                    게시글 작성
                 </button>
             </div>
             <div className="overflow-x-auto">
