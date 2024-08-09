@@ -1,6 +1,9 @@
 package com.edu.user.service;
 
 
+
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.edu.common.util.JwtUtils;
 import com.edu.user.dto.JwtResponse;
-import com.edu.user.dto.LoginRequest;
 import com.edu.user.dto.SignUpRequest;
 import com.edu.user.dto.UserResponse;
 import com.edu.user.entitiy.ERole;
@@ -32,7 +34,9 @@ public class UserService {
 
     @Autowired
     private JwtUtils jwtUtils;
+    
 
+    
     public JwtResponse authenticateUser(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
@@ -61,6 +65,7 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
         user.setEmail(signUpRequest.getEmail());
         user.setRole(ERole.ROLE_USER);
+        user.setSignUpDate(LocalDateTime.now());
         userRepository.save(user);
 
         return new UserResponse(user.getId(), user.getUsername(), user.getEmail());

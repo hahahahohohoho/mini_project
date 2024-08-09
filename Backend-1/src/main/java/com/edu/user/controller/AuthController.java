@@ -61,10 +61,5 @@ public class AuthController {
         return ResponseEntity.ok("This is a protected message only for authenticated users with USER role.");
     }
     
-    @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<String> getAdminMessage() {
-    	System.out.println("시도!");
-        return ResponseEntity.ok("This is a protected message only for authenticated users with USER role.");
-    }
+ 
 }

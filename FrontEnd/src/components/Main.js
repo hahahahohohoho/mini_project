@@ -12,6 +12,10 @@ const Main = () => {
     navigate('/login');
   };
 
+  const goAdmin = () => {
+    navigate('/admin')
+  }
+
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-green-100">
       <h1 className="text-4xl font-bold text-green-500 mb-8">Welcome to the Main Page!</h1>
@@ -20,6 +24,12 @@ const Main = () => {
         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
       >
         Logout
+      </button>
+      <button
+        onClick={goAdmin}
+        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+      >
+        admin
       </button>
     </div>
   );

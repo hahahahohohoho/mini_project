@@ -5,12 +5,15 @@ import axios from '../axios';
 const AdminPage = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [userData, setUserData] = useState()
 
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const response = await axios.get('/auth/admin');
+        const response = await axios.get('/admin/user');
         setMessage(response.data.message);
+        setUserData(response)
+        console.log(response)
       } catch (error) {
         setError('Failed to fetch the admin message');
       }

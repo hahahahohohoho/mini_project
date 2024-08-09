@@ -2,10 +2,12 @@ package com.edu.user.entitiy;
 
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.edu.board.Entity.Board;
+import com.edu.board.Entity.Reply;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,7 +46,13 @@ public class User {
 
     private boolean emailVerified = false;
     
+	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime signUpDate;
+    
     //EAGER로 하면 너무 많이 검색함
     @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
     private List<Board> boardList = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
+    private List<Reply> replyList = new ArrayList<>();
 }
