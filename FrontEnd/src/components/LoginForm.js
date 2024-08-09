@@ -20,7 +20,7 @@ const LoginForm = ({ setAuth }) => {
         const { token } = response.data;
         localStorage.setItem('token', token);
         setAuth(true);  // 로그인 성공 시 auth 상태를 true로 설정
-        navigate('/protected');  // 로그인 후 /protected 페이지로 이동
+        navigate('/admin');  // 로그인 후 /protected 페이지로 이동
       } else {
         setError('Login failed');
       }

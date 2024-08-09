@@ -1,16 +1,11 @@
 package com.edu.user.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +58,13 @@ public class AuthController {
     @GetMapping("/protected")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> getProtectedMessage() {
+        return ResponseEntity.ok("This is a protected message only for authenticated users with USER role.");
+    }
+    
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<String> getAdminMessage() {
+    	System.out.println("시도!");
         return ResponseEntity.ok("This is a protected message only for authenticated users with USER role.");
     }
 }
