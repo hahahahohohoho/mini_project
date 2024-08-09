@@ -73,12 +73,12 @@ public class UserService {
 
 	public void createAdmin() {
 		User user = new User();
+			user.setId(77L);
 			user.setUsername("관리자");
 			user.setPassword(passwordEncoder.encode("asdf"));
-			user.setEmail("admin1");
+			user.setEmail("admin1@111.com");
 			user.setRole(ERole.ROLE_ADMIN);
 			user.setEmailVerified(true);
-			user.setId(0L);
         userRepository.save(user);
 
 	}

@@ -9,7 +9,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const response = await axios.get('/admin');
+        const response = await axios.get('/auth/admin');
         setMessage(response.data.message);
       } catch (error) {
         setError('Failed to fetch the admin message');

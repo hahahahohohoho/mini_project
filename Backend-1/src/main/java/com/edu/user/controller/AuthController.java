@@ -62,15 +62,7 @@ public class AuthController {
     
     @GetMapping("/protected")
     @PreAuthorize("hasRole('USER')")
-    public Map<String, String> getProtectedMessage() {
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "This is a protected message only for authenticated users.");
-        return response;
+    public ResponseEntity<String> getProtectedMessage() {
+        return ResponseEntity.ok("This is a protected message only for authenticated users with USER role.");
     }
-    
-    @GetMapping("/adminC")
-    public void createAdmin () {
-        userService.createAdmin();
-    }
-    
 }

@@ -9,7 +9,7 @@ const ProtectedPage = () => {
   useEffect(() => {
     const fetchMessage = async () => {
       try {
-        const response = await axios.get('/protected');
+        const response = await axios.get('/auth/protected');
         setMessage(response.data.message);
       } catch (error) {
         setError('Failed to fetch the protected message');

@@ -1,6 +1,6 @@
 // src/components/LoginForm.js
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from '../axios';
 
 const LoginForm = ({ setAuth }) => {
@@ -19,8 +19,8 @@ const LoginForm = ({ setAuth }) => {
       if (response.status === 200) {
         const { token } = response.data;
         localStorage.setItem('token', token);
-        setAuth(true);
-        navigate('/main');
+        setAuth(true);  // 로그인 성공 시 auth 상태를 true로 설정
+        navigate('/protected');  // 로그인 후 /protected 페이지로 이동
       } else {
         setError('Login failed');
       }
@@ -68,11 +68,6 @@ const LoginForm = ({ setAuth }) => {
             >
               Sign In
             </button>
-          </div>
-          <div className="mt-4 text-center">
-            <Link to="/register" className="text-blue-500 hover:text-blue-700">
-              Don't have an account? Sign Up
-            </Link>
           </div>
         </form>
       </div>

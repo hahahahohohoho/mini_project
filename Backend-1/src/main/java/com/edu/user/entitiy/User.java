@@ -44,6 +44,7 @@ public class User {
 
     private boolean emailVerified = false;
     
-    @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
+    //EAGER로 하면 너무 많이 검색함
+    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
     private List<Board> boardList = new ArrayList<>();
 }

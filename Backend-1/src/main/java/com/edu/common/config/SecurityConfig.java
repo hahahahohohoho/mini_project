@@ -43,8 +43,8 @@ public class SecurityConfig {
 	SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(security -> security
 				.requestMatchers("/api/admin").hasRole("ADMIN")
-                .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/protected").authenticated()
+                .requestMatchers("/api/auth/**").permitAll()
 				.anyRequest().permitAll());
 		http.csrf(cf -> cf.disable());
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
