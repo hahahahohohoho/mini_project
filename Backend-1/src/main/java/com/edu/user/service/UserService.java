@@ -69,6 +69,21 @@ public class UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+
+	public void createAdmin() {
+		User user = new User();
+			user.setUsername("관리자");
+			user.setPassword(passwordEncoder.encode("asdf"));
+			user.setEmail("admin1");
+			user.setRole(ERole.ROLE_ADMIN);
+			user.setEmailVerified(true);
+			user.setId(0L);
+        userRepository.save(user);
+
+	}
+
+
     
     
 }

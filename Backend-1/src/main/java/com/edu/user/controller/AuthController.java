@@ -67,4 +67,10 @@ public class AuthController {
         response.put("message", "This is a protected message only for authenticated users.");
         return response;
     }
+    
+    @GetMapping("/adminC")
+    public void createAdmin () {
+        userService.createAdmin();
+    }
+    
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
     <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnoreProperties"/>
     <fullyQualifiedTypeName name="com.edu.board.Entity.ReplyDTO"/>
     <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="com.edu.user.entitiy.ERole"/>
 </qualifiedTypeNameHistroy>
