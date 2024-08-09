@@ -1,6 +1,6 @@
 // src/components/AdminPage.js
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../axios';
 const AdminPage = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -10,8 +10,8 @@ const AdminPage = () => {
     const fetchMessage = async () => {
       try {
         const response = await axios.get('/admin/user');
-        setMessage(response.data.message);
         setUserData(response.data)
+        console.log(userData)
       } catch (error) {
         setError('Failed to fetch the admin message');
       }

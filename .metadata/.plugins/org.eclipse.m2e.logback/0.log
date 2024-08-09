@@ -5245,3 +5245,5 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.hibernate
 2024-08-09 16:29:10,844 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
 2024-08-09 16:29:10,853 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-08-09 16:29:10,855 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\SS\mini_project\Backend-1\src\test\resources
+2024-08-09 17:59:24,816 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@6f5e1d27{STOPPING}[12.0.9,sto=0]
+2024-08-09 17:59:24,821 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@10a5a891{HTTP/1.1, (http/1.1)}{127.0.0.1:0}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios'; // axios 인스턴스를 가져옴
 
 const LoginForm = ({ setAuth }) => {
   const [email, setEmail] = useState('');

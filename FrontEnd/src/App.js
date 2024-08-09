@@ -6,6 +6,7 @@ import Main from './components/login/Main';
 import AdminPage from './components/login/AdminPage';
 import Board from './components/board/Board';
 import DetailPage from './components/board/DetailPage';
+import CreatePost from './components/board/CreatePost'
 function App() {
   const [auth, setAuth] = useState(false);
 
@@ -16,6 +17,14 @@ function App() {
     }
   }, []);
 
+  const handleLogout = () => {
+    // 로그아웃 처리
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    setAuth(false);
+    window.location.href = '/'; // 로그아웃 후 메인 페이지로 이동
+  };
+
   return (
     
     <BrowserRouter>
@@ -23,10 +32,19 @@ function App() {
     <header className='flex justify-between items-center text-xl font-bold h-20 p-10 bg-slate-300'>
         <div>리액트연습</div>
         <ul className="flex items-center">
-          <li><Link to='/login' className="mx-3">로그인</Link></li>
-          <li><Link to='/main' className="mx-3">메인</Link></li>
-          <li><Link to='/admin' className="mx-3">관리자</Link></li>
-          <li><Link to='/board' className="mx-3">게시판</Link></li>
+        {auth ? (
+              <>
+                <li><Link to='/main' className="mx-3">메인</Link></li>
+                <li><Link to='/admin' className="mx-3">관리자</Link></li>
+                <li><Link to='/board' className="mx-3">게시판</Link></li>
+                <li><button onClick={handleLogout} className="mx-3">로그아웃</button></li>
+              </>
+            ) : (
+              <>
+                <li><Link to='/login' className="mx-3">로그인</Link></li>
+                <li><Link to='/register' className="mx-3">회원가입</Link></li>
+              </>
+            )}
         </ul>
         </header>
 
@@ -40,7 +58,7 @@ function App() {
       <Route path="*" element={<Navigate to="/login" />} />
       <Route path="/board" element={<Board />} /> {/* 누구나 접근 가능 */}
       <Route path="/detail/:username/:title" element={auth ? <DetailPage /> : <Navigate to="/login" />} />
-
+      <Route path="/create" element={auth ? <CreatePost /> : <Navigate to="/login" />} /> {/* 게시글 작성 페이지 */}
     </Routes>
     </main>
       <footer className='flex justify-center items-center text-white bg-slate-800 h-20'>
