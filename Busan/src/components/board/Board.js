@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import axios from '../../axios';
 const DataDisplay = () => {
     const [dataBoard, setDataBoard] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
         const loadBoard = async () => {
+            console.log(process.env.REACT_APP_API_MODE);
             try {
-                const response = await fetch('/board.json');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch');
-                }
-                const data = await response.json();
+                const response = await axios.get('/board');
+                const data = response.data;
                 setDataBoard(data);
-            } catch (error) {
+            }catch (error) {
                 console.error('Error fetching board data:', error);
             }
         };

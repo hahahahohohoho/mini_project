@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, BrowserRouter } from 'react-router-dom';
 import RegisterForm from './components/login/RegisterForm';
 import LoginForm from './components/login/LoginForm';
 import Main from './components/login/Main';
-import Board from './components/board/Board';
+import Board from '../public/Board';
 import DetailPage from './components/board/DetailPage';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
   }, []);
 
   return (
+    
     <Router>
       <Routes>
         <Route path="/login" element={<LoginForm setAuth={setAuth} />} />
@@ -27,6 +28,8 @@ function App() {
         <Route path="*" element={<Navigate to={auth ? "/board" : "/login"} />} />
       </Routes>
     </Router>
+    
+    
   );
 }
 
