@@ -8,11 +8,13 @@ import org.hibernate.Hibernate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.edu.board.Entity.Board;
 import com.edu.board.Entity.Reply;
 import com.edu.board.repo.BoardRepository;
 import com.edu.board.repo.ReplyRepository;
+import com.edu.user.entitiy.ERole;
 import com.edu.user.entitiy.User;
 import com.edu.user.repo.UserRepository;
 
@@ -26,6 +28,8 @@ public class BoardRepoTest {
 	private BoardRepository boardRepository;
 	@Autowired
 	private ReplyRepository replyRepository;
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	@Test
 	@Transactional
@@ -67,5 +71,17 @@ public class BoardRepoTest {
 		for (Board board : writer.getBoardList()) {
 			System.out.println("--->" + board.toString());
 		}
+	}
+	
+	@Test
+	@Transactional
+	public void testAdmin() {
+		User user = new User();
+			user.setEmail("admin111@111.com");
+			user.setPassword(encoder.encode("asdf123"));
+			user.setUsername("관리자");
+			user.setRole(ERole.ROLE_ADMIN);
+			user.setEmailVerified(true);
+		userRepository.save(user);
 	}
 }

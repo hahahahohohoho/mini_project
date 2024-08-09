@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.edu.common.util.JwtUtils;
 import com.edu.user.dto.JwtResponse;
+import com.edu.user.dto.MyInfoDTO;
 import com.edu.user.dto.SignUpRequest;
 import com.edu.user.dto.UserResponse;
 import com.edu.user.entitiy.ERole;
@@ -86,6 +87,15 @@ public class UserService {
 			user.setEmailVerified(true);
         userRepository.save(user);
 
+	}
+
+
+	public void updateForm(Long id, MyInfoDTO dTO) {
+		User user = userRepository.findById(id).orElseThrow();
+			user.setPassword(dTO.getPassword());
+			user.setEmail(dTO.getEmail());
+			user.setUsername(dTO.getUsername());
+		userRepository.save(user);
 	}
 
 

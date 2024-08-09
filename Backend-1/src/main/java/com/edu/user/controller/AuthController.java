@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.edu.common.service.EmailVerificationService;
 import com.edu.user.dto.JwtResponse;
 import com.edu.user.dto.LoginRequest;
+import com.edu.user.dto.MyInfoDTO;
 import com.edu.user.dto.SignUpRequest;
 import com.edu.user.dto.UserResponse;
 import com.edu.user.entitiy.User;
@@ -48,6 +51,13 @@ public class AuthController {
             return ResponseEntity.status(400).body("Invalid or expired token.");
         }
     }
+	
+	@PutMapping("/myinfo/{id}")
+	public void updateForm(@PathVariable Long id, @RequestBody MyInfoDTO dTO) {
+		userService.updateForm(id, dTO);
+	}
+	
+	
 	// jwt위해 추가
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {

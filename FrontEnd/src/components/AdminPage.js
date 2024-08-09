@@ -12,8 +12,7 @@ const AdminPage = () => {
       try {
         const response = await axios.get('/admin/user');
         setMessage(response.data.message);
-        setUserData(response)
-        console.log(response)
+        setUserData(response.data)
       } catch (error) {
         setError('Failed to fetch the admin message');
       }
