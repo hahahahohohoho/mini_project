@@ -61,7 +61,7 @@ public class BoardController {
 	        }
 	    }
 	
-	@GetMapping("/sarch")
+	@GetMapping
 	public List<BoardDTO> getBoardList() {
 		return boardService.getBoardList();
 	}
