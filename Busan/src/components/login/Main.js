@@ -10,7 +10,11 @@ const Main = () => {
     localStorage.removeItem('token');
     // 로그인 상태 변경
     navigate('/login');
-  };
+    };
+    
+    const goAdmin = () => {
+      navigate('/admin')
+    }
 
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-green-100">
@@ -20,6 +24,12 @@ const Main = () => {
         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
       >
         Logout
+      </button>
+      <button
+        onClick={goAdmin}
+        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+      >
+        admin
       </button>
     </div>
   );
