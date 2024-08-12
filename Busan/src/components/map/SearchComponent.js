@@ -13,9 +13,9 @@ const SearchComponent = ({ onSearch }) => {
         type="text"
         value={searchKeyword}
         onChange={(e) => setSearchKeyword(e.target.value)}
-        placeholder="Search by title"
+        placeholder="어디로 가고 싶으세요?"
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch}>검색</button>
     </div>
   );
 };

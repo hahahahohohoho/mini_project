@@ -30,8 +30,8 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col w-full h-screen overflow-hidden"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
-        <header className='flex justify-between items-center text-xl font-bold h-20 p-10 bg-slate-300 w-full'>
-          <div>리액트연습</div>
+        <header className='flex justify-between items-center text-xl font-bold h-10 p-5 bg-blue-100 w-full'>
+          <div>자전거로 떠나자!</div>
           <ul className="flex items-center">
             {auth ? (
               <>

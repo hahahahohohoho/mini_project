@@ -1,17 +1,18 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import MapComponent from './MapComponent';
 import SearchComponent from './SearchComponent';
-import FilteredMapComponent from './FilteredMapComponent';
+import MarkerComponent from './MarkerComponent';
+import LineComponent from './LineComponent';
+import axios from '../../axios'; // axios 인스턴스 가져오기
 
-const App = () => {
+const MapMain = () => {
   const [map, setMap] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [lineData, setLineData] = useState([]);
-  const [currentPosition, setCurrentPosition] = useState(null); // 부산의 좌표를 기본값으로 설정
-  const [searchCenter, setSearchCenter] = useState(null); // 검색된 좌표를 저장
-  const [zoomLevel, setZoomLevel] = useState(10); // 기본 확대 수준
+  const [currentPosition, setCurrentPosition] = useState(null);
+  const [searchCenter, setSearchCenter] = useState(null);
+  const [zoomLevel, setZoomLevel] = useState(10);
 
   const handleMapLoad = (mapInstance) => {
     setMap(mapInstance);
@@ -36,11 +37,10 @@ const App = () => {
   useEffect(() => {
     if (searchKeyword && map) {
       console.log('Fetching sight data...');
-      fetch('/sight (1).json')
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Fetched sight data:', data);
-          const filtered = data.filter(location => location.title.includes(searchKeyword));
+      axios.get('/sight') // axios를 사용하여 sight 데이터를 가져옴
+        .then((response) => {
+          console.log('Fetched sight data:', response.data);
+          const filtered = response.data.filter(location => location.title.includes(searchKeyword));
           console.log('Filtered sight data:', filtered);
           setFilteredData(filtered);
           if (filtered.length > 0) {
@@ -56,11 +56,10 @@ const App = () => {
         .catch((error) => console.error('Error fetching sight data:', error));
 
       console.log('Fetching road data...');
-      fetch('/road.json')
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Fetched road data:', data);
-          setLineData(data);
+      axios.get('/road') // axios를 사용하여 road 데이터를 가져옴
+        .then((response) => {
+          console.log('Fetched road data:', response.data);
+          setLineData(response.data);
         })
         .catch((error) => console.error('Error fetching road data:', error));
     }
@@ -71,15 +70,13 @@ const App = () => {
       <SearchComponent onSearch={handleSearch} />
       <MapComponent onMapLoad={handleMapLoad} center={searchCenter} zoomLevel={zoomLevel} />
       {map && (
-        <FilteredMapComponent
-          map={map}
-          markerData={filteredData}
-          lineData={lineData}
-          currentPosition={currentPosition}
-        />
+        <>
+          <MarkerComponent map={map} markerData={filteredData} />
+          <LineComponent map={map} currentPosition={currentPosition} markerData={lineData} />
+        </>
       )}
     </div>
   );
 };
 
-export default App;
+export default MapMain;

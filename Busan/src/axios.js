@@ -13,7 +13,7 @@ instance.interceptors.request.use(
       if (config.url === '/board') {
         config.url = '/data/board.json';
       } else if (config.url === '/sight') {
-        config.url = './data/sight (1).json';
+        config.url = './data/sight1.json';
       } else if (config.url === '/road') {
         config.url = '/data/road.json';  // 올바른 경로로 수정
       }
