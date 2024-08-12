@@ -22,8 +22,8 @@ public class ReplyController {
 	private ReplyService replyService;
 	
 	@PostMapping
-	public String postReply(@RequestBody ReplyDTO replydto) {
-		replyService.postReply(replydto);
+	public String postReply(@PathVariable Long board_id, @RequestBody ReplyDTO replydto) {
+		replyService.postReply(board_id, replydto);
 		return "댓글 작성";
 	}
 	

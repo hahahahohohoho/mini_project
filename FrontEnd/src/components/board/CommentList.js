@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import axios from '../../axios'; // axios 인스턴스를 가져옴
 
 
@@ -8,15 +8,9 @@ export default function CommentList() {
     const { boardItem } = state || {};
     const [comments, setComments] = useState(boardItem?.replys || []);
     const [newComment, setNewComment] = useState('');
-    const navigate = useNavigate();
 
     const token = localStorage.getItem('token'); // 로그인 상태 확인
     const username = localStorage.getItem('username'); // 로그인된 사용자의 이름
-
-    const handleLoginRedirect = () => {
-        const redirectAfterLogin = `/detail/${boardItem.username}/${boardItem.title}`;
-        navigate('/login', { state: { from: redirectAfterLogin } });
-    };
 
     const handleCommentChange = (e) => {
         setNewComment(e.target.value);
@@ -57,24 +51,29 @@ export default function CommentList() {
     };
 
     const deleteComment = async (replyId) => {
-        try {
-            console.log(replyId)
-            const result = await axios.delete(`/board/${boardItem.id}/reply/${replyId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            if (result) {
-                alert('댓글 삭제가 완료되었습니다.');
-                // 댓글 목록에서 삭제된 댓글 제거
-                setComments(comments.filter(comment => comment.id !== replyId));
+        if(window.confirm("삭제하시겠습니까?")){
+            try {
+                console.log(replyId)
+                const result = await axios.delete(`/board/${boardItem.id}/reply/${replyId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (result) {
+                    alert('댓글 삭제가 완료되었습니다.');
+                    // 댓글 목록에서 삭제된 댓글 제거
+                    setComments(comments.filter(comment => comment.id !== replyId));
+                }
+            } catch (error) {
+                console.error('Error deleting comment:', error);
+                alert('댓글 삭제에 실패했습니다.');
             }
-        } catch (error) {
-            console.error('Error deleting comment:', error);
-            alert('댓글 삭제에 실패했습니다.');
         }
-        
     };
+    
+    const putComment = ()=>{
+        alert("아직 구현되지 않았습니다.")
+    }
   return (
     <div>
         <div className="mt-8">
@@ -86,6 +85,15 @@ export default function CommentList() {
                             <p className="text-sm font-semibold text-gray-700">{comment.username}</p>
                             <p className="text-gray-600">{comment.content}</p>
                             <p className="text-xs text-gray-500">{new Date(comment.createDate).toLocaleString()}</p>
+                            <div className='flex justify-end'>
+                            {comment.username === username && (
+                                <button
+                                    onClick={() => putComment()} // replyId를 사용하여 삭제 요청
+                                    className="text-blue-600 hover:text-blue-800 mx-3"
+                                >
+                                    수정
+                                </button>
+                            )}
                             {comment.username === username && (
                                 <button
                                     onClick={() => deleteComment(comment.id)} // replyId를 사용하여 삭제 요청
@@ -94,7 +102,8 @@ export default function CommentList() {
                                     삭제
                                 </button>
                             )}
-                            
+                            {/* TODO '수정' 구현 필요 */}
+                            </div>
                         </div>
                     ))
                 ) : (

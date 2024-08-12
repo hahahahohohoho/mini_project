@@ -51,6 +51,11 @@ public class AuthController {
             return ResponseEntity.status(400).body("Invalid or expired token.");
         }
     }
+	@GetMapping("/myinfo")
+	public MyInfoDTO myInfo(@RequestParam("username") String username) {
+		return userService.myInfo(username);
+	}
+	
 	
 	@PutMapping("/myinfo/{id}")
 	public void updateForm(@PathVariable Long id, @RequestBody MyInfoDTO dTO) {

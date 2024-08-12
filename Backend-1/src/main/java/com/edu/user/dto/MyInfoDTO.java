@@ -1,32 +1,33 @@
 package com.edu.user.dto;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.edu.board.Entity.Board;
-import com.edu.board.Entity.Reply;
+import com.edu.board.DTO.BoardDTO;
+import com.edu.board.DTO.ReplyDTO;
 import com.edu.user.entitiy.User;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class MyInfoDTO {
-	@Autowired
-	private PasswordEncoder encoder;
 	
 	private String username;
 	private String email;
-	private String password;
-	private List<Board> boards;
-	private List<Reply> replys;
+	private List<BoardDTO> boards;
+	private List<ReplyDTO> replys;
 	
 	public MyInfoDTO(User user) {
 		this.username = user.getUsername();
 		this.email = user.getEmail();
-		this.password = encoder.encode(user.getPassword()); 
-		this.boards = user.getBoardList();
-		this.replys = user.getReplyList();
+		List<BoardDTO> boardDTOs = user.getBoardList().stream()
+				.map(BoardDTO::new)
+				.collect(Collectors.toList());
+		this.boards = boardDTOs;
+		List<ReplyDTO> replyDTOs = user.getReplyList().stream()
+				.map(ReplyDTO::new)
+				.collect(Collectors.toList());		
+		this.replys = replyDTOs;
 	}
 }

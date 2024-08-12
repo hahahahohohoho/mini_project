@@ -6,8 +6,6 @@ import CommentList from './CommentList';
 const DetailPage = () => {
     const { state } = useLocation();
     const { boardItem } = state || {};
-    const [comments, setComments] = useState(boardItem?.replys || []);
-    const [newComment, setNewComment] = useState('');
     const navigate = useNavigate();
     
     const token = localStorage.getItem('token'); // 로그인 상태 확인
@@ -53,22 +51,24 @@ const DetailPage = () => {
 
     const handleCancelRecommendSubmit = async () => {
         if (username) {
-            try {
-                const result = await axios.delete(`/board/${boardItem.id}/recommend`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                    data: {
-                        username: username,
-                        board_id: boardItem.id,
-                    },
-                });
-                if (result) {
-                    setIsRecommended(false);
-                    alert('추천이 취소되었습니다.');
+            if(window.confirm("추천을 취소하시겠습니까?")){
+                try {
+                    const result = await axios.delete(`/board/${boardItem.id}/recommend`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                        data: {
+                            username: username,
+                            board_id: boardItem.id,
+                        },
+                    });
+                    if (result) {
+                        setIsRecommended(false);
+                        alert('추천이 취소되었습니다.');
+                    }
+                } catch (error) {
+                    alert('추천 취소에 실패했습니다.');
                 }
-            } catch (error) {
-                alert('추천 취소에 실패했습니다.');
             }
         } else {
             alert('로그인이 필요합니다.');

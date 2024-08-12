@@ -93,10 +93,16 @@ public class UserService {
 
 	public void updateForm(Long id, MyInfoDTO dTO) {
 		User user = userRepository.findById(id).orElseThrow();
-			user.setPassword(dTO.getPassword());
 			user.setEmail(dTO.getEmail());
 			user.setUsername(dTO.getUsername());
 		userRepository.save(user);
+	}
+
+
+	public MyInfoDTO myInfo(String username) {
+		User user = userRepository.findByUsername(username);
+		MyInfoDTO dTO = new MyInfoDTO(user);
+		return dTO;
 	}
 
 

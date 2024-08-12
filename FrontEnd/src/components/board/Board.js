@@ -3,12 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from '../../axios';
 const DataDisplay = () => {
     const [dataBoard, setDataBoard] = useState([]);
-    const [boardItem, setBoardItem] = useState();
     const navigate = useNavigate();
 
     useEffect(() => {
         const loadBoard = async () => {
-            console.log(process.env.REACT_APP_API_MODE);
             try {
                 const response = await axios.get('/board');
                 const data = response.data;
@@ -53,7 +51,7 @@ const DataDisplay = () => {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                     {dataBoard.map(board => (
-                        <tr key={`${board.username}-${board.title}`} onClick={() => handleRowClick(board)} className="cursor-pointer" key={board.id}>
+                        <tr key={`${board.username}-${board.title}`} onClick={() => handleRowClick(board)} className="cursor-pointer">
                             <td className="px-6 py-4 whitespace-nowrap">{board.id}</td>
                             <td className="px-6 py-4 whitespace-nowrap">{board.username}</td>
                             <td className="px-6 py-4 whitespace-nowrap">{board.title}</td>

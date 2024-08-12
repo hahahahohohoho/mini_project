@@ -7,6 +7,7 @@ import AdminPage from './components/login/AdminPage';
 import Board from './components/board/Board';
 import DetailPage from './components/board/DetailPage';
 import CreatePost from './components/board/CreatePost';
+import MypageMain from './components/mypage/MypageMain';
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -46,7 +47,7 @@ function App() {
           <ul className="flex items-center">
             {auth ? (
               <>
-                <li>{localStorage.getItem('username')}님</li>
+                <li><Link to='/myinfo' className="mx-3">{localStorage.getItem('username')}님</Link></li>
                 <li><Link to='/main' className="mx-3">메인</Link></li>
                 <li><Link to='/admin' className="mx-3">관리자</Link></li>
                 <li><Link to='/board' className="mx-3">게시판</Link></li>
@@ -71,6 +72,7 @@ function App() {
             <Route path="/board" element={<Board />} /> {/* 누구나 접근 가능 */}
             <Route path="/detail/:username/:title" element={auth ? <DetailPage /> : <Navigate to="/login" />} />
             <Route path="/create" element={auth ? <CreatePost /> : <Navigate to="/login" />} /> {/* 게시글 작성 페이지 */}
+            <Route path="/myinfo" element={auth ? <MypageMain /> : <Navigate to="/login" />} />
           </Routes>
         </main>
 
