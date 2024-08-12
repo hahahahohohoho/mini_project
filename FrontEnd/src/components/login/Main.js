@@ -17,7 +17,7 @@ const Main = () => {
     }
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-green-100">
+    <div className="h-screen flex flex-col items-center justify-center w-full bg-green-100">
       <h1 className="text-4xl font-bold text-green-500 mb-8">Welcome to the Main Page!</h1>
       <button
         onClick={handleLogout}

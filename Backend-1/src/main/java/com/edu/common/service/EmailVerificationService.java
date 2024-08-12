@@ -26,7 +26,7 @@ public class EmailVerificationService {
 
     public String generateVerificationToken(User user) {
         String token = UUID.randomUUID().toString();
-        VerificationToken verificationToken = new VerificationToken(token, user, LocalDateTime.now().plusMinutes(15));
+        VerificationToken verificationToken = new VerificationToken(token, user, LocalDateTime.now().plusMinutes(30));
         tokenRepository.save(verificationToken);
         return token;
     }

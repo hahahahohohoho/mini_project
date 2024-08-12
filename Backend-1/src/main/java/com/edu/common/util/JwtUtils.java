@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.edu.user.entitiy.UserDetailsImpl;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -32,6 +33,14 @@ public class JwtUtils {
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
+    }
+    
+    public long getExpirationFromToken(String token) {
+        Claims claims = Jwts.parser()
+            .setSigningKey(jwtSecret)
+            .parseClaimsJws(token)
+            .getBody();
+        return claims.getExpiration().getTime(); // 만료 시간을 밀리초로 반환
     }
 
     public String getUserNameFromJwtToken(String token) {

@@ -23,7 +23,6 @@ const CreatePost = () => {
         };
 
         try {
-            console.log(newPost)
             const response = await axios.post('/board', {
                 title: title,
                 content: content,

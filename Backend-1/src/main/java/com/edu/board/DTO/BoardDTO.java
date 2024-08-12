@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.edu.board.Entity.Board;
+import com.edu.board.Entity.Recommend;
 
 import lombok.Getter;
 
@@ -17,6 +18,7 @@ public class BoardDTO {
 	private Integer viewcount;
 	private LocalDateTime createTime;
 	private List<ReplyDTO> replys;
+	private List<RecommendDTO> recommends;
 
 	public BoardDTO(Board board) {
 		this.id = board.getId();
@@ -32,6 +34,10 @@ public class BoardDTO {
 
 		
 		this.replys = replyDTOs;
+		List<RecommendDTO> recommendDTOs = board.getRecommends().stream()
+				.map(RecommendDTO::new)
+				.collect(Collectors.toList());
+		this.recommends = recommendDTOs;
 	}
 
 	public BoardDTO(String username, String title, String content) {

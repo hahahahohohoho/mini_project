@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.edu.board.DTO.RecommendDTO;
 import com.edu.board.repo.RecommendRepository;
+import com.edu.user.entitiy.User;
+import com.edu.user.repo.UserRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -12,13 +14,17 @@ import jakarta.transaction.Transactional;
 public class RecommendService {
 	@Autowired
 	private RecommendRepository recommendRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Transactional
     public Integer recommend(RecommendDTO recommendDTO) {
-        return recommendRepository.recommend(recommendDTO.getBoard_id(), recommendDTO.getUser_id());
+		User user = userRepository.findByUsername(recommendDTO.getUsername());
+        return recommendRepository.recommend(recommendDTO.getBoard_id(), user.getId());
     }
 	@Transactional
 	public void cancleRecommend(RecommendDTO recommendDTO) {
-		recommendRepository.cancleRecommend(recommendDTO.getBoard_id(), recommendDTO.getUser_id());
+		User user = userRepository.findByUsername(recommendDTO.getUsername());
+		recommendRepository.cancleRecommend(recommendDTO.getBoard_id(), user.getId());
 	}
 }

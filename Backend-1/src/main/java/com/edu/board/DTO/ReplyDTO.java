@@ -23,10 +23,5 @@ public class ReplyDTO {
 		this.createDate = reply.getCreateDate();
 	}
 	
-	//request용
-	public ReplyDTO(Long board_id, String username, String content) {
-		this.board_id = board_id;
-		this.username = username;
-		this.content = content;
-	}
+
 }

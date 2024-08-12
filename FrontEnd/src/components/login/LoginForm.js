@@ -18,9 +18,11 @@ const LoginForm = ({ setAuth }) => {
         password,
       });
       if (response.status === 200) {
-        const { token, username } = response.data;
+        const { token, username, expirationTime } = response.data;
         localStorage.setItem('token', token);
         localStorage.setItem('username', username);
+        localStorage.setItem('tokenExpiration', expirationTime); // 만료 시간 저장
+        console.log(Date.now() >= expirationTime * 1000)
         setAuth(true);
         navigate(from); // 로그인 후 원래 페이지로 리다이렉트
       } else {
@@ -32,7 +34,7 @@ const LoginForm = ({ setAuth }) => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100">
+    <div className="h-screen w-full flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-xs">
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

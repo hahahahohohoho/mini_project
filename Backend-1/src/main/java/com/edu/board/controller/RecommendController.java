@@ -1,7 +1,6 @@
 package com.edu.board.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,15 +18,15 @@ public class RecommendController {
 	private RecommendService recommendService;
 	
 	@PostMapping
-    public ResponseEntity<?> addRecommend(@RequestBody RecommendDTO recommendDTO) {
+    public String addRecommend(@RequestBody RecommendDTO recommendDTO) {
 		
         recommendService.recommend(recommendDTO);
-        return ResponseEntity.ok().build();
+        return "추천 성공";
     }
 	@DeleteMapping
-	public ResponseEntity<?> cancleRecommend(@RequestBody RecommendDTO recommendDTO) {
+	public String cancleRecommend(@RequestBody RecommendDTO recommendDTO) {
 		recommendService.cancleRecommend(recommendDTO);
-		return ResponseEntity.ok().build();
+		return "삭제 성공";
 	}
 	
 }

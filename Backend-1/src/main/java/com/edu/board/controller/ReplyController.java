@@ -16,19 +16,21 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/board/{board_id}/reply")
+@RequestMapping("/api/board/{board_id}/reply")
 public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
 	@PostMapping
-	public void postReply(@RequestBody ReplyDTO replydto) {
+	public String postReply(@RequestBody ReplyDTO replydto) {
 		replyService.postReply(replydto);
+		return "댓글 작성";
 	}
 	
 	@DeleteMapping("/{replyId}")
-	public void deleteReply(@PathVariable Long replyId) {
+	public String deleteReply(@PathVariable Long replyId) {
 		replyService.deleteReply(replyId);
+		return "댓글 삭제";
 	}
 	
 	@PutMapping("/{id}")
