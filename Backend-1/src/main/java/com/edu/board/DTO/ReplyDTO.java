@@ -8,6 +8,7 @@ import lombok.Getter;
 
 @Getter
 public class ReplyDTO {
+	private Long id;
 	private Long board_id;
 	private String username;
 	private String content;
@@ -17,6 +18,7 @@ public class ReplyDTO {
 	public ReplyDTO() {}
 	
 	public ReplyDTO(Reply reply) {
+		this.id = reply.getId();
 		this.board_id  = reply.getBoard().getId();
 		this.username = reply.getWriter().getUsername();
 		this.content = reply.getContent();

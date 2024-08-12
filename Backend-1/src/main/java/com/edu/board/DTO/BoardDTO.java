@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.edu.board.Entity.Board;
-import com.edu.board.Entity.Recommend;
 
 import lombok.Getter;
 

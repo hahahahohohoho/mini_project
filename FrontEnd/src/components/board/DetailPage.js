@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from '../../axios'; // axios 인스턴스를 가져옴
+import CommentList from './CommentList';
 
 const DetailPage = () => {
     const { state } = useLocation();
@@ -9,10 +10,8 @@ const DetailPage = () => {
     const [newComment, setNewComment] = useState('');
     const navigate = useNavigate();
     
-    
     const token = localStorage.getItem('token'); // 로그인 상태 확인
     const username = localStorage.getItem('username'); // 로그인된 사용자의 이름
-    
     
     // 추천 수 계산
     const recommendCount = boardItem.recommends ? boardItem.recommends.length : 0;
@@ -25,44 +24,6 @@ const DetailPage = () => {
     const handleLoginRedirect = () => {
         const redirectAfterLogin = `/detail/${boardItem.username}/${boardItem.title}`;
         navigate('/login', { state: { from: redirectAfterLogin } });
-    };
-
-    const handleCommentChange = (e) => {
-        setNewComment(e.target.value);
-    };
-
-    const postComment = async (commentData) => {
-        try {
-            const response = await axios.post(`/board/${boardItem.id}/reply`, commentData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Error posting comment:', error);
-            return null;
-        }
-    };
-
-    const handleCommentSubmit = async () => {
-        if (newComment.trim() && username) {
-            const newCommentObj = {
-                username: username,
-                content: newComment,
-                createDate: new Date().toISOString(),
-                board_id: boardItem.id, // 게시물 ID 포함
-            };
-            const result = await postComment(newCommentObj);
-            if (result) {
-                setComments([...comments, newCommentObj]);
-                setNewComment('');
-            } else {
-                alert('댓글 작성에 실패했습니다.');
-            }
-        } else if (!username) {
-            alert("로그인이 필요합니다.");
-        }
     };
 
     const handleRecommendSubmit = async () => {
@@ -165,44 +126,13 @@ const DetailPage = () => {
 
             {token && (
                 <>
-                    <div className="mt-8">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-4">댓글</h2>
-                        <div className="space-y-4">
-                            {comments.length > 0 ? (
-                                comments.map((comment, index) => (
-                                    <div key={index} className="bg-gray-100 p-4 rounded-lg">
-                                        <p className="text-sm font-semibold text-gray-700">{comment.username}</p>
-                                        <p className="text-gray-600">{comment.content}</p>
-                                        <p className="text-xs text-gray-500">{new Date(comment.createDate).toLocaleString()}</p>
-                                    </div>
-                                ))
-                            ) : (
-                                <p className="text-gray-600">댓글이 없습니다. 첫 댓글을 달아보세요!</p>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className="mt-8">
-                        <textarea
-                            value={newComment}
-                            onChange={handleCommentChange}
-                            className="w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                            rows="4"
-                            placeholder="댓글을 작성하세요..."
-                        />
-                        <button
-                            onClick={handleCommentSubmit}
-                            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                        >
-                            댓글 달기
-                        </button>
-                        <button
-                            onClick={isRecommended ? handleCancelRecommendSubmit : handleRecommendSubmit}
-                            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                        >
-                            {isRecommended ? '추천 취소' : '추천'}
-                        </button>
-                    </div>
+                    <CommentList/>
+                    <button
+                        onClick={isRecommended ? handleCancelRecommendSubmit : handleRecommendSubmit}
+                        className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                    >
+                        {isRecommended ? '추천 취소' : '추천'}
+                    </button>
                 </>
             )}
 

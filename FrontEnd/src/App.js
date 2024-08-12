@@ -46,6 +46,7 @@ function App() {
           <ul className="flex items-center">
             {auth ? (
               <>
+                <li>{localStorage.getItem('username')}님</li>
                 <li><Link to='/main' className="mx-3">메인</Link></li>
                 <li><Link to='/admin' className="mx-3">관리자</Link></li>
                 <li><Link to='/board' className="mx-3">게시판</Link></li>
