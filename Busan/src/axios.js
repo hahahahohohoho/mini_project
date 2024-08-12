@@ -13,9 +13,9 @@ instance.interceptors.request.use(
       if (config.url === '/board') {
         config.url = '/data/board.json';
       } else if (config.url === '/sight') {
-        config.url = './sight (1).json';
-      } else if (config.url === '/board') {
-        config.url = '/data/board.json';  // 올바른 경로로 수정
+        config.url = './data/sight (1).json';
+      } else if (config.url === '/road') {
+        config.url = '/data/road.json';  // 올바른 경로로 수정
       }
       config.baseURL = '';  // baseURL 무시
     } else {

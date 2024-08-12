@@ -17,7 +17,7 @@ const Main = () => {
     }
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center bg-green-100">
+    <div className="h-screen flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold text-green-500 mb-8">메인 페이지 입니다</h1>
       <button
         onClick={handleLogout}

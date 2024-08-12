@@ -32,48 +32,51 @@ const LoginForm = ({ setAuth }) => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-xs">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full px-10"> {/* 전체 너비 사용, 양 옆 여백 제거 */}
         <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
           onSubmit={handleLogin}
         >
+          <h2 className="text-xl font-bold text-center mb-4">로그인</h2>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Email
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              이메일
             </label>
             <input
+              id="email"
               type="email"
-              placeholder="Email"
+              placeholder="이메일을 입력하세요"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Password
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+              비밀번호
             </label>
             <input
+              id="password"
               type="password"
-              placeholder="Password"
+              placeholder="비밀번호를 입력하세요"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error && <p className="text-red-500 text-xs italic">{error}</p>}
+          {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline"
             >
               로그인
             </button>
           </div>
           <div className="mt-4 text-center">
             <Link to="/register" className="text-blue-500 hover:text-blue-700">
-             회원가입
+              회원가입
             </Link>
           </div>
         </form>

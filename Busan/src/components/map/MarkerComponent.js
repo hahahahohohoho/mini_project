@@ -1,13 +1,12 @@
-// src/components/MarkerComponent.js
 import React, { useEffect, useState } from 'react';
 
-const MarkerComponent = ({ map, markerData }) => {
+const MarkerComponent = ({ map, markerData, onMarkerClick }) => {
   const { naver } = window;
   const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
     if (map && markerData.length > 0) {
-      // 기존의 마커 삭제
+      // 기존 마커 삭제
       markers.forEach(marker => marker.setMap(null));
 
       // 새로운 마커 추가
@@ -23,6 +22,10 @@ const MarkerComponent = ({ map, markerData }) => {
             title: location.title,
           });
 
+          naver.maps.Event.addListener(marker, 'click', () => {
+            onMarkerClick(location);
+          });
+
           return marker;
         }
         return null;
@@ -30,7 +33,8 @@ const MarkerComponent = ({ map, markerData }) => {
 
       setMarkers(newMarkers);
     }
-  }, [map, markerData]);
+    // 마커들이 맵을 움직일 때 사라지지 않도록 의존성 배열에 markerData만 포함
+  }, [markerData]);
 
   return null;
 };
