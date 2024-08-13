@@ -3,12 +3,14 @@ import MapComponent from './MapComponent';
 import MarkerComponent from './MarkerComponent';
 import SearchComponent from './SearchComponent';
 import axios from '../../axios';
-
+import LineComponent from './LineComponent';
 const MapMain = () => {
   const [map, setMap] = useState(null); // 네이버 지도 객체를 관리하는 상태
   const [markerData, setMarkerData] = useState([]); // 모든 마커 데이터를 저장하는 상태
   const [filteredMarkerData, setFilteredMarkerData] = useState([]); // 필터링된 마커 데이터를 저장하는 상태
   const { naver } = window; // naver 객체를 window에서 가져옴 (네이버 지도 API 사용)
+  const lineString = "LINESTRING (494574.14525293617 278842.4106379978, 494574.2871565765 278842.421066954, 494605.4818847798 278844.3251714521, 494634.92758189834 278846.122664924, 494661.8761756725 278847.76819719985)";
+
 
   // 지도 로드 완료 시 호출되는 함수
   const handleMapLoad = (mapInstance) => {
@@ -56,6 +58,8 @@ const MapMain = () => {
     };
     }
 
+
+
   // 컴포넌트 마운트 시 초기 데이터를 로드하는 useEffect 훅
   useEffect(() => {
     handleSearch('부산', '명소'); // 초기 로드 시 부산의 명소 데이터를 가져옴
@@ -68,7 +72,7 @@ const MapMain = () => {
       {/* 지도 컴포넌트 */}
       <MapComponent onMapLoad={handleMapLoad} center={{ lat: 35.1796, lng: 129.0756 }} zoomLevel={11} />
       {/* 필터링된 마커 데이터를 지도에 표시 */}
-      {map && <MarkerComponent map={map} markerData={filteredMarkerData} />}
+      {map && <MarkerComponent map={map} markerData={filteredMarkerData}/> && <LineComponent map={map} lineData={lineString}/>}
     </div>
   );
 };
