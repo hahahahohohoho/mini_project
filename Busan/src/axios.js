@@ -11,11 +11,13 @@ instance.interceptors.request.use(
     if (isLocal) {
       // 요청 경로에 따라 로컬 파일 경로 설정
       if (config.url === '/board') {
-        config.url = '/data/board.json';
+        config.url = './data/board.json';
       } else if (config.url === '/sight') {
         config.url = './data/sight1.json';
       } else if (config.url === '/road') {
-        config.url = '/data/road.json';  // 올바른 경로로 수정
+        config.url = './data/road.json';  // 올바른 경로로 수정
+      } else if (config.url === '/restaurant'){
+        config.url = './data/restaurant';
       }
       config.baseURL = '';  // baseURL 무시
     } else {

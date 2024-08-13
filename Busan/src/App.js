@@ -56,7 +56,7 @@ function App() {
             <Route path="/" element={<MapMain />} /> {/* 메인 페이지에 MapMain을 설정 */}
             <Route path="/login" element={<LoginForm setAuth={setAuth} />} />
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/main" element={<Main />} />
+            <Route path="/main" element={<MapMain />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/board" element={<Board />} />
             <Route path="/detail/:username/:title" element={<DetailPage />} />
