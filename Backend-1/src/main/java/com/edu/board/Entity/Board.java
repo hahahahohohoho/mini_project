@@ -53,7 +53,7 @@ public class Board {
 	@BatchSize(size = 10)
 	private List<Reply> replys;
 	
-	@OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@BatchSize(size = 10)
 	private List<Recommend> recommends;
 	@Transient

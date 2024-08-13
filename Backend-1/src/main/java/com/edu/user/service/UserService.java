@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.common.util.JwtUtils;
 import com.edu.user.dto.JwtResponse;
@@ -96,11 +97,10 @@ public class UserService {
 			user.setEmail(dTO.getEmail());
 			user.setUsername(dTO.getUsername());
 		userRepository.save(user);
-	}
-
+	}	
 
 	public MyInfoDTO myInfo(String username) {
-		User user = userRepository.findByUsername(username);
+		User user = userRepository.findByUsernameWithAssociations(username);
 		MyInfoDTO dTO = new MyInfoDTO(user);
 		return dTO;
 	}
