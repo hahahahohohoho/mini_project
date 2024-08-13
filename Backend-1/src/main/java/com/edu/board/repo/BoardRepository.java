@@ -37,4 +37,11 @@ public interface BoardRepository extends JpaRepository<Board, Long>{
 
     // 생성일로 정렬
     Page<Board> findAllByOrderByCreateDateDesc(Pageable pageable);
+    
+    //전체 찾기
+    @Query("SELECT DISTINCT b FROM Board b " +
+            "JOIN FETCH b.writer " +
+            "LEFT JOIN FETCH b.replys r " +
+            "LEFT JOIN FETCH r.writer")
+     List<Board> findAllWithReplies();
 }

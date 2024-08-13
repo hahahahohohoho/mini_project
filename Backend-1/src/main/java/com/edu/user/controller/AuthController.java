@@ -52,7 +52,7 @@ public class AuthController {
         }
     }
 	@GetMapping("/myinfo")
-	public MyInfoDTO myInfo(@RequestParam("username") String username) {
+	public MyInfoDTO myInfo(@RequestParam String username) {
 		return userService.myInfo(username);
 	}
 	

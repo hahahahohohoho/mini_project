@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
 import RegisterForm from './components/login/RegisterForm';
 import LoginForm from './components/login/LoginForm';
-import Main from './components/login/Main';
 import AdminPage from './components/login/AdminPage';
 import Board from './components/board/Board';
 import DetailPage from './components/board/DetailPage';
 import CreatePost from './components/board/CreatePost';
 import MypageMain from './components/mypage/MypageMain';
+import MapMain from './components/map/MapMain'; // MapMain을 사용
+
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -47,9 +48,9 @@ function App() {
           <ul className="flex items-center">
             {auth ? (
               <>
-                <li><Link to='/myinfo' className="mx-3">{localStorage.getItem('username')}님</Link></li>
-                <li><Link to='/main' className="mx-3">메인</Link></li>
-                <li><Link to='/admin' className="mx-3">관리자</Link></li>
+                {localStorage.getItem('username')==='관리자'? <li><Link to='/admin' className="mx-3">관리자</Link></li> 
+                : <li><Link to='/myinfo' className="mx-3">{localStorage.getItem('username')}님</Link></li>}
+                <li><Link to='/map' className="mx-3">지도</Link></li>
                 <li><Link to='/board' className="mx-3">게시판</Link></li>
                 <li><button onClick={handleLogout} className="mx-3">로그아웃</button></li>
               </>
@@ -66,13 +67,13 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginForm setAuth={setAuth} />} />
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/main" element={auth ? <Main /> : <Navigate to="/login" />} />
             <Route path="/admin" element={auth ? <AdminPage /> : <Navigate to="/login" />} />
             <Route path="*" element={<Navigate to="/login" />} />
             <Route path="/board" element={<Board />} /> {/* 누구나 접근 가능 */}
             <Route path="/detail/:username/:title" element={auth ? <DetailPage /> : <Navigate to="/login" />} />
             <Route path="/create" element={auth ? <CreatePost /> : <Navigate to="/login" />} /> {/* 게시글 작성 페이지 */}
             <Route path="/myinfo" element={auth ? <MypageMain /> : <Navigate to="/login" />} />
+            <Route path="/map" element={<MapMain />} />
           </Routes>
         </main>
 

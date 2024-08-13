@@ -3,6 +3,8 @@ package com.edu.board.Entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.BatchSize;
+
 import com.edu.user.entitiy.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -48,9 +50,11 @@ public class Board {
 	// LAZY는 선택적 출력 EAGER는 반드시 출력
 	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER) //연관관계의 주인이 아니르는 의미, 외래키 아니니 열 생성 필요 X
 	@JsonIgnoreProperties({"board"})
+	@BatchSize(size = 10)
 	private List<Reply> replys;
 	
 	@OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+	@BatchSize(size = 10)
 	private List<Recommend> recommends;
 	@Transient
 	private boolean recommend_state;

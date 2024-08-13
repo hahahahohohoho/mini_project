@@ -22,7 +22,6 @@ const LoginForm = ({ setAuth }) => {
         localStorage.setItem('token', token);
         localStorage.setItem('username', username);
         localStorage.setItem('tokenExpiration', expirationTime); // 만료 시간 저장
-        console.log(Date.now() >= expirationTime * 1000)
         setAuth(true);
         navigate(from); // 로그인 후 원래 페이지로 리다이렉트
       } else {

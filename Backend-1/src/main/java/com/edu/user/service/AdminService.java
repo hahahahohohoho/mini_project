@@ -32,4 +32,8 @@ public class AdminService {
 		User user = userRepository.findById(userId).orElseThrow();
 		return user.getReplyList();
 	}
+
+	public void delteUser(Long userId) {
+		userRepository.deleteById(userId);
+	}
 }

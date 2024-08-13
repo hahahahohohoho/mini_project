@@ -12,10 +12,6 @@ import com.edu.board.Entity.Board;
 import com.edu.board.repo.BoardRepository;
 import com.edu.user.repo.UserRepository;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -26,9 +22,28 @@ public class BoardService {
 	private UserRepository userRepository;
 	
 	public List<BoardDTO> getBoardList(){
-		return boardRepository.findAll().stream()
-                .map(BoardDTO::new)
-                .collect(Collectors.toList());
+	       // Step 1: 모든 Board와 연관된 Reply를 가져옴
+        List<Board> boardsWithReplies = boardRepository.findAllWithReplies();
+        // TODO 굳이 필요하지 않으니 삭제해버리자.
+        // Step 2: 모든 Board와 연관된 Recommend를 가져옴
+//        List<Board> boardsWithRecommends = boardRepository.findAllWithRecommends();
+//
+//        // Step 3: Map을 이용하여 Board 객체를 ID 기준으로 정리
+//        Map<Long, Board> boardMap = boardsWithReplies.stream()
+//                .collect(Collectors.toMap(Board::getId, board -> board));
+//
+//        // Step 4: Recommend 데이터를 Board 객체에 추가
+//        for (Board boardWithRecommend : boardsWithRecommends) {
+//            Board board = boardMap.get(boardWithRecommend.getId());
+//            if (board != null) {
+//                board.setRecommends(boardWithRecommend.getRecommends());
+//            }
+//        }
+
+        // Step 5: 최종적으로 결합된 Board 리스트 반환
+        return boardsWithReplies.stream()
+              .map(BoardDTO::new)
+              .collect(Collectors.toList());
 	};
 	
 	@Transactional

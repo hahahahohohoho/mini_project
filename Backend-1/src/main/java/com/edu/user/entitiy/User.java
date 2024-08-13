@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.BatchSize;
+
 import com.edu.board.Entity.Board;
 import com.edu.board.Entity.Reply;
 
@@ -50,8 +52,10 @@ public class User {
     
     //EAGER로 하면 너무 많이 검색함
     @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
     private List<Board> boardList = new ArrayList<>();
     
     @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
     private List<Reply> replyList = new ArrayList<>();
 }
