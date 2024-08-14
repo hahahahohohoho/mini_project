@@ -42,7 +42,6 @@ const MarkerComponent = ({ map, markerData }) => {
             map: map, // 마커가 표시될 지도 객체
             title: title, // 마커의 타이틀 설정
           });
-
           // 정보창 생성
           const infoWindow = new naver.maps.InfoWindow({
             content: `

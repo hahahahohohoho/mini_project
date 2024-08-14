@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import MapComponent from './MapComponent';
 import MarkerComponent from './MarkerComponent';
 import SearchComponent from './SearchComponent';
-import axios from '../../axios';
 import LineComponent from './LineComponent';
-
+import InfoPanel from '../info/InfoPanel';  // InfoPanel 컴포넌트 추가
+import axios from '../../axios';
 const MapMain = () => {
   const [map, setMap] = useState(null); // 네이버 지도 객체를 관리하는 상태
   const [markerData, setMarkerData] = useState([]); // 모든 마커 데이터를 저장하는 상태
   const [filteredMarkerData, setFilteredMarkerData] = useState([]); // 필터링된 마커 데이터를 저장하는 상태
   const { naver } = window; // naver 객체를 window에서 가져옴 (네이버 지도 API 사용)
-  const lineString = "LINESTRING (494574.14525293617 278842.4106379978, 494574.2871565765 278842.421066954, 494605.4818847798 278844.3251714521, 494634.92758189834 278846.122664924, 494661.8761756725 278847.76819719985)";
+  const lineString = "LINESTRING (129.03470525344528 35.10391678387709, 129.03475810896123 35.10391676936382, 129.0349571413246 35.10392724243077, 129.0352202401185 35.103941086464594)";
 
   // 지도 로드 완료 시 호출되는 함수
   const handleMapLoad = (mapInstance) => {
@@ -59,26 +59,20 @@ const MapMain = () => {
     }
   };
 
-  // 컴포넌트 마운트 시 초기 데이터를 로드하는 useEffect 훅
-  useEffect(() => {
-    // 초기에는 마커를 로드하지 않음.
-  }, []); // 빈 배열을 의존성으로 사용하여 최초 렌더링 시 한 번만 실행
-
   return (
-    <div className="w-full h-full">
-      {/* 검색 컴포넌트 (카테고리와 구/군 선택) */}
+    <div className="flex h-screen">
+    <div className="flex-1 relative">
       <SearchComponent onSearch={handleSearch} />
-      {/* 지도 컴포넌트 */}
       <MapComponent onMapLoad={handleMapLoad} center={{ lat: 35.1796, lng: 129.0756 }} zoomLevel={11} />
-      {/* 지도에 라인을 표시 */}
       {map && (
         <>
           <LineComponent map={map} lineData={lineString} />
-          {/* 검색을 통해서만 마커가 렌더링 되도록 설정 */}
           {filteredMarkerData.length > 0 && <MarkerComponent map={map} markerData={filteredMarkerData} />}
         </>
       )}
     </div>
+    <InfoPanel markerData={filteredMarkerData} />
+  </div>
   );
 };
 

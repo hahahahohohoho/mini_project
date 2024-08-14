@@ -28,7 +28,7 @@ const MapComponent = ({ onMapLoad, center, zoomLevel }) => {
     }
   }, [map, center, zoomLevel]);
 
-  return <div ref={mapElement} style={{ width: '75%', height: '95%' }} />;
+  return <div ref={mapElement} style={{ width: '100%', height: '95%' }} />;
 };
 
 export default MapComponent;
