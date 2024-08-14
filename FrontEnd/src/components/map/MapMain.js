@@ -37,7 +37,7 @@ const MapMain = () => {
   const handleSearch = async (district, category) => {
     const data = await fetchMarkerData(category); // 선택된 카테고리에 따라 데이터를 가져옴
     setMarkerData(data); // 가져온 데이터를 markerData 상태에 저장
-    
+
     const filtered = data.filter(location => 
       location.address.includes(district) // 선택된 구/군에 해당하는 데이터 필터링
     );
@@ -61,7 +61,7 @@ const MapMain = () => {
 
   // 컴포넌트 마운트 시 초기 데이터를 로드하는 useEffect 훅
   useEffect(() => {
-    handleSearch('부산', '명소'); // 초기 로드 시 부산의 명소 데이터를 가져옴
+    // 초기에는 마커를 로드하지 않음.
   }, []); // 빈 배열을 의존성으로 사용하여 최초 렌더링 시 한 번만 실행
 
   return (
@@ -69,9 +69,15 @@ const MapMain = () => {
       {/* 검색 컴포넌트 (카테고리와 구/군 선택) */}
       <SearchComponent onSearch={handleSearch} />
       {/* 지도 컴포넌트 */}
-      <MapComponent onMapLoad={handleMapLoad} center={{ lat: 35.1796, lng: 129.0756 }} zoomLevel={14} />
-      {/* 필터링된 마커 데이터를 지도에 표시 */}
-      {map && <MarkerComponent map={map} markerData={filteredMarkerData}/> && <LineComponent map={map} lineData={lineString}/>}
+      <MapComponent onMapLoad={handleMapLoad} center={{ lat: 35.1796, lng: 129.0756 }} zoomLevel={11} />
+      {/* 지도에 라인을 표시 */}
+      {map && (
+        <>
+          <LineComponent map={map} lineData={lineString} />
+          {/* 검색을 통해서만 마커가 렌더링 되도록 설정 */}
+          {filteredMarkerData.length > 0 && <MarkerComponent map={map} markerData={filteredMarkerData} />}
+        </>
+      )}
     </div>
   );
 };

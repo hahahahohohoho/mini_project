@@ -24,7 +24,6 @@ public class BoardDTO {
 		this.username = board.getWriter().getUsername();
 		this.title = board.getTitle();
 		this.content = board.getContent();
-		this.viewcount = board.getViewcount();
 		this.createTime = board.getCreateDate();
 		
 		List<ReplyDTO> replyDTOs = board.getReplys().stream()

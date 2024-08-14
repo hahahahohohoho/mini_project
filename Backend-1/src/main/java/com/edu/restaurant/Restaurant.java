@@ -1,23 +1,19 @@
 package com.edu.restaurant;
 
+import com.edu.common.CommentableEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Data
-public class Restaurant {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "rt_id")
-	private Long id;
-	
+@Getter
+@Setter
+public class Restaurant extends CommentableEntity{
+
+	// 레스토랑 용 필드
 	private String address;
-	
 	private String menu;
 	
 	@Column(name="main_img", columnDefinition = "TEXT")
@@ -34,15 +30,13 @@ public class Restaurant {
 	@Column(name = "rt_name")
 	private String name;
 	
-	@Column(columnDefinition = "TEXT")
-	private String content;
-	
     public Restaurant() {
     }
 
 	public Restaurant(Long id, String address, String menu, String img1, String img2, String usage_day, String point,
 			String name, String content) {
-		this.id = id;
+		super.setId(id);
+		super.setContent(content);
 		this.address = address;
 		this.menu = menu;
 		this.img1 = img1;
@@ -50,7 +44,6 @@ public class Restaurant {
 		this.usage_day = usage_day;
 		this.point = point;
 		this.name = name;
-		this.content = content;
 	}	
     
 }

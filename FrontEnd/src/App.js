@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-ro
 import RegisterForm from './components/login/RegisterForm';
 import LoginForm from './components/login/LoginForm';
 import AdminPage from './components/login/AdminPage';
-import Board from './components/board/Board';
+import Board from './components/board/BoardList';
 import DetailPage from './components/board/DetailPage';
-import CreatePost from './components/board/CreatePost';
+import CreatePost from './components/board/utils/PostCreate';
 import MypageMain from './components/mypage/MypageMain';
 import MapMain from './components/map/MapMain'; // MapMain을 사용
 

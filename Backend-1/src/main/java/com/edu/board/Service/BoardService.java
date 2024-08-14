@@ -83,7 +83,6 @@ public class BoardService {
 			board.setContent(boardDTO.getContent());
 			board.setTitle(boardDTO.getTitle());
 			board.setWriter(userRepository.findByUsername(boardDTO.getUsername()));
-			board.setViewcount(0);
 			board.setCreateDate(LocalDateTime.now());
 		boardRepository.save(board);
 	}

@@ -24,7 +24,7 @@ public class ReplyService {
 	public void postReply(Long board_id, ReplyDTO replydto) {
 		Reply reply = new Reply();
 			reply.setContent(replydto.getContent());
-			reply.setBoard(boardRepository.findByIdOrThrow(board_id));
+//			reply.setCommentable(boardRepository.findByIdOrThrow(board_id));
 			reply.setWriter(userRepository.findByUsername(replydto.getUsername()));
 			reply.setCreateDate(LocalDateTime.now());
 		replyRepository.save(reply);

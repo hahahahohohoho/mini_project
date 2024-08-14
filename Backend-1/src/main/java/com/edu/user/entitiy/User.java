@@ -51,7 +51,7 @@ public class User {
     private LocalDateTime signUpDate;
     
     //EAGER로 하면 너무 많이 검색함
-    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
     @BatchSize(size = 10)
     private List<Board> boardList = new ArrayList<>();
     

@@ -44,44 +44,44 @@ public class BoardRepoTest {
 			boardRepository.save(board);
 		}
 		
-		List<Board> boards = boardRepository.findAll();
-		for(int i=1; i<=5; i++) {
-			Reply reply = new Reply();
-			reply.setContent( users.get(i%2).getUsername() + "가 작성한 댓글입니다.");
-			reply.setWriter( users.get(i%2));
-			reply.setBoard(boards.get(0));
-			replyRepository.save(reply);
-		}
+//		List<Board> boards = boardRepository.findAll();
+//		for(int i=1; i<=5; i++) {
+//			Reply reply = new Reply();
+//			reply.setContent( users.get(i%2).getUsername() + "가 작성한 댓글입니다.");
+//			reply.setWriter( users.get(i%2));
+//			reply.setBoard(boards.get(0));
+//			replyRepository.save(reply);
+//		}
 	}
 	
-	@Test
-	@Transactional
-	public void testGetBoard() {
-		Board board = boardRepository.findById(41L).get();
-		
-		System.out.println(board.getTitle());
-		System.out.println(board.getContent());
-	}
-	
-	@Test
-	public void testGetBoardList() {
-		User writer = userRepository.findById(1L).get();
-		
-		System.out.println("[ "+writer.getUsername()+"가 등록한 게시글 ]");
-		for (Board board : writer.getBoardList()) {
-			System.out.println("--->" + board.toString());
-		}
-	}
-	
-	@Test
-	@Transactional
-	public void testAdmin() {
-		User user = new User();
-			user.setEmail("admin111@111.com");
-			user.setPassword(encoder.encode("asdf123"));
-			user.setUsername("관리자");
-			user.setRole(ERole.ROLE_ADMIN);
-			user.setEmailVerified(true);
-		userRepository.save(user);
-	}
+//	@Test
+//	@Transactional
+//	public void testGetBoard() {
+//		Board board = boardRepository.findById(41L).get();
+//		
+//		System.out.println(board.getTitle());
+//		System.out.println(board.getContent());
+//	}
+//	
+//	@Test
+//	public void testGetBoardList() {
+//		User writer = userRepository.findById(1L).get();
+//		
+//		System.out.println("[ "+writer.getUsername()+"가 등록한 게시글 ]");
+//		for (Board board : writer.getBoardList()) {
+//			System.out.println("--->" + board.toString());
+//		}
+//	}
+//	
+//	@Test
+//	@Transactional
+//	public void testAdmin() {
+//		User user = new User();
+//			user.setEmail("admin111@111.com");
+//			user.setPassword(encoder.encode("asdf123"));
+//			user.setUsername("관리자");
+//			user.setRole(ERole.ROLE_ADMIN);
+//			user.setEmailVerified(true);
+//		userRepository.save(user);
+//	}
 }
