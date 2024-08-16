@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.annotations.BatchSize;
 
 import com.edu.board.recommend.BoardRecommend;
-import com.edu.board.reply.common.Reply;
+import com.edu.board.reply.BoardReply;
 import com.edu.user.entitiy.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -44,7 +44,7 @@ public class Board {
 	@JoinColumn(name="user_id")
 	private User writer;
 	
-	@Column(columnDefinition = "default 0")
+	@Column(columnDefinition = "`default` 0")
 	private Integer viewcount;
 	
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

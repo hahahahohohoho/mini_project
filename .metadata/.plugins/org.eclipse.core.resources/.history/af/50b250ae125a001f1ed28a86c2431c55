@@ -1,0 +1,7 @@
+package com.edu.restaurant;
+
+import com.edu.board.reply.BaseReply;
+
+public class RestaurantReply extends BaseReply {
+
+}

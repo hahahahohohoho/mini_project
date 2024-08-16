@@ -1,0 +1,12 @@
+package com.edu.board;
+
+import com.edu.board.reply.Reply;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+
+@Entity
+public class BoardReply extends Reply{
+	@ManyToOne
+	private Board board;
+}

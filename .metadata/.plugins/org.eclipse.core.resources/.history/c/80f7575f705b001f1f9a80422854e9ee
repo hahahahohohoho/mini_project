@@ -1,0 +1,32 @@
+package com.edu.road;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.edu.restaurant.RestaurantDTO;
+
+@Service
+public class RoadService {
+	@Autowired
+	private RoadRepo roadRepo;
+	
+	public List<RoadDTO> getAllRoads(){
+		return roadRepo.findAll().stream()
+                .map(RestaurantDTO::new)
+                .collect(Collectors.toList());
+	};
+	public List<RoadDTO> searchByGrade(Integer grade){
+		return roadRepo.findByGrade(grade).stream()
+                .map(RestaurantDTO::new)
+                .collect(Collectors.toList());
+	};
+	public List<Road> searchByName(String name){
+		return roadRepo.findByNameContaining(name);
+	};
+	public List<Road> searchByCity(Long cty_cd){
+		return roadRepo.findByCityId(cty_cd);
+	};
+}

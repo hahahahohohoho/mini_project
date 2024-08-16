@@ -1,0 +1,5 @@
+package com.edu.user.dto;
+
+public class AdminUserDTO {
+
+}

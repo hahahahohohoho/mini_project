@@ -1,0 +1,29 @@
+package com.edu.road;
+
+import com.edu.cty.City;
+
+import lombok.Getter;
+
+@Getter
+public class RoadDTO {
+	private String name;
+	private String geometry;
+	private String cty_name;
+	private Integer grade;
+	
+	public RoadDTO(Road road) {
+		this.name = road.getName();
+		this.geometry = road.getGeometry();
+		City city = road.getCty_cd();
+		this.cty_name= ;
+		this.grade = road.getGrade();
+	}
+
+	public RoadDTO(String name, String geometry, Integer cty_cd, Integer grade) {
+		this.name = name;
+		this.geometry = geometry;
+		this.cty_cd = cty_cd;
+		this.grade = grade;
+	}
+	
+}

@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.Objects;
 
 public class UserDetailsImpl implements UserDetails {
-    private Long id;
+    private static final long serialVersionUID = 1L;
+	private Long id;
     private String username;
     private String email;
     private String password;

@@ -1,0 +1,35 @@
+package com.edu.board.recommend.common;
+
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+public abstract class GenericRecommendController<T> {
+
+    @Autowired
+    private GenericRecommendService<T> service;
+
+    @GetMapping
+    public List<T> getAllRecommends() {
+        return service.findAllRecommends();
+    }
+
+    @PostMapping
+    public T createRecommend(@RequestBody T recommend) {
+        return service.saveRecommend(recommend);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteRecommend(@PathVariable Long id) {
+        service.deleteRecommend(id);
+    }
+
+    @GetMapping("/{id}")
+    public T getRecommendById(@PathVariable Long id) {
+        return service.findRecommendById(id);
+    }
+
+    // 추가적인 공통 API를 정의할 수 있습니다.
+}
+

@@ -21,7 +21,7 @@ public class SightController {
     private SightService sightService;
 
     @GetMapping
-    public List<Sight> getAllRestaurants() {
+    public List<SightDTO> getAllRestaurants() {
         return sightService.getAllSight();
     }
 
@@ -29,7 +29,12 @@ public class SightController {
     public Sight getRestaurantById(@PathVariable Long id) {
         return sightService.getSightById(id);
     }
-
+    
+    @GetMapping("/city/{cty_cd}")
+    public List<SightDTO> getRestaurantByCity(@PathVariable Long cty_cd) {
+        return sightService.getSightByCity(cty_cd);
+    }
+    
     @PostMapping
     public Sight createRestaurant(@RequestBody Sight restaurant) {
         return sightService.saveSight(restaurant);

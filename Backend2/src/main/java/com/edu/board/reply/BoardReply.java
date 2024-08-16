@@ -1,5 +1,6 @@
-package com.edu.board.board;
+package com.edu.board.reply;
 
+import com.edu.board.board.Board;
 import com.edu.board.reply.common.Reply;
 
 import jakarta.persistence.Entity;

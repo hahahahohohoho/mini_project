@@ -1,0 +1,5 @@
+package com.edu.common.util;
+
+public class OAuth2SuccessHandler {
+
+}

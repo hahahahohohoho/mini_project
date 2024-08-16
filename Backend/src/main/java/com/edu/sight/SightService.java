@@ -12,8 +12,10 @@ public class SightService {
     @Autowired
     private SightRepo sightRepository;
 
-    public List<Sight> getAllSight() {
-        return sightRepository.findAll();
+    public List<SightDTO> getAllSight() {
+        return sightRepository.findAll().stream()
+    			.map(SightDTO::new)
+    			.collect(Collectors.toList());
     }
 
     public Sight getSightById(Long id) {
@@ -39,5 +41,11 @@ public class SightService {
     			.map(SightDTO::new)
     			.collect(Collectors.toList());
     }
+
+	public List<SightDTO> getSightByCity(Long cty_cd) {
+		return sightRepository.findByCityId(cty_cd).stream()
+    			.map(SightDTO::new)
+    			.collect(Collectors.toList());
+	}
 
 }

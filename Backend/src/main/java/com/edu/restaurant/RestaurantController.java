@@ -24,10 +24,12 @@ public class RestaurantController {
     public List<RestaurantDTO> getAllRestaurants() {
         return restaurantService.getAllRestaurants();
     }
-
-    @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable Long id) {
-        return restaurantService.getRestaurantById(id);
+ 
+    
+    
+    @GetMapping("/city/{cty_cd}")
+    public List<RestaurantDTO> getRestaurantByCity(@PathVariable Long cty_cd) {
+        return restaurantService.getRestaurantByCity(cty_cd);
     }
 
     @PostMapping

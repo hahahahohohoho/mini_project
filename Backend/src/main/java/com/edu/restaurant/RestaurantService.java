@@ -19,7 +19,7 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurantById(Long id) {
-        return restaurantRepository.findById(id).orElse(null);
+        return restaurantRepository.findById(id).orElseThrow();
     }
 
     public Restaurant saveRestaurant(Restaurant restaurant) {
@@ -46,5 +46,11 @@ public class RestaurantService {
     			.map(RestaurantDTO::new)
     			.collect(Collectors.toList());
     }
+
+	public List<RestaurantDTO> getRestaurantByCity(Long cty_cd) {
+		return restaurantRepository.findByCityId(cty_cd).stream()
+    			.map(RestaurantDTO::new)
+    			.collect(Collectors.toList());
+	}
 
 }

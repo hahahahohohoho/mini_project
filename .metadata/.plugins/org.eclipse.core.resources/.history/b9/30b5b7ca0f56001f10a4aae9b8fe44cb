@@ -1,0 +1,16 @@
+package com.edu.user.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class AdminController {
+	   @GetMapping("/admin")
+	    @PreAuthorize("hasRole('ADMIN')")
+	    public ResponseEntity<String> getAdminMessage() {
+	    	System.out.println("시도!");
+	        return ResponseEntity.ok("This is a protected message only for authenticated users with USER role.");
+	    }
+}
