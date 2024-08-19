@@ -15,7 +15,7 @@ instance.interceptors.request.use(
       } else if (config.url === '/sight') {
         config.url = './data/sight1.json';
       } else if (config.url === '/road') {
-        config.url = './data/cycle.json';  // 올바른 경로로 수정
+        config.url = './data/road1.json';  // 올바른 경로로 수정
       } else if (config.url === '/restaurant'){
         config.url = './data/restaurant';
       }

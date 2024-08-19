@@ -1,47 +1,44 @@
 //package com.edu.board;
 //
-//import java.util.Random;
+//import java.util.List;
 //
 //import org.springframework.boot.ApplicationArguments;
 //import org.springframework.boot.ApplicationRunner;
 //import org.springframework.stereotype.Component;
 //
-//import com.edu.board.entity.Board;
-//import com.edu.board.persistence.BoardRepo;
-//import com.edu.user.entity.User;
-//import com.edu.user.entity.UserRole;
+//import com.edu.board.Entity.Board;
+//import com.edu.board.Entity.BoardRepository;
+//import com.edu.board.Entity.Comment;
+//import com.edu.board.Entity.CommentRepository;
+//import com.edu.user.entitiy.User;
+//import com.edu.user.repo.UserRepository;
 //
 //import lombok.RequiredArgsConstructor;
 //
 //@Component
 //@RequiredArgsConstructor
 //public class DataSetup implements ApplicationRunner{
-//	private final BoardRepo boardRepo;
+//	private final BoardRepository boardRepo;
+//	private final CommentRepository commentRepo;
+//	private final UserRepository userRepository;
 //	
 //	@Override
 //	public void run(ApplicationArguments args) throws Exception {
-//		Random rd = new Random();
-//		User user1 = User.builder().id(1L)
-//				.email("example@naver.com")
-//				.nickName("홍길동")
-//				.password("abcd")
-//				.userRole(UserRole.ROLE_USER).build();
-//		User user2 = User.builder().id(2L)
-//				.email("example2@naver.com")
-//				.nickName("이순신")
-//				.password("abcd")
-//				.userRole(UserRole.ROLE_ADMIN).build();
-//		User[] s = {user1, user2};
-//		
-//		for(int i = 1 ; i <=10; i++) {
+//		List<User> user = userRepository.findAll();
+//		for(int i=0; i<=10;i++) {
+//
 //			boardRepo.save(Board.builder()
-//					.title("title"+i)
-//					.content("content"+i)
-//					.viewCount(rd.nextInt(120))
-//					.user(s[(i%2)])
-//					.isSecret(false)
-//					.build());
+//					.content("test"+i)
+//					.title("test title"+i)
+//					.writer(user.get(i%2)).build());
+//		}
+//		for(int i=0; i<=5;i++) {
+//			List<Board> board = boardRepo.findAll();
+//			commentRepo.save(Comment.builder()
+//					.content("test"+i)
+//					.board(board.get(i+1))
+//					.writer(user.get(i%2)).build());
 //		}
 //	}
-//
+//	
 //}

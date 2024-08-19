@@ -24,7 +24,7 @@ const LineComponent = ({ map, lineData }) => {
         for (const line of lineData) {
           const { geometry, grade } = line; // geometry와 grade를 추출
 
-          const strokeColor = gradeColors[grade] || '#000000'; // grade에 따른 색상 설정
+          const strokeColor = gradeColors[grade] || '#D3D3D3'; // grade에 따른 색상 설정
 
           // LINESTRING 데이터를 파싱하여 LatLng 배열로 변환
           const coordinates = geometry
