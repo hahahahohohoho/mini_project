@@ -4,6 +4,7 @@ import MarkerComponent from './MarkerComponent';
 import SearchComponent from './SearchComponent';
 import LineComponent from './LineComponent';
 import RestaurantInfoPanel from '../info/RestaurantInfo';
+import SightInfoPanel from '../info/SightInfo';
 import axios from '../../axios';
 
 const MapMain = () => {
@@ -12,6 +13,7 @@ const MapMain = () => {
   const [filteredLineData, setFilteredLineData] = useState([]);
   const [showInfoPanel, setShowInfoPanel] = useState(false);
   const [selectedMarkerId, setSelectedMarkerId] = useState(null);
+  const [category, setCategory] = useState('');
   const [panelPosition, setPanelPosition] = useState({ top: '10%', left: '10%' });
   const { naver } = window;
 
@@ -26,20 +28,18 @@ const MapMain = () => {
   };
 
   const fetchMarkerData = async (category, district) => {
-
     try {
       let baseUrl = '';
       if (category === '식당') {
         baseUrl = '/restaurant';
       } else if (category === '명소') {
         baseUrl = '/sight';
-      } else if (category === '자전거 도로') {
-        baseUrl = '/road';
       }
       
-      const url = district !== '부산' ? `${baseUrl}/city/${districtCodes[district]}` : baseUrl;
+      // "부산 전체"인 경우 city code를 포함하지 않은 기본 URL을 사용
+      const url = district !== '부산 전체' ? `${baseUrl}/city/${districtCodes[district]}` : baseUrl;
+      
       const response = await axios.get(url);
-      console.log(response)
       return response.data;
     } catch (error) {
       console.error('Error fetching marker data:', error);
@@ -53,18 +53,22 @@ const MapMain = () => {
   };
 
   const handleSearch = async (district, category) => {
-    setFilteredLineData([]);// 이전에 그려진 라인 데이터 초기화
-    
+    setFilteredLineData([]); // 이전에 그려진 라인 데이터 초기화
+    setCategory(category); // 현재 카테고리를 저장
+
     const data = await fetchMarkerData(category, district); // 선택된 카테고리 및 구/군에 따라 데이터를 가져옴
     setFilteredMarkerData(data); // 필터링된 데이터를 상태에 저장
 
     if (category === '명소' || category === '식당') {
-      const districtCode = districtCodes[district];
-      const lineResponse = await axios.get(`/road/city/${districtCode}`); // 해당 구/군의 라인 데이터 요청
-      const data = lineResponse.data
-      .filter(a=> a.grade != -999) // 필요시 주석 처리
-      setFilteredLineData(data); // 라인 데이터를 상태에 저장
-    }  
+      if (district !== '부산 전체') { // "부산 전체"가 아닌 경우에만 라인 데이터 요청
+        const districtCode = districtCodes[district];
+        const lineResponse = await axios.get(`/road/city/${districtCode}`); // 해당 구/군의 라인 데이터 요청
+        const data = lineResponse.data.filter(a => a.grade !== -999); // 필요시 주석 처리
+        setFilteredLineData(data); // 라인 데이터를 상태에 저장
+      } else {
+        setFilteredLineData([]); // 부산 전체일 때는 라인 데이터를 초기화
+      }
+    }
 
     if (map) {
       if (filteredMarkerData.length > 0) {
@@ -90,7 +94,11 @@ const MapMain = () => {
           className="absolute z-10 w-72 h-auto bg-white p-4 shadow-lg rounded-lg"
           style={{ top: panelPosition.top, left: panelPosition.left }}
         >
-          <RestaurantInfoPanel id={selectedMarkerId} onClose={() => setShowInfoPanel(false)} />
+          {category === '식당' ? (
+            <RestaurantInfoPanel id={selectedMarkerId} onClose={() => setShowInfoPanel(false)} />
+          ) : (
+            <SightInfoPanel id={selectedMarkerId} onClose={() => setShowInfoPanel(false)} />
+          )}
           <button
             onClick={() => setShowInfoPanel(false)}
             className="absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded"

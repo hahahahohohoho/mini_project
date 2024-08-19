@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../../axios';
 
-const ReviewForm = ({resId, onReviewSubmitted }) => {
+const ReviewForm = ({type, resId, onReviewSubmitted }) => {
   const [reviewContent, setReviewContent] = useState('');
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username');
@@ -18,9 +18,9 @@ const ReviewForm = ({resId, onReviewSubmitted }) => {
       username: username,
       content: reviewContent,
     };
-    console.log(resId)
+    console.log(`/${type}/reply/${resId}`)
     try {
-      const response = await axios.post(`/res/reply/${resId}`, newReview, {
+      const response = await axios.post(`/${type}/reply/${resId}`, newReview, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

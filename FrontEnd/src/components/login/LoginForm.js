@@ -8,7 +8,7 @@ const LoginForm = ({ setAuth }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from || '/board';
+  const from = location.state?.from || '/map';
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -12,6 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class SightDTO {
+	private Long id;
 	private String title;
 	private String address;
 	private String img1;
@@ -34,6 +35,7 @@ public class SightDTO {
 	}
 	
 	public SightDTO(Sight sight) {
+		this.id = sight.getId();
 		this.title = sight.getTitle();
 		this.address = sight.getAddress();
 		this.img1 = sight.getImg1();

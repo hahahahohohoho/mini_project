@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from '../../../axios';
 
-export default function RecommendButton({ restaurant }) {
+export default function RecommendButton({ boardItem }) {
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username');
   const [isRecommended, setIsRecommended] = useState(
-    restaurant.recommends?.some(recommend => recommend.username === username)
+    boardItem.recommends?.some(recommend => recommend.username === username)
   );
 
   const handleRecommendSubmit = async () => {
@@ -13,9 +13,9 @@ export default function RecommendButton({ restaurant }) {
       try {
         const newRecommend = {
           username: username,
-          board_id: restaurant.id,
+          board_id: boardItem.id,
         };
-        const result = await axios.post(`/res/${restaurant.id}/recommend`, newRecommend, {
+        const result = await axios.post(`/res/${boardItem.id}/recommend`, newRecommend, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,13 +36,13 @@ export default function RecommendButton({ restaurant }) {
     if (username) {
       if (window.confirm('추천을 취소하시겠습니까?')) {
         try {
-          const result = await axios.delete(`/board/${restaurant.id}/recommend`, {
+          const result = await axios.delete(`/board/${boardItem.id}/recommend`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
             data: {
               username: username,
-              board_id: restaurant.id,
+              board_id: boardItem.id,
             },
           });
           if (result) {

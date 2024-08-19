@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../../axios';
 
-export default function RestaurantRecommendButton({ restaurant }) {
+export default function RestaurantRecommendButton({ type, restaurant }) {
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username');
   
@@ -17,7 +17,7 @@ export default function RestaurantRecommendButton({ restaurant }) {
           username: username,
           restaurant_id: restaurant.id,  // 레스토랑의 ID 사용
         };
-        const result = await axios.post(`/res/${restaurant.id}/recommend`, newRecommend, {
+        const result = await axios.post(`/${type}/${restaurant.id}/recommend`, newRecommend, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -39,7 +39,7 @@ export default function RestaurantRecommendButton({ restaurant }) {
     if (username) {
       if (window.confirm('추천을 취소하시겠습니까?')) {
         try {
-          const result = await axios.delete(`/res/${restaurant.id}/recommend`, {
+          const result = await axios.delete(`/${type}/${restaurant.id}/recommend`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
