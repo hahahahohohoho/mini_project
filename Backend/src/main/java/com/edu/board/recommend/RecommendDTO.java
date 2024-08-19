@@ -1,6 +1,4 @@
-package com.edu.board.DTO;
-
-import com.edu.board.Entity.Recommend;
+package com.edu.board.recommend;
 
 import lombok.Getter;
 

@@ -1,7 +1,14 @@
 package com.edu.sight;
 
-import com.edu.cty.City;
+import java.util.List;
 
+import org.hibernate.annotations.BatchSize;
+
+import com.edu.cty.City;
+import com.edu.sight.recommend.SightRecommend;
+import com.edu.sight.reply.SightReply;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,4 +50,11 @@ public class Sight {
 	@JoinColumn(name="cty_cd", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private City city;
+	
+	@OneToMany(mappedBy = "sight", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@BatchSize(size = 10)
+	private List<SightRecommend> recommends;
+	@OneToMany(mappedBy = "sight", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@BatchSize(size = 10)
+	private List<SightReply> replys;
 }

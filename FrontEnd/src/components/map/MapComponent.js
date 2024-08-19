@@ -11,7 +11,7 @@ const MapComponent = ({ onMapLoad, center, zoomLevel }) => {
     if (mapElement.current && !map) {
       const newMap = new naver.maps.Map(mapElement.current, {
         center: busanCenter, // 부산을 초기 중심으로 설정
-        zoom: 11,
+        zoom: 10,
       });
       setMap(newMap);
       onMapLoad(newMap); // 지도 객체를 부모 컴포넌트로 전달
@@ -28,7 +28,7 @@ const MapComponent = ({ onMapLoad, center, zoomLevel }) => {
     }
   }, [map, center, zoomLevel]);
 
-  return <div ref={mapElement} style={{ width: '100%', height: '500px' }} />;
+  return <div ref={mapElement} style={{ width: '100%', height: '95%' }} />;
 };
 
 export default MapComponent;

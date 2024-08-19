@@ -1,15 +1,9 @@
-package com.edu.board.Entity;
-
-import java.time.LocalDateTime;
+package com.edu.board.reply;
 
 
-import com.edu.user.entitiy.User;
-
-import jakarta.persistence.Column;
+import com.edu.board.base.reply.BaseReply;
+import com.edu.board.board.Board;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -20,22 +14,8 @@ import lombok.Setter;
 @Entity
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
-public class Reply {
-	@Id @Column(name = "reply_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column(nullable = false, length = 200)
-	private String content;
-	
+public class Reply extends BaseReply {
 	@ManyToOne // many = Reply one = Board
 	@JoinColumn(name="board_id")
 	private Board board;
-	
-	@ManyToOne //many =Reply one = User
-	@JoinColumn(name="user_id", nullable = false, updatable = false)
-	private User writer;
-	
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime createDate;
-	
 }

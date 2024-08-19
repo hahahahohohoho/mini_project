@@ -42,14 +42,12 @@ const MarkerComponent = ({ map, markerData }) => {
             map: map, // 마커가 표시될 지도 객체
             title: title, // 마커의 타이틀 설정
           });
-
           // 정보창 생성
           const infoWindow = new naver.maps.InfoWindow({
             content: `
               <div style="width:150px;text-align:center;padding:5px;">
                 <h4>${title}</h4>
-                <img src=${img2} alt="${title}" style="width:100%;" onError="this.onerror=null; this.src='https://via.placeholder.com/150?text=Image+Not+Found';"
-                />
+                <img src=${img2} alt="${title}" style="width:100%;" onError="this.onerror=null; this.src='';"/>
               </div>
             `,
           });

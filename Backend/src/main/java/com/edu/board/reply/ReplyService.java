@@ -1,4 +1,4 @@
-package com.edu.board.service;
+package com.edu.board.reply;
 
 
 import java.time.LocalDateTime;
@@ -6,10 +6,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edu.board.DTO.ReplyDTO;
-import com.edu.board.Entity.Reply;
-import com.edu.board.repo.BoardRepository;
-import com.edu.board.repo.ReplyRepository;
+import com.edu.board.board.BoardRepository;
 import com.edu.user.repo.UserRepository;
 
 @Service
@@ -35,7 +32,7 @@ public class ReplyService {
 	}
 
 	public void putReply(Long id, ReplyDTO dTO) {
-		Reply reply = replyRepository.findByIdOrThrow(id);
+		Reply reply = replyRepository.findById(id).orElseThrow();
 			reply.setContent(dTO.getContent());
 			reply.setCreateDate(LocalDateTime.now());
 		replyRepository.save(reply);

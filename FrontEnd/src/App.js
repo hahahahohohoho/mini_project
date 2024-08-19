@@ -42,16 +42,17 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col w-full max-w-screen-xl mx-auto h-screen overflow-y-auto max-w-auto">
-        <header className='flex justify-between items-center text-xl font-bold h-20 p-10 bg-slate-300'>
-          <div>리액트연습</div>
+      <div className="flex flex-col w-full h-screen overflow-hidden"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
+        <header className='flex justify-between items-center text-xl font-bold h-10 p-5 bg-blue-100 w-full'>
+          <div>자전거로 떠나자!</div>
           <ul className="flex items-center">
             {auth ? (
               <>
-                {localStorage.getItem('username')==='관리자'? <li><Link to='/admin' className="mx-3">관리자</Link></li> 
-                : <li><Link to='/myinfo' className="mx-3">{localStorage.getItem('username')}님</Link></li>}
-                <li><Link to='/map' className="mx-3">지도</Link></li>
+              {localStorage.getItem('username')==='관리자' && <li><Link to='/admin' className="mx-3">관리자</Link></li> }
+                <li><Link to='/main' className="mx-3">메인</Link></li>
                 <li><Link to='/board' className="mx-3">게시판</Link></li>
+                <li><Link to='/map' className="mx-3">지도</Link></li>
+                
                 <li><button onClick={handleLogout} className="mx-3">로그아웃</button></li>
               </>
             ) : (
@@ -63,22 +64,23 @@ function App() {
           </ul>
         </header>
 
-        <main className='grow flex justify-center items-center'>
+        <main className='flex-grow w-full'> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
           <Routes>
+            <Route path="/" element={<MapMain />} /> {/* 메인 페이지에 MapMain을 설정 */}
             <Route path="/login" element={<LoginForm setAuth={setAuth} />} />
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/admin" element={auth ? <AdminPage /> : <Navigate to="/login" />} />
-            <Route path="*" element={<Navigate to="/login" />} />
-            <Route path="/board" element={<Board />} /> {/* 누구나 접근 가능 */}
-            <Route path="/detail/:username/:title" element={auth ? <DetailPage /> : <Navigate to="/login" />} />
-            <Route path="/create" element={auth ? <CreatePost /> : <Navigate to="/login" />} /> {/* 게시글 작성 페이지 */}
-            <Route path="/myinfo" element={auth ? <MypageMain /> : <Navigate to="/login" />} />
+            <Route path="/main" element={<MapMain />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/board" element={<Board />} />
+            <Route path="/detail/:username/:title" element={<DetailPage />} />
+            <Route path="/create" element={<CreatePost />} />
             <Route path="/map" element={<MapMain />} />
+            <Route path="*" element={<MapMain />} />
           </Routes>
         </main>
 
-        <footer className='flex justify-center items-center text-white bg-slate-800 h-20'>
-          @2024 Kim Seon Sin. All Right reserved.
+        <footer className='flex justify-center items-center text-white bg-slate-800 h-20 w-full'>
+          @2024 All Right reserved.
         </footer>
       </div>
     </Router>

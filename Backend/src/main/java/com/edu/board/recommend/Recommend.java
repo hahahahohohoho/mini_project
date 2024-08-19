@@ -1,5 +1,6 @@
-package com.edu.board.Entity;
+package com.edu.board.recommend;
 
+import com.edu.board.board.Board;
 import com.edu.user.entitiy.User;
 
 import jakarta.persistence.Column;

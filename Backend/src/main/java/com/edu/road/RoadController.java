@@ -19,15 +19,15 @@ public class RoadController {
 	public List<RoadDTO> searchByName() {
 		return roadService.getAllRoads();
 	}
-	@GetMapping("/search/grade/{grade}")
+	@GetMapping("/grade/{grade}")
 	public List<RoadDTO> searchByGrade(@PathVariable Integer grade) {
 		return roadService.searchByGrade(grade);
 	}
-	@GetMapping("/search/name")
+	@GetMapping("/name")
 	public List<RoadDTO> searchByName(@RequestParam String name) {
 		return roadService.searchByName(name);
 	}
-	@GetMapping("/search/city/{cty_cd}")
+	@GetMapping("/city/{cty_cd}")
 	public List<RoadDTO> searchByCity(@PathVariable Long cty_cd) {
 		return roadService.searchByCity(cty_cd);
 	}

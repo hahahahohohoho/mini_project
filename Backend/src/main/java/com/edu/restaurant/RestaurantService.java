@@ -18,6 +18,9 @@ public class RestaurantService {
                 .collect(Collectors.toList());
     }
 
+    public RestaurantDTO getRestaurantByIdDTO(Long id) {
+        return new RestaurantDTO(restaurantRepository.findById(id).orElseThrow());
+    }
     public Restaurant getRestaurantById(Long id) {
         return restaurantRepository.findById(id).orElseThrow();
     }

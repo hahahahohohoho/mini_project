@@ -1,5 +1,11 @@
 package com.edu.restaurant;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.edu.restaurant.recommend.ResRecommendDTO;
+import com.edu.restaurant.reply.ResReplyDTO;
+
 import lombok.Getter;
 
 @Getter
@@ -13,6 +19,8 @@ public class RestaurantDTO {
 	private String usageDay;
 	private String img1;
 	private String img2;
+	private List<ResReplyDTO> replys;
+	private List<ResRecommendDTO> recommends;
 	
 	
 	public RestaurantDTO(String address, String point, String menu, String name, String usage_day, String img2) {
@@ -34,6 +42,14 @@ public class RestaurantDTO {
 	        this.point = restaurant.getPoint();
 	        this.name = restaurant.getName();
 	        this.content = restaurant.getContent();
+	         List<ResReplyDTO> dTOs = restaurant.getReplys().stream()
+	        		.map(ResReplyDTO::new)
+	        		.collect(Collectors.toList());
+	        this.replys = dTOs;
+	        List<ResRecommendDTO> recommenddTOs = restaurant.getRecommends().stream()
+	        		.map(ResRecommendDTO::new)
+	        		.collect(Collectors.toList());
+	        this.recommends = recommenddTOs;
 	    }
 	
 }

@@ -1,11 +1,7 @@
-package com.edu.board.controller;
+package com.edu.board.reply;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.edu.board.DTO.ReplyDTO;
-import com.edu.board.service.ReplyService;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/api/board/{board_id}/reply")
+@RequestMapping("/api/board/reply")
 public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
@@ -34,7 +30,7 @@ public class ReplyController {
 	}
 	
 	@PutMapping("/{id}")
-	public void putReply(@PathVariable Long id, @RequestBody ReplyDTO DTO) {
+	public void editReply(@PathVariable Long id, @RequestBody ReplyDTO DTO) {
 		replyService.putReply(id, DTO);
 	}
 }

@@ -1,4 +1,4 @@
-package com.edu.board.DTO;
+package com.edu.board.board;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

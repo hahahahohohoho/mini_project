@@ -46,6 +46,8 @@
 		<item key="updateQualifiedNames" value="false"/>
 		<item key="patterns" value="*"/>
 		<item key="renameSubpackages" value="false"/>
+		<item key="renameGetter" value="false"/>
+		<item key="renameSetter" value="false"/>
 	</section>
 	<section name="ProblemSeveritiesConfigurationBlock">
 		<item key="expanded0" value="false"/>
@@ -63,7 +65,7 @@
 		<item key="height" value="400"/>
 	</section>
 	<section name="NewInterfaceCreationWizard.dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="678"/>
+		<item key="DIALOG_X_ORIGIN" value="532"/>
 		<item key="DIALOG_Y_ORIGIN" value="166"/>
 		<item key="DIALOG_WIDTH" value="580"/>
 		<item key="DIALOG_HEIGHT" value="543"/>

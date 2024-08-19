@@ -25,7 +25,10 @@ public class RestaurantController {
         return restaurantService.getAllRestaurants();
     }
  
-    
+    @GetMapping("/{id}")
+    public RestaurantDTO getRestaurantById(@PathVariable Long id) {
+        return restaurantService.getRestaurantByIdDTO(id);
+    }
     
     @GetMapping("/city/{cty_cd}")
     public List<RestaurantDTO> getRestaurantByCity(@PathVariable Long cty_cd) {

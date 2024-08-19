@@ -1,10 +1,12 @@
-package com.edu.board.Entity;
+package com.edu.board.board;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.annotations.BatchSize;
 
+import com.edu.board.recommend.Recommend;
+import com.edu.board.reply.Reply;
 import com.edu.user.entitiy.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

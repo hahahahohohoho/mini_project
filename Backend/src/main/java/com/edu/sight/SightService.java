@@ -17,7 +17,10 @@ public class SightService {
     			.map(SightDTO::new)
     			.collect(Collectors.toList());
     }
-
+    public SightDTO getSightByIdDTO(Long id) {
+        return new SightDTO(sightRepository.findById(id).orElseThrow()) ;
+    }
+    
     public Sight getSightById(Long id) {
         return sightRepository.findById(id).orElse(null);
     }

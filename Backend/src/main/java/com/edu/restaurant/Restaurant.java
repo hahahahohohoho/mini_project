@@ -1,7 +1,14 @@
 package com.edu.restaurant;
 
-import com.edu.cty.City;
+import java.util.List;
 
+import org.hibernate.annotations.BatchSize;
+
+import com.edu.cty.City;
+import com.edu.restaurant.recommend.ResRecommend;
+import com.edu.restaurant.reply.RestaurantReply;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -42,4 +50,14 @@ public class Restaurant {
 	@JoinColumn(name="cty_cd", nullable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private City city;
+	
+	@OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@BatchSize(size = 10)
+	private List<RestaurantReply> replys;
+	
+	@OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@BatchSize(size = 10)
+	private List<ResRecommend> recommends;
+	
+	
 }

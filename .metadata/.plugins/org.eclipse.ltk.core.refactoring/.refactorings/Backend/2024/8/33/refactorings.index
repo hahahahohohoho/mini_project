@@ -1,3 +1,69 @@
 1723606704096	Rename package 'com.edu.board.Service'
 1723606834239	Delete element
 1723771184216	Rename method 'getRestaurantByCty'
+1723781012059	Delete element
+1723781043228	Move compilation unit
+1723781044514	Move compilation unit
+1723781046243	Move compilation unit
+1723781048152	Delete element
+1723781050981	Move compilation unit
+1723781052377	Move compilation unit
+1723781053664	Move compilation unit
+1723781055715	Delete element
+1723781057969	Move compilation unit
+1723781060383	Move compilation unit
+1723781062006	Move compilation unit
+1723781063473	Move compilation unit
+1723781065344	Delete element
+1723781070034	Move compilation unit
+1723781071296	Move compilation unit
+1723781072433	Move compilation unit
+1723781074324	Delete element
+1723781076768	Move compilation unit
+1723781078233	Move compilation unit
+1723781079825	Move compilation unit
+1723781082123	Delete element
+1723781096131	Copy packages
+1723781114885	Delete element
+1723781121559	Delete element
+1723781127335	Copy package
+1723781135093	Delete element
+1723781146077	Copy package
+1723781197501	Rename type 'Reply'
+1723781224682	Rename local variable 'board_id'
+1723781274983	Rename type 'ReplyService'
+1723781285123	Rename type 'ReplyRepository'
+1723781292962	Rename type 'ReplyDTO'
+1723781298991	Rename type 'ReplyController'
+1723782943329	Rename local variable 'board_id'
+1723783587345	Copy package
+1723783602922	Rename type 'Recommend'
+1723783610333	Rename type 'RecommendController'
+1723783614829	Rename type 'RecommendDTO'
+1723783619347	Rename type 'RecommendRepository'
+1723783625258	Rename type 'RecommendService'
+1723785525313	Rename method 'putReply'
+1723786717048	Delete elements
+1723787010157	Rename type 'BaseRepository'
+1723787225974	Delete elements
+1723787506882	Delete element
+1723787580929	Copy packages
+1723787598346	Rename type 'ResRecommend'
+1723787624145	Rename type 'ResRecommendController'
+1723787638588	Rename type 'ResRecommendDTO'
+1723787646122	Rename type 'ResRecommendRepository'
+1723787670437	Rename type 'ResRecommendService'
+1723787715390	Rename type 'RestaurantReply'
+1723787753190	Rename field 'restaurant'
+1723787761563	Rename field 'restaurant'
+1723787786758	Rename type 'ResReplyService'
+1723787798546	Rename type 'ResReplyRepository'
+1723787824428	Rename field 'restaurantRepo'
+1723787842282	Rename type 'ResReplyDTO'
+1723787854566	Rename type 'ResReplyController'
+1723787959262	Rename local variable 'res_id'
+1723787980923	Rename local variable 'res_id'
+1723788127641	Rename method 'putReply'
+1723788764867	Rename local variable 'res_id'
+1723788768482	Rename local variable 'res_id'
+1723788805741	Rename field 'board_id'
