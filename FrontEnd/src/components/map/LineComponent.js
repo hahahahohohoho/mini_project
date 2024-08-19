@@ -47,7 +47,6 @@ const gradeColors = {
             strokeColor: gradeColors[grade] || '#D3D3D3',
             strokeWeight: 3,
           });
-          console.log("Polyline : ", polyline)
           polylineRef.current.push(polyline); // 생성된 폴리라인을 참조 배열에 추가
         }
 

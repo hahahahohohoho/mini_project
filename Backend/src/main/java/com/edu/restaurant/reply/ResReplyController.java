@@ -17,10 +17,9 @@ public class ResReplyController {
 	@Autowired
 	private ResReplyService replyService;
 	
-	@PostMapping
-	public String postReply(@PathVariable Long res_id, @RequestBody ResReplyDTO replydto) {
-		replyService.postReply(res_id, replydto);
-		return "댓글 작성";
+	@PostMapping("/{res_id}")
+	public ResReplyDTO postReply(@PathVariable Long res_id, @RequestBody ResReplyDTO replydto) {
+		return replyService.postReply(res_id, replydto);
 	}
 	
 	@DeleteMapping("/{replyId}")

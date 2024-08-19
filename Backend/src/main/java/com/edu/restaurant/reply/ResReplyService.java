@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edu.board.reply.ReplyDTO;
 import com.edu.restaurant.RestaurantRepo;
 import com.edu.user.repo.UserRepository;
 
@@ -18,13 +19,14 @@ public class ResReplyService {
 	@Autowired
 	private RestaurantRepo restaurantRepo;
 	
-	public void postReply(Long res_id, ResReplyDTO replydto) {
+	public ResReplyDTO postReply(Long res_id, ResReplyDTO replydto) {
 		RestaurantReply reply = new RestaurantReply();
 			reply.setContent(replydto.getContent());
 			reply.setRestaurant(restaurantRepo.findById(res_id).orElseThrow());
 			reply.setWriter(userRepository.findByUsername(replydto.getUsername()));
 			reply.setCreateDate(LocalDateTime.now());
 		replyRepository.save(reply);
+		return new ResReplyDTO(reply);
 	}
 
 	public void deleteReply(Long replyId) {

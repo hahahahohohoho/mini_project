@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const MarkerComponent = ({ map, markerData }) => {
+const MarkerComponent = ({ map, markerData, onMarkerClick  }) => {
   const { naver } = window; // naver 지도 객체를 window에서 가져옵니다.
   const [infoWindows, setInfoWindows] = useState([]);
   const [markers, setMarkers] = useState([]); // 현재 표시된 마커들을 관리하는 상태
@@ -57,11 +57,12 @@ const MarkerComponent = ({ map, markerData }) => {
 
           // 마커 클릭 이벤트 설정
           naver.maps.Event.addListener(marker, 'click', () => {
-            if (infoWindow.getMap()) {
-              infoWindow.close();
-            } else {
-              infoWindow.open(map, marker);
-            }
+            onMarkerClick(location); // 마커 클릭 시 InfoPanel에 정보 전달
+            // if (infoWindow.getMap()) {
+            //   infoWindow.close();
+            // } else {
+            //   infoWindow.open(map, marker);
+            // }
           });
         }
       });

@@ -11,13 +11,13 @@ const SearchComponent = ({ onSearch }) => {
   const [districtOptions, setDistrictOptions] = useState([]);
 
   // 카테고리 옵션을 하드코딩하여 설정
-  const [categoryOptions] = useState(['자전거 도로', '명소', '식당']);
+  const [categoryOptions] = useState(['명소', '식당']);
 
   // 컴포넌트가 처음 렌더링될 때 구/군 목록을 설정
   useEffect(() => {
     const options = [
-      '부산', '해운대구', '동래구', '사상구', '기장군', '부산진구', '수영구', '남구',
-      '서구', '동구', '영도구', '강서구', '중구', '북구', '금정구'
+      '부산 전체','강서구', '금정구', '기장군', '남구', '동구', '동래구', '부산진구', '북구',
+      '사상구', '서구', '수영구', '연제구', '영도구', '중구', '해운대구', 
       // 다른 구/군 추가 가능
     ];
     setDistrictOptions(options); // 설정된 구/군 목록을 상태로 저장
