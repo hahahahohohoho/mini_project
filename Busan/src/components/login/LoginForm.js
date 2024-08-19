@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios'; // axios 인스턴스를 가져옴
 
 const LoginForm = ({ setAuth }) => {
   const [email, setEmail] = useState('');
@@ -18,9 +18,10 @@ const LoginForm = ({ setAuth }) => {
         password,
       });
       if (response.status === 200) {
-        const { token, username } = response.data;
+        const { token, username, expirationTime } = response.data;
         localStorage.setItem('token', token);
         localStorage.setItem('username', username);
+        localStorage.setItem('tokenExpiration', expirationTime); // 만료 시간 저장
         setAuth(true);
         navigate(from); // 로그인 후 원래 페이지로 리다이렉트
       } else {
@@ -32,51 +33,48 @@ const LoginForm = ({ setAuth }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full px-10"> {/* 전체 너비 사용, 양 옆 여백 제거 */}
+    <div className="h-screen w-full flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-xs">
         <form
-          className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4"
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={handleLogin}
         >
-          <h2 className="text-xl font-bold text-center mb-4">로그인</h2>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-              이메일
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Email
             </label>
             <input
-              id="email"
               type="email"
-              placeholder="이메일을 입력하세요"
+              placeholder="Email"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-              비밀번호
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Password
             </label>
             <input
-              id="password"
               type="password"
-              placeholder="비밀번호를 입력하세요"
+              placeholder="Password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
+          {error && <p className="text-red-500 text-xs italic">{error}</p>}
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              로그인
+              Sign In
             </button>
           </div>
           <div className="mt-4 text-center">
             <Link to="/register" className="text-blue-500 hover:text-blue-700">
-              회원가입
+              Don't have an account? Sign Up
             </Link>
           </div>
         </form>
