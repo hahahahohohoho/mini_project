@@ -19,8 +19,7 @@ public class ReplyController {
 	
 	@PostMapping("/{board_id}/reply")
 	public ReplyDTO postReply(@PathVariable Long board_id, @RequestBody ReplyDTO replydto) {
-		Reply reply = replyService.postReply(board_id, replydto);
-		return new ReplyDTO(reply);
+		return replyService.postReply(board_id, replydto);
 	}
 	
 	@DeleteMapping("/{board_id}/reply/{reply_id}")

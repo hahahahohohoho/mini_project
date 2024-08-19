@@ -5,13 +5,15 @@ const LineComponent = ({ map, lineData }) => {
   const { naver } = window; // 네이버 지도 API 객체를 window에서 가져옴
 
   // grade에 따른 색상 딕셔너리
-  const gradeColors = {
-    1: '#FF0000', // 빨간색
-    2: '#FF7F00', // 주황색
-    3: '#FFFF00', // 노란색
-    4: '#00FF00', // 녹색
-    5: '#0000FF', // 파란색
-  };
+  // grade에 따른 색상 딕셔너리
+const gradeColors = {
+  1: '#FF6347', // 빨간색 -> Tomato (밝은 빨강)
+  2: '#FFA500', // 주황색 -> Orange (기존과 동일)
+  3: '#FFFF00', // 노란색 -> Yellow (기존과 동일)
+  4: '#32CD32', // 녹색 -> LimeGreen (밝은 녹색)
+  5: '#1E90FF', // 파란색 -> DodgerBlue (밝은 파랑)
+};
+
 
   useEffect(() => {
     const convertLineData = async () => {
@@ -20,7 +22,6 @@ const LineComponent = ({ map, lineData }) => {
         // 기존 폴리라인 제거 (필요할 경우)
         polylineRef.current.forEach(polyline => polyline.setMap(null)); // 기존 폴리라인을 지도에서 제거
         polylineRef.current = []; // 참조 배열 초기화
-
         for (const line of lineData) {
           const { geometry, grade } = line; // geometry와 grade를 추출
           const strokeColor = gradeColors[grade] || '#D3D3D3'; // grade에 따른 색상 설정
@@ -43,12 +44,10 @@ const LineComponent = ({ map, lineData }) => {
           const polyline = new naver.maps.Polyline({
             map: map,
             path: coordinates.map(coord => new naver.maps.LatLng(coord[0], coord[1])), // 위도(Y), 경도(X) 순서로 LatLng 객체 생성
-            strokeColor: strokeColor,
+            strokeColor: gradeColors[grade] || '#D3D3D3',
             strokeWeight: 3,
-            strokeOpacity: 1,
-            strokeStyle: 'solid'
           });
-
+          console.log("Polyline : ", polyline)
           polylineRef.current.push(polyline); // 생성된 폴리라인을 참조 배열에 추가
         }
 
