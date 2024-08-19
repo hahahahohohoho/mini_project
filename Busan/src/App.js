@@ -64,7 +64,7 @@ function App() {
           </ul>
         </header>
 
-        <main className='flex-grow w-full'> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
+        <main className='flex-grow w-full overflow-y-auto  '> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
           <Routes>
             <Route path="/" element={<MapMain />} /> {/* 메인 페이지에 MapMain을 설정 */}
             <Route path="/login" element={<LoginForm setAuth={setAuth} />} />
@@ -79,7 +79,7 @@ function App() {
           </Routes>
         </main>
 
-        <footer className='flex justify-center items-center text-white bg-slate-800 h-20 w-full'>
+        <footer className='flex justify-center items-center text-white bg-slate-800 h-19 w-full'>
           @2024 All Right reserved.
         </footer>
       </div>

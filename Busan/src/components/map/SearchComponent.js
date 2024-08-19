@@ -11,7 +11,7 @@ const SearchComponent = ({ onSearch }) => {
   const [districtOptions, setDistrictOptions] = useState([]);
 
   // 카테고리 옵션을 하드코딩하여 설정
-  const [categoryOptions] = useState(['자전거 도로', '명소', '식당']);
+  const [categoryOptions] = useState(['명소', '식당']);
 
   // 컴포넌트가 처음 렌더링될 때 구/군 목록을 설정
   useEffect(() => {
