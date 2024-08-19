@@ -19,7 +19,6 @@ export default function CommentList() {
       username: username,
       content: content,
       createDate: new Date().toISOString(),
-      board_id: boardItem.id,
     };
     try {
       const result = await axios.post(`/board/${boardItem.id}/reply`, newCommentObj, {
@@ -28,7 +27,8 @@ export default function CommentList() {
         },
       });
       if (result) {
-        setComments([...comments, newCommentObj]);
+        const savedComment = result.data; // 백엔드에서 반환된 댓글 데이터
+        setComments([...comments, savedComment]); // 새로운 댓글을 기존 댓글 배열에 추가
       } else {
         alert('댓글 작성에 실패했습니다.');
       }
@@ -46,6 +46,7 @@ export default function CommentList() {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (result) {
         setComments(
           comments.map((comment) =>
@@ -126,6 +127,7 @@ export default function CommentList() {
           ) : (
             <p className="text-gray-600">댓글이 없습니다. 첫 댓글을 달아보세요!</p>
           )}
+
         </div>
       </div>
 

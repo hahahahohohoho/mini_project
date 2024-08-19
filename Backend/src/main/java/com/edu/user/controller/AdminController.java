@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edu.board.board.Board;
-import com.edu.board.reply.Reply;
+import com.edu.board.board.BoardDTO;
+import com.edu.board.reply.ReplyDTO;
 import com.edu.user.dto.AdminUserDTO;
 import com.edu.user.service.AdminService;
 
@@ -29,13 +29,13 @@ public class AdminController {
 		return adminService.getAllUsers();
 	}
 	
-	@GetMapping("/user/board/{userId}")
-	public List<Board> getAllBoard(@PathVariable Long userId) {
+	@GetMapping("/user/{userId}/posts")
+	public List<BoardDTO> getAllBoard(@PathVariable Long userId) {
 		return adminService.getAllBoard(userId);
 	}
 	
 	@GetMapping("/user/reply/{userId}")
-	public List<Reply>getAllReply(@PathVariable Long userId) {
+	public List<ReplyDTO>getAllReply(@PathVariable Long userId) {
 		return adminService.getAllReply(userId);
 	}
 	@DeleteMapping("/user/{userId}")

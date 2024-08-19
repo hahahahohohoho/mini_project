@@ -37,7 +37,7 @@ const DetailPage = () => {
           username: username,
           board_id: boardItem.id,
         };
-        const result = await axios.post(`/board/${boardItem.id}/recommend`, newRecommend, {
+        const result = await axios.post(`/board/recommend/${boardItem.id}`, newRecommend, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -59,7 +59,7 @@ const DetailPage = () => {
     if (username) {
       if (window.confirm('추천을 취소하시겠습니까?')) {
         try {
-          const result = await axios.delete(`/board/${boardItem.id}/recommend`, {
+          const result = await axios.delete(`/board/recommend/${boardItem.id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

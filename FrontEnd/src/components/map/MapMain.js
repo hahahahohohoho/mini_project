@@ -77,6 +77,7 @@ const MapMain = () => {
 
   return (
     <div className="flex h-screen">
+      <InfoPanel markerData={filteredMarkerData} />
       <div className="flex-1 relative">
         <SearchComponent onSearch={handleSearch} />
         <MapComponent onMapLoad={handleMapLoad} center={{ lat: 35.1796, lng: 129.0756 }} zoomLevel={11} />
@@ -87,7 +88,6 @@ const MapMain = () => {
           </>
         )}
       </div>
-      <InfoPanel markerData={filteredMarkerData} />
     </div>
   );
 };

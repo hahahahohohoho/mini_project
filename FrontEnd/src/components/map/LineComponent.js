@@ -23,9 +23,7 @@ const LineComponent = ({ map, lineData }) => {
 
         for (const line of lineData) {
           const { geometry, grade } = line; // geometry와 grade를 추출
-
-          const strokeColor = gradeColors[grade] || '#000000'; // grade에 따른 색상 설정
-
+          const strokeColor = gradeColors[grade] || '#D3D3D3'; // grade에 따른 색상 설정
           // LINESTRING 데이터를 파싱하여 LatLng 배열로 변환
           const coordinates = geometry
             .replace('LINESTRING (', '') // 'LINESTRING (' 부분 제거
@@ -36,7 +34,6 @@ const LineComponent = ({ map, lineData }) => {
               return [Y, X]; // 좌표 배열 반환 (위도(Y), 경도(X) 순서로)
             })
             .filter(coord => !isNaN(coord[0]) && !isNaN(coord[1])); // 유효한 좌표만 필터링
-
           if (coordinates.length === 0) {
             console.error("All coordinates are invalid or conversion failed."); // 모든 좌표가 유효하지 않으면 오류 로그 출력
             continue; // 다음 라인으로 이동

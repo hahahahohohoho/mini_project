@@ -18,13 +18,14 @@ public class ReplyService {
 	@Autowired
 	private BoardRepository boardRepository;
 	
-	public void postReply(Long board_id, ReplyDTO replydto) {
+	public Reply postReply(Long board_id, ReplyDTO replydto) {
 		Reply reply = new Reply();
 			reply.setContent(replydto.getContent());
 			reply.setBoard(boardRepository.findByIdOrThrow(board_id));
 			reply.setWriter(userRepository.findByUsername(replydto.getUsername()));
 			reply.setCreateDate(LocalDateTime.now());
 		replyRepository.save(reply);
+		return reply;
 	}
 
 	public void deleteReply(Long replyId) {

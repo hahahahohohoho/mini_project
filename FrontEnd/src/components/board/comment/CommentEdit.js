@@ -9,6 +9,8 @@ export default function CommentEdit({ comment, onCancel, onSave }) {
 
   const handleSave = (e) => {
     e.preventDefault();
+    // comment.id가 제대로 전달되고 있는지 콘솔로 확인
+    console.log('Saving comment with id:', comment);
     onSave(comment.id, editedContent);
   };
 

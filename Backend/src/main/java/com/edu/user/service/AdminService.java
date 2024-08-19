@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edu.board.board.Board;
-import com.edu.board.reply.Reply;
+import com.edu.board.board.BoardDTO;
+import com.edu.board.reply.ReplyDTO;
 import com.edu.user.dto.AdminUserDTO;
 import com.edu.user.entitiy.User;
 import com.edu.user.repo.UserRepository;
@@ -23,14 +23,18 @@ public class AdminService {
                 .collect(Collectors.toList());
     }
 	
-	public List<Board> getAllBoard(Long userId){
+	public List<BoardDTO> getAllBoard(Long userId){
 		User user = userRepository.findById(userId).orElseThrow();
-		return user.getBoardList();
+		return user.getBoardList().stream()
+	              .map(BoardDTO::new)
+	              .collect(Collectors.toList());
 	}
 	
-	public List<Reply> getAllReply(Long userId){
+	public List<ReplyDTO> getAllReply(Long userId){
 		User user = userRepository.findById(userId).orElseThrow();
-		return user.getReplyList();
+		return user.getReplyList().stream()
+	              .map(ReplyDTO::new)
+	              .collect(Collectors.toList());
 	}
 
 	public void delteUser(Long userId) {
