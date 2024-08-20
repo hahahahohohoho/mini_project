@@ -16,14 +16,8 @@ const PostCreate = () => {
             return;
         }
 
-        const newPost = {
-            title: title,
-            content: content,
-            username: localStorage.getItem('username'), // 작성자 이름을 로컬 스토리지에서 가져옴
-        };
-
         try {
-            const response = await axios.post('/board', {
+            await axios.post('/board', {
                 title: title,
                 content: content,
                 username: localStorage.getItem('username'), // 작성자 이름을 로컬 스토리지에서 가져옴

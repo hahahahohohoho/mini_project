@@ -43,6 +43,7 @@ public class SecurityConfig {
 	SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(security -> security
 				.requestMatchers("/api/admin").hasRole("ADMIN")
+				.requestMatchers("/api/board/**").hasAnyRole("ADMIN", "USER")
                 .requestMatchers("/api/**").permitAll()
 				.anyRequest().permitAll());
 		http.csrf(cf -> cf.disable());

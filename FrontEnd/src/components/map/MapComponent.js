@@ -1,22 +1,20 @@
-// src/components/MapComponent.js
 import React, { useRef, useEffect, useState } from 'react';
 
 const MapComponent = ({ onMapLoad, center, zoomLevel }) => {
   const mapElement = useRef(null);
   const [map, setMap] = useState(null);
   const { naver } = window;
-  const busanCenter = new naver.maps.LatLng(35.1796, 129.0756); // 부산 좌표
 
   useEffect(() => {
     if (mapElement.current && !map) {
       const newMap = new naver.maps.Map(mapElement.current, {
-        center: busanCenter, // 부산을 초기 중심으로 설정
-        zoom: 10,
+        center: new naver.maps.LatLng(center.lat, center.lng), // 초기 중심을 prop에서 가져옴
+        zoom: zoomLevel || 10, // 초기 줌 레벨 설정
       });
       setMap(newMap);
       onMapLoad(newMap); // 지도 객체를 부모 컴포넌트로 전달
     }
-  }, [mapElement, map, onMapLoad]);
+  }, [mapElement, map, onMapLoad, center, zoomLevel]); // center와 zoomLevel도 의존성에 추가
 
   useEffect(() => {
     if (map && center) {
@@ -28,7 +26,7 @@ const MapComponent = ({ onMapLoad, center, zoomLevel }) => {
     }
   }, [map, center, zoomLevel]);
 
-  return <div ref={mapElement} style={{ width: '100%', height: '95%' }} />;
+  return <div ref={mapElement} style={{ width: '100%', height: '100%' }} />;
 };
 
 export default MapComponent;

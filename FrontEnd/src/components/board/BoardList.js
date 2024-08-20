@@ -45,7 +45,7 @@ export default function BoardList() {
     };
 
     return (
-        <div className="container mx-auto p-4 min-h-screen flex flex-col justify-between">
+        <div className="container mx-auto p-4 flex flex-col justify-between">
             <h1 className="text-2xl font-bold mb-4 text-center">Board</h1>
             <div className="flex items-end mb-4">
                     <button 

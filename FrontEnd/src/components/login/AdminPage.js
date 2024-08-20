@@ -121,7 +121,7 @@ const AdminPage = () => {
                   <td className="px-6 py-4 whitespace-nowrap">{user.id}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{user.username}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{maskEmail(user.email)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.signUpDate}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{new Date(user.signUpDate).toLocaleString()}</td>
                   <td className="px-6 py-4 whitespace-nowrap" onClick={() => handleRowClick(user.id)}>{user.boardCount}</td>
                 </tr>
                 {selectedUserId === user.id && renderPosts()}

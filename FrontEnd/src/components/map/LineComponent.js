@@ -7,21 +7,22 @@ const LineComponent = ({ map, lineData }) => {
   // grade에 따른 색상 딕셔너리
   // grade에 따른 색상 딕셔너리
 const gradeColors = {
-  1: '#FF6347', // 빨간색 -> Tomato (밝은 빨강)
-  2: '#FFA500', // 주황색 -> Orange (기존과 동일)
+  5: '#FF6347', // 빨간색 -> Tomato (밝은 빨강)
+  4: '#FFA500', // 주황색 -> Orange (기존과 동일)
   3: '#FFFF00', // 노란색 -> Yellow (기존과 동일)
-  4: '#32CD32', // 녹색 -> LimeGreen (밝은 녹색)
-  5: '#1E90FF', // 파란색 -> DodgerBlue (밝은 파랑)
+  2: '#32CD32', // 녹색 -> LimeGreen (밝은 녹색)
+  1: '#1E90FF', // 파란색 -> DodgerBlue (밝은 파랑)
 };
 
 
   useEffect(() => {
     const convertLineData = async () => {
       if (map && lineData && Array.isArray(lineData)) { // lineData가 배열인지 확인
-
-        // 기존 폴리라인 제거 (필요할 경우)
-        polylineRef.current.forEach(polyline => polyline.setMap(null)); // 기존 폴리라인을 지도에서 제거
-        polylineRef.current = []; // 참조 배열 초기화
+         // %변경% 기존 폴리라인 제거 (필요할 경우)
+         if (polylineRef.current.length > 0) { // %변경% 배열의 길이를 확인하여 조건 추가
+          polylineRef.current.forEach(polyline => polyline.setMap(null)); // 기존 폴리라인을 지도에서 제거
+          polylineRef.current = []; // 참조 배열 초기화
+        }
         for (const line of lineData) {
           const { geometry, grade } = line; // geometry와 grade를 추출
           const strokeColor = gradeColors[grade] || '#D3D3D3'; // grade에 따른 색상 설정

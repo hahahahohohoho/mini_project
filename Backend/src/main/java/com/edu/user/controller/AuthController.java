@@ -70,11 +70,5 @@ public class AuthController {
         return ResponseEntity.ok(jwtResponse);
     }
     
-    @GetMapping("/protected")
-    @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<String> getProtectedMessage() {
-        return ResponseEntity.ok("This is a protected message only for authenticated users with USER role.");
-    }
-    
  
 }

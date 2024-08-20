@@ -48,9 +48,9 @@ export default function MyBoardList() {
     };
 
     return (
-        <div className="container mx-auto p-4 min-h-screen flex flex-col justify-between">
+        <div className="container mx-auto p-4 flex flex-col justify-between">
             <h1 className="text-2xl font-bold mb-4 text-center">{localStorage.getItem("username")}님이 작성한 게시글</h1>
-            <div className="overflow-x-auto flex-grow">
+            <div className="overflow-x-auto flex-grow" style={{ minHeight: 'calc(10 * 4rem + 2rem)' }}>
                 <BoardTable boardItems={currentBoardItems} handleRowClick={handleRowClick} />
             </div>
             <Pagination

@@ -8,6 +8,8 @@ import DetailPage from './components/board/DetailPage';
 import CreatePost from './components/board/utils/PostCreate';
 import MypageMain from './components/mypage/MypageMain';
 import MapMain from './components/map/MapMain'; // MapMain을 사용
+import Error403 from './components/Error403';
+import Error404 from './components/Error404';
 
 
 function App() {
@@ -49,10 +51,10 @@ function App() {
             {auth ? (
               <>
               {localStorage.getItem('username')==='관리자' && <li><Link to='/admin' className="mx-3">관리자</Link></li> }
+                <li><Link to='/myinfo'>내 정보</Link></li>
                 <li><Link to='/main' className="mx-3">메인</Link></li>
                 <li><Link to='/board' className="mx-3">게시판</Link></li>
                 <li><Link to='/map' className="mx-3">지도</Link></li>
-                
                 <li><button onClick={handleLogout} className="mx-3">로그아웃</button></li>
               </>
             ) : (
@@ -76,6 +78,9 @@ function App() {
             <Route path="/create" element={<CreatePost />} />
             <Route path="/map" element={<MapMain />} />
             <Route path="*" element={<MapMain />} />
+            <Route path="myinfo" element={<MypageMain/>}/>
+            <Route path="error-403" element={<Error403/>}/>
+            <Route path="error-404" element={<Error404/>}/>
           </Routes>
         </main>
 
