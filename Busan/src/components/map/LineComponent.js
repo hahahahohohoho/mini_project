@@ -6,25 +6,26 @@ const LineComponent = ({ map, lineData }) => {
 
   // grade에 따른 색상 딕셔너리
   const gradeColors = {
-    1: '#FF0000', // 빨간색
+    1: '#0000FF', // 파란색
     2: '#FF7F00', // 주황색
     3: '#FFFF00', // 노란색
     4: '#00FF00', // 녹색
-    5: '#0000FF', // 파란색
+    5: '#FF0000', // 빨강색
   };
 
   useEffect(() => {
     const convertLineData = async () => {
       if (map && lineData && Array.isArray(lineData)) { // lineData가 배열인지 확인
 
-        // 기존 폴리라인 제거 (필요할 경우)
-        polylineRef.current.forEach(polyline => polyline.setMap(null)); // 기존 폴리라인을 지도에서 제거
-        polylineRef.current = []; // 참조 배열 초기화
+         // %변경% 기존 폴리라인 제거 (필요할 경우)
+        polylineRef.current.forEach(polyline => polyline.setMap(null)); // %변경% 기존 폴리라인을 지도에서 제거
+        polylineRef.current = []; // %변경% 참조 배열 초기화
+
 
         for (const line of lineData) {
-          const { geometry, grade } = line; // geometry와 grade를 추출
+          const { geometry, GRADE } = line; // geometry와 grade를 추출
 
-          const strokeColor = gradeColors[grade] || '#D3D3D3'; // grade에 따른 색상 설정
+          const strokeColor = gradeColors[GRADE] || '#D3D3D3'; // grade에 따른 색상 설정
 
           // LINESTRING 데이터를 파싱하여 LatLng 배열로 변환
           const coordinates = geometry

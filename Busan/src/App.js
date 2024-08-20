@@ -8,6 +8,7 @@ import DetailPage from './components/board/DetailPage';
 import CreatePost from './components/board/utils/PostCreate';
 import MypageMain from './components/mypage/MypageMain';
 import MapMain from './components/map/MapMain'; // MapMain을 사용
+import HeadetNav from './components/UI/HeadetNav';
 
 
 function App() {
@@ -42,9 +43,10 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col w-full h-screen overflow-hidden"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
-        <header className='flex justify-between items-center text-xl font-bold h-10 p-5 bg-blue-100 w-full'>
-          <div>자전거로 떠나자!</div>
+      <div className="flex flex-col w-3/4 h-screen overflow-hidden mx-auto my-auto bg-stone-200"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
+          <HeadetNav />
+        {/* <header className='flex justify-between items-center text-xl font-bold h-10 p-5 bg-blue-100 w-full'>
+          <div>BT</div>
           <ul className="flex items-center">
             {auth ? (
               <>
@@ -62,9 +64,9 @@ function App() {
               </>
             )}
           </ul>
-        </header>
+        </header> */}
 
-        <main className='flex-grow w-full overflow-y-auto  '> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
+        <main className='flex-grow w-full h-96 '> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
           <Routes>
             <Route path="/" element={<MapMain />} /> {/* 메인 페이지에 MapMain을 설정 */}
             <Route path="/login" element={<LoginForm setAuth={setAuth} />} />
@@ -79,7 +81,7 @@ function App() {
           </Routes>
         </main>
 
-        <footer className='flex justify-center items-center text-white bg-slate-800 h-19 w-full'>
+        <footer className='flex justify-center items-center text-white bg-cyan-400 h-19 w-full'>
           @2024 All Right reserved.
         </footer>
       </div>
