@@ -30,10 +30,10 @@ public class Restaurant {
 	
 	private String menu;
 	
-	@Column(name="main_img", columnDefinition = "TEXT")
+	@Column(name="main_img")
 	private String img1;
 	
-	@Column(name="thumbnail_img", columnDefinition = "TEXT")
+	@Column(name="thumbnail_img")
 	private String img2;
 	
 	private String usage_day;

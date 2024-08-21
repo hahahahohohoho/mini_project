@@ -6,6 +6,8 @@ const PostCreate = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [error, setError] = useState('');
+    const [charCount, setCharCount] = useState(0);
+    const maxCharCount = 100; // 글자수 제한
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -16,18 +18,35 @@ const PostCreate = () => {
             return;
         }
 
+        if (charCount > maxCharCount) {
+            setError(`내용은 ${maxCharCount}자를 초과할 수 없습니다.`);
+            return;
+        }
+
         try {
             await axios.post('/board', {
                 title: title,
                 content: content,
                 username: localStorage.getItem('username'), // 작성자 이름을 로컬 스토리지에서 가져옴
-            })
+            });
+            alert("성공적으로 게시글을 등록하였습니다.");
+            navigate("/board");
         } catch (error) {
             console.error('게시글 등록 중 오류 발생:', error);
             setError('게시글 등록 중 오류가 발생했습니다.');
         }
-        alert("성공적으로 게시글을 등록하였습니다.")
-        navigate("/board")
+    };
+
+    const handleContentChange = (e) => {
+        const inputContent = e.target.value;
+        const inputLength = inputContent.length;
+
+        if (inputLength > maxCharCount) {
+            alert(`내용은 ${maxCharCount}자를 초과할 수 없습니다.`);
+        } else {
+            setContent(inputContent);
+            setCharCount(inputLength);
+        }
     };
 
     return (
@@ -55,11 +74,14 @@ const PostCreate = () => {
                     <textarea
                         id="content"
                         value={content}
-                        onChange={(e) => setContent(e.target.value)}
+                        onChange={handleContentChange}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         rows="8"
                         placeholder="내용을 입력하세요"
                     />
+                    <p className={`text-sm mt-2 ${charCount > maxCharCount ? 'text-red-500' : 'text-gray-500'}`}>
+                        {charCount} / {maxCharCount} 글자
+                    </p>
                 </div>
                 <div className="flex items-center justify-between">
                     <button

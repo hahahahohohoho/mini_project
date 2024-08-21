@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RegisterForm from './components/login/RegisterForm';
 import LoginForm from './components/login/LoginForm';
 import AdminPage from './components/login/AdminPage';
@@ -10,7 +10,8 @@ import MypageMain from './components/mypage/MypageMain';
 import MapMain from './components/map/MapMain'; // MapMain을 사용
 import Error403 from './components/Error403';
 import Error404 from './components/Error404';
-
+import HeadetNav from './components/UI/HeadetNav';
+import Logout from './components/login/LogOut';
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -27,7 +28,7 @@ function App() {
         localStorage.removeItem('tokenExpiration');
         alert('세션이 만료되었습니다. 다시 로그인해 주세요.');
         window.location.href = '/login'; // 로그인 페이지로 리다이렉트
-    } else {
+      } else {
         setAuth(true);
       }
     }
@@ -44,27 +45,8 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col w-full h-screen overflow-hidden"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
-        <header className='flex justify-between items-center text-xl font-bold h-10 p-5 bg-blue-100 w-full'>
-          <div>자전거로 떠나자!</div>
-          <ul className="flex items-center">
-            {auth ? (
-              <>
-              {localStorage.getItem('username')==='관리자' && <li><Link to='/admin' className="mx-3">관리자</Link></li> }
-                <li><Link to='/myinfo'>내 정보</Link></li>
-                <li><Link to='/main' className="mx-3">메인</Link></li>
-                <li><Link to='/board' className="mx-3">게시판</Link></li>
-                <li><Link to='/map' className="mx-3">지도</Link></li>
-                <li><button onClick={handleLogout} className="mx-3">로그아웃</button></li>
-              </>
-            ) : (
-              <>
-                <li><Link to='/login' className="mx-3">로그인</Link></li>
-                <li><Link to='/register' className="mx-3">회원가입</Link></li>
-              </>
-            )}
-          </ul>
-        </header>
+      <div className="flex flex-col w-3/4 h-screen overflow-hidden mx-auto bg-stone-200"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
+        <HeadetNav auth={auth}/>
 
         <main className='flex-grow w-full overflow-y-auto'> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
           <Routes>
@@ -78,13 +60,14 @@ function App() {
             <Route path="/create" element={<CreatePost />} />
             <Route path="/map" element={<MapMain />} />
             <Route path="*" element={<MapMain />} />
-            <Route path="myinfo" element={<MypageMain/>}/>
-            <Route path="error-403" element={<Error403/>}/>
-            <Route path="error-404" element={<Error404/>}/>
-          </Routes>
+            <Route path="/myinfo" element={<MypageMain />} />
+            <Route path="/error-403" element={<Error403 />} />
+            <Route path="/error-404" element={<Error404 />} />
+            <Route path="/logout" element={<Logout onLogout={handleLogout} />} /> {/* 로그아웃 라우트 설정 */}
+            </Routes>
         </main>
 
-        <footer className='flex justify-center items-center text-white bg-slate-800 h-20 w-full'>
+        <footer className='flex justify-center items-center text-white bg-cyan-400 h-19 w-full'>
           @2024 All Right reserved.
         </footer>
       </div>
