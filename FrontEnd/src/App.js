@@ -12,6 +12,7 @@ import Error403 from './components/Error403';
 import Error404 from './components/Error404';
 import HeadetNav from './components/UI/HeadetNav';
 import Logout from './components/login/LogOut';
+import EmailVerificationRequired from './components/login/EmailVerificationRequired';
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -64,6 +65,7 @@ function App() {
             <Route path="/error-403" element={<Error403 />} />
             <Route path="/error-404" element={<Error404 />} />
             <Route path="/logout" element={<Logout onLogout={handleLogout} />} /> {/* 로그아웃 라우트 설정 */}
+            <Route path="/email-verification-required" element={<EmailVerificationRequired />} /> {/* 추가 */}
             </Routes>
         </main>
 

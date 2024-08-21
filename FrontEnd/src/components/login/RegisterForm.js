@@ -1,22 +1,17 @@
-// src/components/RegisterForm.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../axios';
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setLoading(true); // 로딩 시작
-    setError('');
-    setSuccess('');
+    setLoading(true);
     try {
       const response = await axios.post('/auth/signup', {
         username,
@@ -24,15 +19,14 @@ const RegisterForm = () => {
         password,
       });
       if (response.status === 200) {
-        setSuccess('Registration successful! Please log in.');
-        setTimeout(() => navigate('/login'), 2000); // 2초 후 로그인 페이지로 이동
+        navigate('/email-verification-required'); // 이메일 인증 필요 페이지로 이동
       } else {
-        setError(response.data);
+        console.error(response.data);
       }
     } catch (error) {
-      setError('Registration failed');
+      console.error('Registration failed:', error);
     }
-    setLoading(false); // 로딩 종료
+    setLoading(false);
   };
 
   return (
@@ -81,8 +75,6 @@ const RegisterForm = () => {
               disabled={loading}
             />
           </div>
-          {error && <p className="text-red-500 text-xs italic">{error}</p>}
-          {success && <p className="text-green-500 text-xs italic">{success}</p>}
           <div className="flex items-center justify-between">
             <button
               type="submit"

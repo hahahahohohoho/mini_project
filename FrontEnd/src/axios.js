@@ -1,5 +1,5 @@
-// src/axios.js
 import axios from 'axios';
+
 const isLocal = process.env.REACT_APP_API_MODE === 'local';
 
 const instance = axios.create({
@@ -9,7 +9,6 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     if (isLocal) {
-      // 요청 경로에 따라 로컬 파일 경로 설정
       if (config.url === '/board') {
         config.url = '/data/board.json';
       } else if (config.url === '/sight') {
@@ -20,6 +19,7 @@ instance.interceptors.request.use(
       config.baseURL = '';  // baseURL 무시
     } else {
       const token = localStorage.getItem('token');
+      // BE 헤드에 토큰을 보냄
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -27,16 +27,26 @@ instance.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// response 인터셉터 추가
+instance.interceptors.response.use(
+  (response) => {
+    // 성공적으로 응답을 받았을 경우 그대로 반환
+    return response;
+  },
+  (error) => {
     if (error.response && error.response.status === 403) {
       // 403 에러 발생 시 에러 페이지로 리다이렉트
       window.location.href = '/error-403';
-    }
-    if (error.response && error.response.status === 404) {
-      // 403 에러 발생 시 에러 페이지로 리다이렉트
+    } else if (error.response && error.response.status === 404) {
+      // 404 에러 발생 시 에러 페이지로 리다이렉트
       window.location.href = '/error-404';
     }
     return Promise.reject(error);
-    
   }
 );
+
 export default instance;

@@ -39,6 +39,14 @@ public class UserService {
 
     
     public JwtResponse authenticateUser(String username, String password) {
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found.");
+        }
+        if (!user.isEmailVerified()) {
+            throw new IllegalArgumentException("Email is not verified. Please verify your email before logging in.");
+        }
+        
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
         );

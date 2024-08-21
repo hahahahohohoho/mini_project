@@ -28,7 +28,12 @@ const LoginForm = ({ setAuth }) => {
         setError('Login failed');
       }
     } catch (error) {
-      setError('Login failed');
+      // 이메일 인증이 안된 경우 서버에서 보낸 에러 메시지를 검사
+      if (error.response && error.response.data.message === 'Email is not verified. Please verify your email before logging in.') {
+        setError('이메일 인증이 필요합니다. 이메일을 확인해 주세요.');
+      } else {
+        setError('로그인 실패');
+      }
     }
   };
 
