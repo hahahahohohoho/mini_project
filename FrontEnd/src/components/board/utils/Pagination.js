@@ -12,6 +12,18 @@ export default function Pagination({ totalItems, itemsPerPage, currentPage, onPa
     return (
         <nav className="mt-4 flex justify-center">
             <ul className="inline-flex -space-x-px">
+                {/* 이전 페이지 버튼 */}
+                <li>
+                    <button
+                        onClick={() => onPageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        이전
+                    </button>
+                </li>
+
+                {/* 페이지 번호 버튼 */}
                 {pageNumbers.map(number => (
                     <li key={number}>
                         <button
@@ -24,6 +36,17 @@ export default function Pagination({ totalItems, itemsPerPage, currentPage, onPa
                         </button>
                     </li>
                 ))}
+
+                {/* 다음 페이지 버튼 */}
+                <li>
+                    <button
+                        onClick={() => onPageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        다음
+                    </button>
+                </li>
             </ul>
         </nav>
     );

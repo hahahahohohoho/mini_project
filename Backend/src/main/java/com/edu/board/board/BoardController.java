@@ -20,57 +20,58 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-	@Autowired 
+	@Autowired
 	private BoardRepository boardRepository;
-	
-	 @PostMapping("/search")
-	    public Page<Board> searchBoards(@PageableDefault(size = 10) Pageable pageable,
-	                                    @RequestBody SearchRequest searchRequest) {
 
-	        String searchType = searchRequest.getSearchType();
-	        String searchKeyword = searchRequest.getSearchKeyword();
-	        String sortBy = searchRequest.getSortBy();
+	@PostMapping("/search")
+	public Page<Board> searchBoards(@PageableDefault(size = 10) Pageable pageable,
+			@RequestBody SearchRequest searchRequest) {
 
-	        if (searchKeyword == null || searchKeyword.isBlank()) {
-	            switch (sortBy) {
-	                case "recommendCount":
-	                    return boardRepository.findAllByOrderByRecommendCountDesc(pageable);
-	                case "viewCount":
-	                    return boardRepository.findAllByOrderByViewcountDesc(pageable);
-	                case "createDate":
-	                default:
-	                    return boardRepository.findAllByOrderByCreateDateDesc(pageable);
-	            }
-	        } else if (searchType.equals("nickname")) {
-	            return boardRepository.findByWriterContaining(searchKeyword, pageable);
-	        } else {
-	            return boardRepository.findByTitleContaining(searchKeyword, pageable);
-	        }
-	    }
-	
+		String searchType = searchRequest.getSearchType();
+		String searchKeyword = searchRequest.getSearchKeyword();
+		String sortBy = searchRequest.getSortBy();
+
+		if (searchKeyword == null || searchKeyword.isBlank()) {
+			switch (sortBy) {
+			case "recommendCount":
+				return boardRepository.findAllByOrderByRecommendCountDesc(pageable);
+			case "viewCount":
+				return boardRepository.findAllByOrderByViewcountDesc(pageable);
+			case "createDate":
+			default:
+				return boardRepository.findAllByOrderByCreateDateDesc(pageable);
+			}
+		} else if (searchType.equals("nickname")) {
+			return boardRepository.findByWriterContaining(searchKeyword, pageable);
+		} else {
+			return boardRepository.findByTitleContaining(searchKeyword, pageable);
+		}
+	}
+
 	@GetMapping
 	public List<BoardDTO> getBoardList() {
 		return boardService.getBoardList();
 	}
-	
+
 	@GetMapping("/{id}")
 	public BoardDTO getBoard(@PathVariable Long id) {
 		return boardService.getBoardDetails(id);
 	}
+
 	@PostMapping
 	public void postBoard(@RequestBody BoardDTO boardDTO) {
 		boardService.postBoard(boardDTO);
 	}
+
 	@DeleteMapping("/{id}")
 	public void deleteBoard(@PathVariable Long id) {
 		boardService.deleteBoard(id);
 	}
+
 	@PutMapping("{id}")
 	public void putMethodName(@PathVariable Long id, @RequestBody BoardDTO boardDTO) {
-		//TODO: process PUT request
+		// TODO: process PUT request
 		boardService.putBoard(id, boardDTO);
 	}
-	
 
-	
 }
