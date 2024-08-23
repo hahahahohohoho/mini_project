@@ -1,5 +1,0 @@
-package com.edu.persistence;
-
-public interface BoardRepo {
-
-}

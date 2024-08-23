@@ -1,5 +1,0 @@
-package com.edu.board.persistence;
-
-public class BoardRepoImpl {
-
-}
