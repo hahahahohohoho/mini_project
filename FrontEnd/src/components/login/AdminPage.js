@@ -107,10 +107,10 @@ const AdminPage = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">순번</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">EMAIL</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SIGNUP DATE</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">번호</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">작성자</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">이메일</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">로그인 날짜</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">게시글 수</th>
             </tr>
           </thead>
@@ -136,7 +136,7 @@ const AdminPage = () => {
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-100">
       <div className="p-8 bg-white shadow-md rounded">
-        <h1 className="text-2xl font-bold mb-4">Admin Page</h1>
+        <h1 className="text-2xl font-bold mb-4">관리자 페이지</h1>
         {error && <p className="text-red-500">{error}</p>}
         <div>
           {loadData()}

@@ -50,9 +50,9 @@ const SightInfoPanel = ({ id, onClose }) => {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2 rounded-sm">
       <h2 className="text-xl font-bold">{sightData.title}</h2>
-      <div className="flex space-x-4">
+      <div className="flex space-x-3">
         <img 
           src={sightData.img2} 
           alt={sightData.name} 
@@ -62,7 +62,7 @@ const SightInfoPanel = ({ id, onClose }) => {
       </div>
       <p className="text-gray-600"><strong>주소:</strong> {sightData.address}</p>
       <p className="text-gray-600"><strong>홈페이지:</strong>
-      {sightData.homepage != '-'? <a href={sightData.homepage}>링크</a> : '없음'}
+      {sightData.homepage !== '-'? <a href={sightData.homepage}>링크</a> : '없음'}
       </p>
       {/* <p className="text-gray-600"><strong>메뉴:</strong> {sightData.menu}</p> */}
       
@@ -74,8 +74,10 @@ const SightInfoPanel = ({ id, onClose }) => {
           </button>
         )}
       </p>
-
-      <div className="mt-4">
+      <div className="flex justify-end">
+        <RestaurantRecommendButton type= 'sight' restaurant={sightData} />
+        </div>
+      <div className="mt-2">
         <h3 className="text-lg font-semibold">리뷰</h3>
         {sightData.replys && sightData.replys.length > 0 ? (
           sightData.replys.map(reply => (
@@ -90,13 +92,6 @@ const SightInfoPanel = ({ id, onClose }) => {
         )}
       </div>
       <ReviewForm type ='sig' resId={sightData.id} onReviewSubmitted={handleReviewSubmitted} />
-      <RestaurantRecommendButton type= 'sight' restaurant={sightData} />
-      <button
-        onClick={onClose}
-        className="w-full mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-      >
-        닫기
-      </button>
     </div>
   );
 };

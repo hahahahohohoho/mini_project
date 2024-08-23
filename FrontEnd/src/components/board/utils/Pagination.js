@@ -28,9 +28,10 @@ export default function Pagination({ totalItems, itemsPerPage, currentPage, onPa
                     <li key={number}>
                         <button
                             onClick={() => onPageChange(number)}
-                            className={`px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ${
-                                currentPage === number ? 'bg-blue-500 text-white' : ''
-                            }`}
+                            className={`px-3 py-2 ml-0 leading-tight 
+                                ${
+                                currentPage === number ? 'bg-blue-500 text-blue-600' : ''
+                            }text-gray-400 bg-white border border-gray-300 hover:bg-gray-200 hover:text-gray-700 `}
                         >
                             {number}
                         </button>

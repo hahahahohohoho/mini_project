@@ -40,19 +40,19 @@ const ReviewForm = ({type, resId, onReviewSubmitted }) => {
   };
 
   return (
-    <form onSubmit={handleReviewSubmit} className="mt-4">
+    <form onSubmit={handleReviewSubmit} className="mt-4 flex">
       <textarea
         value={reviewContent}
         onChange={(e) => setReviewContent(e.target.value)}
         className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        rows="3"
+        rows="2"
         placeholder="리뷰를 작성하세요..."
       />
       <button
         type="submit"
-        className="mt-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+        className="mx-1 mt-1 p-1 flex bg-slate-400 text-white rounded-lg hover:bg-slate-300"
       >
-        리뷰 제출
+        제출
       </button>
     </form>
   );

@@ -5,10 +5,14 @@ import CommentForm from './CommentForm';
 import CommentEdit from './CommentEdit';
 import CommentDelete from './CommentDelete';
 
-export default function CommentList() {
+export default function CommentList({
+  comments,
+  onCommentAdded,
+  onCommentEdited,
+  onCommentDeleted,
+}) {
   const { state } = useLocation();
   const { boardItem } = state || {};
-  const [comments, setComments] = useState(boardItem?.replys || []);
   const [editCommentId, setEditCommentId] = useState(null);
 
   const token = localStorage.getItem('token');
@@ -28,7 +32,7 @@ export default function CommentList() {
       });
       if (result) {
         const savedComment = result.data; // 백엔드에서 반환된 댓글 데이터
-        setComments([...comments, savedComment]); // 새로운 댓글을 기존 댓글 배열에 추가
+        onCommentAdded(savedComment); // Notify parent component
       } else {
         alert('댓글 작성에 실패했습니다.');
       }
@@ -48,11 +52,8 @@ export default function CommentList() {
       });
 
       if (result) {
-        setComments(
-          comments.map((comment) =>
-            comment.id === id ? { ...comment, content: content } : comment
-          )
-        );
+        const editedComment = { ...result.data, content }; // Use response from server to update
+        onCommentEdited(editedComment); // Notify parent component
         setEditCommentId(null);
         alert('댓글 수정이 완료되었습니다.');
       }
@@ -70,7 +71,7 @@ export default function CommentList() {
         },
       });
       if (result) {
-        setComments(comments.filter((comment) => comment.id !== id));
+        onCommentDeleted(id); // Notify parent component
         alert('댓글 삭제가 완료되었습니다.');
       }
     } catch (error) {
@@ -90,7 +91,7 @@ export default function CommentList() {
   return (
     <div>
       <div className="mt-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">댓글</h2>
+        {/* <h2 className="text-2xl font-bold text-gray-800 mb-4">댓글</h2> */}
         <div className="space-y-4">
           {comments.length > 0 ? (
             comments.map((comment) => (
@@ -118,7 +119,7 @@ export default function CommentList() {
                   {comment.username === username && (
                     <CommentDelete
                       commentId={comment.id}
-                      onDelete={handleDelete}
+                      onDelete={() => handleDelete(comment.id)}
                     />
                   )}
                 </div>
@@ -127,7 +128,6 @@ export default function CommentList() {
           ) : (
             <p className="text-gray-600">댓글이 없습니다. 첫 댓글을 달아보세요!</p>
           )}
-
         </div>
       </div>
 

@@ -4,15 +4,15 @@ import lombok.Getter;
 
 @Getter
 public class SigRecommendDTO {
-	private Long sig_id;
+	private Long board_id;
 	private String username;
 	
 	public SigRecommendDTO(Long board_id, String username) {
-		this.sig_id = board_id;
+		this.board_id = board_id;
 		this.username = username;
 	}
 	public SigRecommendDTO(SightRecommend recommend) {
-		this.sig_id = recommend.getSight().getId();
+		this.board_id = recommend.getSight().getId();
 		this.username = recommend.getUser().getUsername();
 	}
 }

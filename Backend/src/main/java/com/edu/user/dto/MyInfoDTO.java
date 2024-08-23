@@ -14,12 +14,14 @@ public class MyInfoDTO {
 	
 	private String username;
 	private String email;
+	private String password;
 	private List<BoardDTO> boards;
 	private List<ReplyDTO> replys;
 	
 	public MyInfoDTO(User user) {
 		this.username = user.getUsername();
 		this.email = user.getEmail();
+		this.password = user.getPassword();
 		List<BoardDTO> boardDTOs = user.getBoardList().stream()
 				.map(BoardDTO::new)
 				.collect(Collectors.toList());

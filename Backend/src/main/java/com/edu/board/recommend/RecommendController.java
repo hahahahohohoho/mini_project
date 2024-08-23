@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/api/board/recommend")
+@RequestMapping("/api/board")
 public class RecommendController {
 	@Autowired
 	private RecommendService recommendService;
 	
-	@PostMapping("/{board_id}")
+	@PostMapping("{board_id}/recommend")
     public String addRecommend(@PathVariable Long board_id, @RequestBody RecommendDTO recommendDTO) {
 		
         recommendService.recommend(recommendDTO);
         return "추천 성공";
     }
-	@DeleteMapping("{board_id}")
-	public String cancleRecommend(@PathVariable Long board_id, @RequestBody RecommendDTO recommendDTO) {
+	@DeleteMapping("{board_id}/recommend")
+	public String cancleRecommend(@PathVariable Long board_id,@RequestBody RecommendDTO recommendDTO) {
 		recommendService.cancleRecommend(recommendDTO);
 		return "삭제 성공";
 	}

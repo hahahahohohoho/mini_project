@@ -8,6 +8,7 @@ const RestaurantInfoPanel = ({ id, onClose }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const maxLength = 50;
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const RestaurantInfoPanel = ({ id, onClose }) => {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2 rounded-sm">
       <h2 className="text-xl font-bold">{restaurantData.name}</h2>
       <div className="flex space-x-4">
         <img 
@@ -72,12 +73,17 @@ const RestaurantInfoPanel = ({ id, onClose }) => {
           </button>
         )}
       </p>
-
+      
+      {/* Flexbox container to position the button on the right */}
+      <div className="flex justify-end">
+        <RestaurantRecommendButton type='res'  restaurant={restaurantData} />
+      </div>
+      
       <div className="mt-4">
         <h3 className="text-lg font-semibold">리뷰</h3>
         {restaurantData.replys && restaurantData.replys.length > 0 ? (
           restaurantData.replys.map(reply => (
-            <div key={reply.id+reply.username} className="p-2 border rounded-lg bg-gray-100">
+            <div key={reply.id + reply.username} className="p-2 border rounded-lg bg-gray-100">
               <p className="text-sm font-semibold">{reply.username}</p>
               <p className="text-gray-600">{reply.content}</p>
               <p className="text-xs text-gray-500">{new Date(reply.createDate).toLocaleString()}</p>
@@ -87,14 +93,9 @@ const RestaurantInfoPanel = ({ id, onClose }) => {
           <p className="text-gray-600">리뷰가 없습니다.</p>
         )}
       </div>
-      <ReviewForm type ='res' resId={restaurantData.id} onReviewSubmitted={handleReviewSubmitted} />
-      <RestaurantRecommendButton type= 'res' restaurant={restaurantData} />
-      <button
-        onClick={onClose}
-        className="w-full mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-      >
-        닫기
-      </button>
+      
+      <ReviewForm type='res' resId={restaurantData.id} onReviewSubmitted={handleReviewSubmitted} />
+      
     </div>
   );
 };

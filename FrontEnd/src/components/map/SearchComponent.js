@@ -29,12 +29,12 @@ const SearchComponent = ({ onSearch }) => {
   };
 
   return (
-    <div className="flex flex-grow justify-center p-1">
+    <div className="flex flex-grow justify-center p-4">
       {/* 카테고리 선택 드롭다운 */}
       <select
         value={selectedCategory} // 현재 선택된 카테고리 상태와 연결
         onChange={(e) => setSelectedCategory(e.target.value)} // 선택된 값이 변경되면 상태 업데이트
-        className="border rounded p-1 h-8 w-60"
+        className="border rounded p-1 h-10 w-1/3 mx-3 text-lg"
       >
         <option value="">카테고리를 선택하세요</option> {/* 기본 옵션 */}
         {categoryOptions.map((category) => (
@@ -48,7 +48,7 @@ const SearchComponent = ({ onSearch }) => {
       <select
         value={selectedDistrict} // 현재 선택된 구/군 상태와 연결
         onChange={(e) => setSelectedDistrict(e.target.value)} // 선택된 값이 변경되면 상태 업데이트
-        className="border rounded p-1 h-8 w-60 mx-2"
+        className="border rounded p-1 h-10 w-1/3 mx-2 text-lg"
       >
         <option value="">구/군을 선택하세요</option> {/* 기본 옵션 */}
         {districtOptions.map((district) => (
@@ -59,8 +59,11 @@ const SearchComponent = ({ onSearch }) => {
       </select>
 
       {/* 검색 버튼 */}
-      <button onClick={handleSearch} className="bg-blue-500 text-white p-1 rounded h-8 w-30">
-        검색
+      <button onClick={handleSearch} className="bg-neutral-100  p-1 rounded h-10 w-30">
+      <svg class="w-8 h-8 text-neutral-700 hover:text-neutral-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+</svg>
+
       </button>
     </div>
   );

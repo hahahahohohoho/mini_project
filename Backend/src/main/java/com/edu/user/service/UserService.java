@@ -99,12 +99,53 @@ public class UserService {
 	}
 
 
-	public void updateForm(Long id, MyInfoDTO dTO) {
-		User user = userRepository.findById(id).orElseThrow();
-			user.setEmail(dTO.getEmail());
-			user.setUsername(dTO.getUsername());
-		userRepository.save(user);
-	}	
+	public JwtResponse updateForm(String username, String name, String email, String password) {
+	    User user = userRepository.findByUsername(username);
+
+	    if (user == null) {
+	        throw new IllegalArgumentException("User not found.");
+	    }
+	    
+	    if (!user.isEmailVerified()) {
+	        throw new IllegalArgumentException("Email is not verified. Please verify your email before proceeding.");
+	    }
+
+	    boolean updated = false;
+
+	    if (email != null && !email.equals(user.getEmail())) {
+	        user.setEmail(email);
+	        updated = true;
+	    }
+
+	    if (name != null && !name.equals(user.getUsername())) {
+	        user.setUsername(name);
+	        updated = true;
+	    }
+
+	    if (password != null && !passwordEncoder.matches(password, user.getPassword())) {
+	        user.setPassword(passwordEncoder.encode(password));
+	        updated = true;
+	    }
+
+	    if (updated) {
+	        userRepository.save(user);
+	    }
+
+	    // Re-authenticate the user and generate a new JWT token
+	    Authentication authentication = authenticationManager.authenticate(
+	        new UsernamePasswordAuthenticationToken(user.getUsername(), password)
+	    );
+
+	    SecurityContextHolder.getContext().setAuthentication(authentication);
+	    String newJwt = jwtUtils.generateJwtToken(authentication);
+
+	    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+	    long expirationTime = jwtUtils.getExpirationFromToken(newJwt);
+
+	    return new JwtResponse(newJwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), expirationTime);
+	}
+
+
 
 	public MyInfoDTO myInfo(String username) {
 		User user = userRepository.findByUsernameWithAssociations(username);
@@ -113,6 +154,13 @@ public class UserService {
 	}
 
 
-    
+    public boolean existUsername(String username) {
+    	return userRepository.existsByUsername(username);
+    }
+
+
+	public boolean existEmail(String email) {
+    	return userRepository.existsByEmail(email);
+	}
     
 }

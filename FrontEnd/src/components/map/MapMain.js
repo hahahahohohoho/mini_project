@@ -41,7 +41,6 @@ const MapMain = () => {
       }
       
       const url = district !== '부산 전체' ? `${baseUrl}/city/${districtCodes[district]}` : baseUrl;
-      console.log('url : ',url)
       const response = await axios.get(url);
       return response.data;
     } catch (error) {
@@ -51,11 +50,15 @@ const MapMain = () => {
   };
 
   const handleSearch = async (district, category) => {
-    setFilteredLineData([]);
-    setCategory(category);
+    // 기존 정보 초기화
+    setFilteredLineData([]); // 이전에 그려진 라인 데이터 초기화
+    setFilteredMarkerData([]); // 이전에 그려진 마커 데이터 초기화
+    setSelectedMarkerId(null); // 선택된 마커 ID 초기화
+    setShowInfoPanel(false); // 정보창 초기화
+    setCategory(category); // 현재 카테고리 저장
 
     const data = await fetchMarkerData(category, district);
-    setFilteredMarkerData(data);
+    setFilteredMarkerData(data); // 필터링된 데이터를 상태에 저장
 
     if (category === '명소' || category === '식당') {
       if (district !== '부산 전체') {
@@ -84,7 +87,7 @@ const MapMain = () => {
         // 검색된 구/군의 중심으로 지도 설정 (초기 로드가 아닌 경우에만)
         if (!isInitialLoad) {
           const districtCenter = new naver.maps.LatLng(data[0].latitude, data[0].longitude);
-          setCenter({ lat: data[0].latitude, lng: data[0].longitude }); // 지도의 중심을 변경
+          setCenter({ lat: data[0].latitude, lng: data[0].longitude });
           map.setCenter(districtCenter);
         }
       }
@@ -105,24 +108,27 @@ const MapMain = () => {
   return (
     <div className="relative flex h-screen">
       {showInfoPanel && selectedMarkerId && (
-      <Draggable>
-        <div
-          className="absolute z-10 w-72 h-auto bg-white p-4 shadow-lg rounded-lg"
-          style={{ top: panelPosition.top, left: panelPosition.left }}
-        >
-          {category === '식당' ? (
-            <RestaurantInfoPanel id={selectedMarkerId} onClose={() => setShowInfoPanel(false)} />
-          ) : (
-            <SightInfoPanel id={selectedMarkerId} onClose={() => setShowInfoPanel(false)} />
-          )}
-          <button
-            onClick={() => setShowInfoPanel(false)}
-            className="absolute top-2 right-2 bg-blue-500 text-white py-1 px-3 rounded"
+        <Draggable>
+          <div
+            className="absolute z-10 w-72 h-auto bg-white p-4 shadow-lg rounded-lg"
+            style={{ top: panelPosition.top, left: panelPosition.left }}
           >
-            X
-          </button>
-        </div>
-      </Draggable>
+            {category === '식당' ? (
+              <RestaurantInfoPanel id={selectedMarkerId} onClose={() => setShowInfoPanel(false)} />
+            ) : (
+              <SightInfoPanel id={selectedMarkerId} onClose={() => setShowInfoPanel(false)} />
+            )}
+            <button
+              onClick={() => setShowInfoPanel(false)}
+              className="absolute top-2 right-2 bg-slate-400
+              hover:bg-slate-300 text-white py-1 px-1 rounded"
+            >
+              <svg className="w-6 h-6 text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+              </svg>
+            </button>
+          </div>
+        </Draggable>
       )}
       <div className="flex-1 relative">
         <SearchComponent onSearch={handleSearch} />

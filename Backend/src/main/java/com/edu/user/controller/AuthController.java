@@ -1,5 +1,7 @@
 package com.edu.user.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -57,9 +59,13 @@ public class AuthController {
 	}
 	
 	
-	@PutMapping("/myinfo/{id}")
-	public void updateForm(@PathVariable Long id, @RequestBody MyInfoDTO dTO) {
-		userService.updateForm(id, dTO);
+	@PutMapping("/myinfo/{username}")
+	public ResponseEntity<?> updateForm(@PathVariable String username, @RequestBody Map<String, String> dTO) {
+		String name = dTO.get("username");
+		String email = dTO.get("email");
+		String password = dTO.get("password");
+		JwtResponse jwtResponse = userService.updateForm(username, name, email, password);
+		return ResponseEntity.ok(jwtResponse);
 	}
 	
 	
@@ -70,5 +76,12 @@ public class AuthController {
         return ResponseEntity.ok(jwtResponse);
     }
     
- 
+    @GetMapping("/check_username")
+    public boolean existUsername(@RequestParam String username) {
+       return userService.existUsername(username);
+    }
+    @GetMapping("/check_email")
+    public boolean existEmail(@RequestParam String email) {
+    	return userService.existEmail(email);
+    }
 }

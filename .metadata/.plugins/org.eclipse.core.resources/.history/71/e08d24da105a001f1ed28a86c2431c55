@@ -1,5 +1,0 @@
-package com.edu.board.recommend;
-
-public abstract class BaseRecommend {
-
-}

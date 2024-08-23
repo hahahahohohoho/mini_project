@@ -46,11 +46,11 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col w-3/4 h-screen overflow-hidden mx-auto bg-stone-200"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
+      <div className="flex flex-col w-3/4 h-screen mx-auto bg-neutral-100"> {/* h-screen을 사용하여 화면 전체를 차지하게 설정 */}
         <HeadetNav auth={auth}/>
 
-        <main className='flex-grow w-full overflow-y-auto'> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
-          <Routes>
+        <main className=' flex-grow  w-full overflow-hidden '> {/* flex-grow를 사용하여 남은 공간을 모두 차지하게 설정 */}
+          <Routes className= 'h-full overflow-auto '>
             <Route path="/" element={<MapMain />} /> {/* 메인 페이지에 MapMain을 설정 */}
             <Route path="/login" element={<LoginForm setAuth={setAuth} />} />
             <Route path="/register" element={<RegisterForm />} />
@@ -69,7 +69,7 @@ function App() {
             </Routes>
         </main>
 
-        <footer className='flex justify-center items-center text-white bg-cyan-400 h-19 w-full'>
+        <footer className='flex justify-center items-center text-black bg-neutral-200 h-25 w-full'>
           @2024 All Right reserved.
         </footer>
       </div>

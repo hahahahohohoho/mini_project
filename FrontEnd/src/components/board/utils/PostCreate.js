@@ -50,7 +50,7 @@ const PostCreate = () => {
     };
 
     return (
-        <div className="container mx-auto p-8 bg-white shadow-lg rounded-lg">
+        <div className="container mx-auto w-9/12 p-8 mt-40 bg-white shadow-lg rounded-lg">
             <h1 className="text-2xl font-bold mb-4">게시글 작성</h1>
             {error && <p className="text-red-500 mb-4">{error}</p>}
             <form onSubmit={handleSubmit}>
@@ -83,10 +83,10 @@ const PostCreate = () => {
                         {charCount} / {maxCharCount} 글자
                     </p>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between ">
                     <button
                         type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-slate-400 hover:bg-slate-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
                         작성
                     </button>

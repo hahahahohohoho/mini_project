@@ -15,7 +15,7 @@ const EmailVerificationRequired = () => {
         </p>
         <Link 
           to="/login" 
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-slate-400 hover:bg-slate-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           로그인 페이지로 이동
         </Link>

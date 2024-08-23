@@ -15,7 +15,7 @@ export default function RecommendButton({ boardItem }) {
           username: username,
           board_id: boardItem.id,
         };
-        const result = await axios.post(`/res/${boardItem.id}/recommend`, newRecommend, {
+        const result = await axios.post(`/board/recommend`, newRecommend, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -22,24 +22,7 @@ export default function MyReplyList() {
         }  
         loadMyBoard()
     }, []);
-    // const toDate = (dateTimeString)=>{
-    //   // Date 객체로 변환
-    //   const dateTime = new Date(dateTimeString);
-
-    //   // 년, 월, 일 추출
-    //   const year = dateTime.getFullYear();
-    //   const month = String(dateTime.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
-    //   const day = String(dateTime.getDate()).padStart(2, '0');
-
-    //   // 시간, 분, 초 추출
-    //   const hours = String(dateTime.getHours()).padStart(2, '0');
-    //   const minutes = String(dateTime.getMinutes()).padStart(2, '0');
-    //   const seconds = String(dateTime.getSeconds()).padStart(2, '0');
-
-    //   // 날짜 - 시간 형식으로 변환
-    //   const formattedDateTime = `${year}-${month}-${day} - ${hours}:${minutes}:${seconds}`;
-
-    // }
+    
     const loadData = () => {
       if(myInfo){
         return (

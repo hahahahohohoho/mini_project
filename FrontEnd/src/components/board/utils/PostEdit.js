@@ -46,13 +46,13 @@ export default function PostEdit({ boardItem, onSave, onCancel }) {
       <div className="flex justify-end mt-4">
         <button
           onClick={handleSave}
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-300"
+          className="px-4 py-2 bg-slate-400 text-white  rounded-lg hover:bg-slate-300 transition-colors duration-300"
         >
           저장
         </button>
         <button
           onClick={onCancel}
-          className="ml-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300"
+          className="ml-2 px-4 py-2 bg-slate-300  text-white rounded-lg hover:bg-slate-400 hover:text-white    transition-colors duration-300"
         >
           취소
         </button>

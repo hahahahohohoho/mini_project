@@ -7,8 +7,44 @@ import axios from '../../axios';
 export default function MyBoardList() {
     const [myInfo, setMyInfo] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [sortOrder, setSortOrder] = useState('date_desc'); // 기본 정렬은 날짜 내림차순
     const itemsPerPage = 10; // 페이지당 항목 수
     const navigate = useNavigate();
+
+    const sortData = (boardItems) => {
+        return boardItems.sort((a, b) => {
+            switch (sortOrder) {
+                case 'id_asc':
+                    return a.id - b.id;
+                case 'id_desc':
+                    return b.id - a.id;
+                case 'username_asc':
+                    return a.username.localeCompare(b.username);
+                case 'username_desc':
+                    return b.username.localeCompare(a.username);
+                case 'viewcount_asc':
+                    return a.viewcount - b.viewcount;
+                case 'viewcount_desc':
+                    return b.viewcount - a.viewcount;
+                case 'date_asc':
+                    return new Date(a.createTime) - new Date(b.createTime);
+                case 'date_desc':
+                    return new Date(b.createTime) - new Date(a.createTime);
+                default:
+                    return 0;
+            }
+        });
+    };
+
+
+
+    const handleSortChange = (column) => {
+        if (sortOrder.includes(column)) {
+            setSortOrder(sortOrder.includes('_asc') ? `${column}_desc` : `${column}_asc`);
+        } else {
+            setSortOrder(`${column}_asc`);
+        }
+    };
 
     useEffect(() => {
         const loadMyBoard = async () => {
@@ -26,7 +62,7 @@ export default function MyBoardList() {
     }, []); // 빈 배열로 설정하여 이 로직은 컴포넌트 마운트 시 한 번만 실행
 
     // 페이지 전환 시 데이터를 슬라이스
-    const currentBoardItems = myInfo.slice(
+    const currentBoardItems = sortData(myInfo).slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
@@ -51,14 +87,17 @@ export default function MyBoardList() {
         <div className="container mx-auto p-4 flex flex-col justify-between">
             <h1 className="text-2xl font-bold mb-4 text-center">{localStorage.getItem("username")}님이 작성한 게시글</h1>
             <div className="overflow-x-auto flex-grow" style={{ minHeight: 'calc(10 * 4rem + 2rem)' }}>
-                <BoardTable boardItems={currentBoardItems} handleRowClick={handleRowClick} />
-            </div>
+                <BoardTable boardItems={currentBoardItems} 
+                handleRowClick={handleRowClick} 
+                onSortChange={handleSortChange} 
+                sortOrder={sortOrder}/>
             <Pagination
                 totalItems={myInfo.length}
                 itemsPerPage={itemsPerPage}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
             />
+            </div>
         </div>
     );
 }

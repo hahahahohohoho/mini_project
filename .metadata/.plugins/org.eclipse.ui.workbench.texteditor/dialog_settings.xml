@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="Jwts"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="jwtS"/>
+			<item value="jwt"/>
+			<item value="jwtSec"/>
+			<item value="jwtSe"/>
 			<item value="3000"/>
 			<item value="liked"/>
 			<item value="load"/>
 			<item value="sql"/>
 			<item value="mana"/>
 			<item value="expir"/>
-			<item value="jwt"/>
 			<item value="user"/>
 		</list>
 		<list key="replacehistory">
